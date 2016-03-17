@@ -58,7 +58,11 @@ class Notifications{
 			This will generate a kind of "To whom it may concern" message when there are multiple clients in one email.
 			The type of request will let the function know which template file to use.
 		*/
-		return "";
+		String message;
+		
+		message = "To whom it may concern, \n" + typeOfRequest;
+            
+		return message;
 	}
 
 	/*
@@ -72,6 +76,7 @@ class Notifications{
 		*/
 		String message;
 		
+<<<<<<< HEAD
 		if(typeOfRequest.equals("Change"){
 			message = publicationMessage(publicationName);
 		}
@@ -107,6 +112,11 @@ class Notifications{
 		String salutation = "Regards \n Bravo team"
 		String completed = intro + body + publicationName + "\n" + salutation;
 		return completed;
+=======
+		message = clientName + ", \n" + typeOfRequest;
+		
+		return message;
+>>>>>>> 6ee0556292dedbb05c207185c342b93aade066af
 	}
 	
 
