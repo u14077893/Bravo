@@ -1,4 +1,4 @@
-package people;
+package bravopeople;
 
 class Group {
 	private String name;

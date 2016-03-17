@@ -1,4 +1,4 @@
-package people;
+package bravopeople;
 
 import java.util.Date;
 
@@ -24,22 +24,22 @@ class ResearchGroupAssociation {
 		this.startDate = startDate;
 		this.endDate = null;
 		this.group = group;
-		
-		switch (role.toUpperCase()) {
-			case "STUDENT":
-				this.role = ResearchGroupAssociationType.STUDENT;
-				break;
-			case "COLLABORATOR":
-				this.role = ResearchGroupAssociationType.COLLABORATOR;
-				break;
-			case "MEMBER":
-				this.role = ResearchGroupAssociationType.MEMBER;
-				break;
-			case "GROUPLEADER":
-				this.role = ResearchGroupAssociationType.GROUPLEADER;
-				break;
-			default:
-				this.role = ResearchGroupAssociationType.STUDENT;
+
+		String s = role.toUpperCase();
+		if (s.equals("STUDENT")) {
+			this.role = ResearchGroupAssociationType.STUDENT;
+
+		} else if (s.equals("COLLABORATOR")) {
+			this.role = ResearchGroupAssociationType.COLLABORATOR;
+
+		} else if (s.equals("MEMBER")) {
+			this.role = ResearchGroupAssociationType.MEMBER;
+
+		} else if (s.equals("GROUPLEADER")) {
+			this.role = ResearchGroupAssociationType.GROUPLEADER;
+
+		} else {
+			this.role = ResearchGroupAssociationType.STUDENT;
 		}
 	} // End of Constructor
 
@@ -67,21 +67,21 @@ class ResearchGroupAssociation {
 	}
 
 	public void setRole(String role) {
-		switch (role.toUpperCase()) {
-			case "STUDENT":
-				this.role = ResearchGroupAssociationType.STUDENT;
-				break;
-			case "COLLABORATOR":
-				this.role = ResearchGroupAssociationType.COLLABORATOR;
-				break;
-			case "MEMBER":
-				this.role = ResearchGroupAssociationType.MEMBER;
-				break;
-			case "GROUPLEADER":
-				this.role = ResearchGroupAssociationType.GROUPLEADER;
-				break;
-			default:
-				this.role = ResearchGroupAssociationType.STUDENT;
+		String s = role.toUpperCase();
+		if (s.equals("STUDENT")) {
+			this.role = ResearchGroupAssociationType.STUDENT;
+
+		} else if (s.equals("COLLABORATOR")) {
+			this.role = ResearchGroupAssociationType.COLLABORATOR;
+
+		} else if (s.equals("MEMBER")) {
+			this.role = ResearchGroupAssociationType.MEMBER;
+
+		} else if (s.equals("GROUPLEADER")) {
+			this.role = ResearchGroupAssociationType.GROUPLEADER;
+
+		} else {
+			this.role = ResearchGroupAssociationType.STUDENT;
 		}
 	}
 

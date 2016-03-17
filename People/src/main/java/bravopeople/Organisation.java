@@ -1,12 +1,10 @@
-/*
+package bravopeople;/*
 	Author: Mpho Baloyi 
 	Student Number: 14133670
 	Group Name: Bravo-People
 	
 	This file defines the Organization Class for the Researcher Support System (RSS).
 */
-
-//package people;
 
 class Organisation
 {
@@ -26,7 +24,7 @@ class Organisation
 	public void setName(String name)
 	{}
 		
-	public void String getName()
+	public String getName()
 	{
 		return name;
 	}

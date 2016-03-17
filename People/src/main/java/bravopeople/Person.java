@@ -1,4 +1,4 @@
-/*
+package bravopeople;/*
 	Author: Mpho Baloyi 
 	Student Number: 14133670
 	Group Name: Bravo-People
@@ -7,7 +7,7 @@
 	The class defines the attributes of the user of the system.	
 */
 
-//package people;
+import java.util.LinkedList;
 
 class Person 
 {
@@ -69,7 +69,7 @@ class Person
 		return Surname;
 	}
 	
-	publicString getID()
+	public String getID()
 	{
 		return ID;
 	}
