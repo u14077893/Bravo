@@ -1,3 +1,4 @@
+package bravopeople;
 
 import java.util.Date;
 /**
@@ -39,7 +40,7 @@ public class researchCategory {
     
     public String getID()
     {
-        return name;
+        return ID;
     }
     
     public void setID(String _ID)
