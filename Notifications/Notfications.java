@@ -58,7 +58,11 @@ class Notifications{
 			This will generate a kind of "To whom it may concern" message when there are multiple clients in one email.
 			The type of request will let the function know which template file to use.
 		*/
-		return "";
+		String message;
+		
+		message = "To whom it may concern, \n" + typeOfRequest;
+            
+		return message;
 	}
 
 	/*
@@ -70,6 +74,10 @@ class Notifications{
 			This will take the client's name and add it to the message to give it a personal touch
 			The type of request will let the function know which template file to use.
 		*/
-		return "";
+		String message;
+		
+		message = clientName + ", \n" + typeOfRequest;
+		
+		return message;
 	}
 }
