@@ -32,7 +32,7 @@ class Notifications{
 		@param emailList[] it will be an array containing all the email addresses the change notice must be sent to
 		other parameters still unsure
 	*/
-	public void sendChange(String emailList[]){
+	public void sendChange(String emailList[], String publicationName){
 		/*
 			All authors must be notified if someone made changes to their publication of any kind. (Note the publication name must be specified as an author can belong to multiple groups) 
 			Still to be figured out if it will tell the authors exactly what was changed. (to be discussed)
@@ -53,7 +53,7 @@ class Notifications{
 	/*
 		@param typeOfRequest specifies the type of request it will be eg a notification or a change notice.
 	*/
-	private String buildMessage(String typeOfRequest){ 
+	private String buildMessage(String typeOfRequest){ // Frederick
 		/*
 			This will generate a kind of "To whom it may concern" message when there are multiple clients in one email.
 			The type of request will let the function know which template file to use.
@@ -65,11 +65,49 @@ class Notifications{
 		@param clientName this variable specifies the email receiptiant's name to make the mail look more professional
 		@param typeOfRequest specifies the type of request it will be eg a notification or a change notice.
 	*/
-	private String buildMessage(String clientName, String typeOfRequest){
+	private String buildMessage(String clientName, String typeOfRequest, String publicationName){ // Frederick
 		/*
 			This will take the client's name and add it to the message to give it a personal touch
 			The type of request will let the function know which template file to use.
 		*/
-		return "";
+		String message;
+		
+		if(typeOfRequest.equals("Change"){
+			message = publicationMessage(publicationName);
+		}
+		else if(typeOfRequest.equals("Notification")){
+			message = notificationMessage(clientName);
+		}
+		else if(typeOfRequest.equals("Report")){
+			message = reportMessage();
+		}
+		return message;
 	}
+	/*Functions to help mock */
+
+	private String publicationMessage(String publicationName){
+		String intro = "To whom it may concern \n";
+		String body = "Please note that the following publication has been modified:";
+		String salutation = "Regards \n Bravo team"
+		String completed = intro + body + publicationName + "\n" + salutation;
+		return completed;
+	}
+
+	private String notificationMessage(String clientName){
+		String intro = "Dear " + clientName + "\n";				// sql request to sql database to get notification message
+		String body = "This is the user's personal message";
+		String salutation = "Regards \n Bravo team"
+		String completed = intro + body + "\n" + salutation;
+		return completed;
+	}
+
+	private String reportMessage(){
+		String intro = "To whom it may concern \n";				// sql request to sql database to get the report file
+		String body = "Plesae find attached the report file";
+		String salutation = "Regards \n Bravo team"
+		String completed = intro + body + publicationName + "\n" + salutation;
+		return completed;
+	}
+	
+
 }
