@@ -39,22 +39,22 @@ class Person
 	
 	public void setName(String name)
 	{
-		//sets the person's name
+		Name = name;
 	}
 	
 	public void setSurname(String surname)
 	{
-		//sets the persons Surname
+		Surname = surname;
 	}
 	
 	public void setID(String id)
 	{
-		//sets the person's id
+		ID = id;
 	}
 	
 	public void setEmail(String email)
 	{
-		//saves the person's email
+        email_address = email;
 	}
 	
 	//get Functions
