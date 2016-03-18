@@ -67,7 +67,7 @@ class Notifications{
 		//list of recipients seperated by commas : e.g banele@gmail.com , u12201911@tuks.co.za , mm@webmaster.com
 			for (int i=1;i<emailList.length;i++)
 			{
-				recList+=","+emailList[i];
+				recipientList+=","+emailList[i];
 			}
 			
 	}
