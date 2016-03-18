@@ -83,7 +83,7 @@ public class Client extends Thread
         try
         {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            String msg;
+            String msg = "";
 
             while(c.running)
             {
