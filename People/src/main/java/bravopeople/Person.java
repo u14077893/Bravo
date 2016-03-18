@@ -5,8 +5,8 @@
   *	The class defines the attributes of the user of the system.
   */
 
-import java.util.LinkedList;
 package bravopeople;
+import java.util.LinkedList;
 
 public class Person
 {
