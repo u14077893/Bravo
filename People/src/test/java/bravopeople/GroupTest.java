@@ -14,7 +14,8 @@ public class GroupTest extends TestCase
      */
     public void testGroup()
     {
-        Group test = new Group("testName");
+        Group test = new Group();
+        test.setName("testName");
         assertEquals("testName", test.getName());
     }
 }

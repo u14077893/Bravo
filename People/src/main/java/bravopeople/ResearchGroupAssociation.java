@@ -26,7 +26,7 @@ class ResearchGroupAssociation {
 		this.startDate = new Date();		// This will need to be converted before adding to database
 		this.endDate = null;
 		this.role = ResearchGroupAssociationType.MEMBER;
-		this.group = new Group("DTG");
+		this.group = new Group();
 	}
 	
 	/**

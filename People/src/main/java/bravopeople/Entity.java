@@ -1,4 +1,4 @@
-package people;
+package bravopeople;
 
 /**
  * <h1>Entity</h1>

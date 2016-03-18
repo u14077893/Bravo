@@ -1,5 +1,6 @@
 package bravopeople;
 
+import java.util.Date;
 import junit.framework.TestCase;
 public class ResearchGroupAssociationTest extends TestCase
 {
@@ -13,6 +14,10 @@ public class ResearchGroupAssociationTest extends TestCase
      */
     public void testResearchGroupAssociation()
     {
-        assert(true);
+        Date d = new Date();
+        ResearchGroupAssociation test = new ResearchGroupAssociation();
+        test.setStartDate(d);
+        assertEquals(d, test.getStartDate());
+        assertEquals(null, test.getEndDate());
     }
 }
