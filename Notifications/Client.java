@@ -26,13 +26,23 @@ public class Client extends Thread
 
     public void terminate()
     {
-        
+        try
+        {
+            running = false;
+            writer.close();
+            reader.close();
+        }
+        catch ( IOException e )
+        {
+            e.toString();
+        }
     }
 
     @Override
     public void start()
     {
-        
+        running = true;
+        super.start();       
     }
 
     @Override
@@ -43,7 +53,8 @@ public class Client extends Thread
 
     public void send( String msg )
     {
-       
+        writer.println(msg);
+        writer.flush();
     }
 
     public static void main(String args[])
