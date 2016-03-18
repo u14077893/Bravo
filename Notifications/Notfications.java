@@ -63,12 +63,14 @@ class Notifications{
 		*/
 		String recipientList=emailList[0];
 		String message="sample message"; //the message to be sent to the recipient
-		
+		String subje="subject of message";
 		//list of recipients seperated by commas : e.g banele@gmail.com , u12201911@tuks.co.za , mm@webmaster.com
 			for (int i=1;i<emailList.length;i++)
 			{
 				recipientList+=","+emailList[i];
 			}
+			//address,subject,message
+			submitEmail(recipientList,subje,message);
 			
 	}
 
