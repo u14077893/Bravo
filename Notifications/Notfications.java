@@ -27,9 +27,9 @@ class Notifications{
 			This will not use buildMessage as the user specified his own message.
 		*/
 		String message = "Sample message"; //this will be replaced with code to fetch the message stored on the database
-		String email = "Sample Email" //this will also have been fetched from the database
-		
 		message = message + "Sent via automatic notifications";
+		
+		submitEmail(emailList[i], "Automated Notification", message);
 	}
 
 	/*
@@ -63,12 +63,14 @@ class Notifications{
 		*/
 		String recipientList=emailList[0];
 		String message="sample message"; //the message to be sent to the recipient
-		
+		String subje="subject of message";
 		//list of recipients seperated by commas : e.g banele@gmail.com , u12201911@tuks.co.za , mm@webmaster.com
 			for (int i=1;i<emailList.length;i++)
 			{
 				recipientList+=","+emailList[i];
 			}
+			//address,subject,message
+			submitEmail(recipientList,subje,message);
 			
 	}
 
