@@ -2,7 +2,13 @@ package bravopeople;
 
 import java.util.Date;
 
-
+/**
+ * <h1>Association class with a research group</h1>
+ * Object representing the relationship of a person class with a specific research 
+ * project. 
+ * @author Bravo Team
+ * @version 1.0
+ */
 class ResearchGroupAssociation {
 	private Date startDate;
 	private Date endDate;		// [0..1]
@@ -12,7 +18,10 @@ class ResearchGroupAssociation {
 		STUDENT, COLLABORATOR, MEMBER, GROUPLEADER
 	}
 	
-	// Dummy default constructor
+	/**
+	 * Dummy constructor used to generate a test sample for unit testing. 
+	 * Will later be replaced.
+	 */
 	public ResearchGroupAssociation() {
 		this.startDate = new Date();		// This will need to be converted before adding to database
 		this.endDate = null;
@@ -20,6 +29,12 @@ class ResearchGroupAssociation {
 		this.group = new Group("DTG");
 	}
 	
+	/**
+	 * Constructor
+	 * @param startDate Date when the person became part of the research group
+	 * @param group 	Research group with which the person is associated
+	 * @param role		Role of the person in the research group
+	 */
 	public ResearchGroupAssociation(Date startDate, Group group, String role) {
 		this.startDate = startDate;
 		this.endDate = null;
@@ -43,29 +58,52 @@ class ResearchGroupAssociation {
 		}
 	} // End of Constructor
 
-	/*
-	 * Getters
+	/**
+	 * Getter
+	 * @return	Date when the person joined the research group
 	 */
-	
 	public Date getStartDate() { return startDate; }
+
+	/**
+	 * Getter
+	 * @return Date when the person left the research group
+	 */
 	public Date getEndDate() { return endDate; }						// Can return null
+
+	/**
+	 * Getter
+	 * @return Role of the person within the research group
+	 */
 	public ResearchGroupAssociationType getRole() { return role; }
+
+	/**
+	 * Getter
+	 * @return Group to which the person is associated
+	 */
 	public Group getGroup() { return group; }
 	
-	/*
-	 * Setters
+	/**
+	 * Setter
+	 * @param startDate Date when the person joined the research group
 	 */
-	
 	public void setStartDate(Date startDate) {
 		if (startDate != null)
 			this.startDate = startDate;
 	}
 
+	/**
+	 * Setter
+	 * @param endDate Date when the person left the research group
+	 */
 	public void setEndDate(Date endDate) {
 		if (endDate != null)
 			this.endDate = endDate;
 	}
 
+	/**
+	 * Setter
+	 * @param role Role of the person within the research group
+	 */
 	public void setRole(String role) {
 		String s = role.toUpperCase();
 		if (s.equals("STUDENT")) {
@@ -85,6 +123,10 @@ class ResearchGroupAssociation {
 		}
 	}
 
+	/**
+	 * Setter
+	 * @param group Group to which the person is associated
+	 */
 	public void setGroup(Group group) {
 		if (group != null)
 			this.group = group;
