@@ -48,7 +48,25 @@ public class Client extends Thread
     @Override
     public void run()
     {
-        
+        try
+        {
+            String msg;
+            
+            while( running && (msg = reader.readLine() ) != null )
+            {
+              System.out.println(msg);
+            }
+
+            reader.close();
+        } 
+        catch ( IOException e )
+        {
+           e.toString();
+        }
+        finally
+        {
+          terminate();
+        }
     }
 
     public void send( String msg )
