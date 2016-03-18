@@ -8,13 +8,16 @@
 import java.util.LinkedList;
 package bravopeople;
 
-class Person
+public class Person
 {
 	private String Name;
 	private String Surname;
 	private String ID;
 	private String email_address;
-	private LinkedList<Organisation> organisations;  ///Person can belong to 0 or more organisations
+	
+	private LinkedList<Organisation> organisations;  	///Person can belong to 0 or more organisations
+	private LinkedList<ResearchGroupAssociation> research_groups; 	///Person can have multiple associations with research groups
+	private LinkedList<researchCategory> research_category;  ///Person may be associated with a research Category
 	
 	/**
 		Default contructor with dummy data
@@ -26,7 +29,10 @@ class Person
 		Surname = "Surname";
 		ID= "00000000000";
 		email_address = "email@domain.com";
+		
 		organisations = new LinkedList<Organisation>();
+		research_groups = new LinkedList<ResearchGroupAssociation>();
+		research_category = new LinkedList<researchCategory>();
 	}
 	
 	/**
@@ -89,6 +95,24 @@ class Person
 		organisations.add(new Organisation(organisation));
 	}
 	
+	/**
+	* Setter 	
+	* @param group Research group that the of the person is associated with
+	*/
+	public void setResearchGroupAssociation(ResearchGroupAssociation group)
+	{
+		research_groups.add(group);
+	}
+	
+	/**
+	* Setter 	
+	* @param category Research category that the of the person is associated with
+	*/
+	public void setResearchCategory(researchCategory category)
+	{
+		research_category.add(category);
+	}
+	
 	
 	/**
 	* Getter
@@ -133,9 +157,35 @@ class Person
 	
 	public LinkedList<Organisation> getOrganisation()
 	{
+		if(this.organisations.isEmpty())
+			return null;
 		return organisations;
 	}
 	
+	/**
+	* Getter
+	* @return the list of research categories this person is associated with or may return null if they if they are not associated with any.
+	*/
+	
+	public LinkedList<researchCategory> getResearchCategory()
+	{
+		if(research_category.isEmpty())
+			return null;
+		else
+			return research_category;
+	}
+	
+	/**
+	* Getter
+	* @return the list of research groups this person is associated with or may return null if they if they are not associated with any.
+	*/
+	public LinkedList<ResearchGroupAssociation> getResearchGroupAssociation()
+	{
+		if(research_groups.isEmpty())
+			return null;
+		else
+			return research_groups;
+	}
 }
 
   
