@@ -6,7 +6,7 @@
   */
 
 import java.util.LinkedList;
-//package bravopeople;
+package bravopeople;
 
 class Person
 {
@@ -89,14 +89,6 @@ class Person
 		organisations.add(new Organisation(organisation));
 	}
 	
-	/**
-	* Setter 	
-	* @param organisations_list List of organisations the person belongs to.
-	*/
-	public void set_Organisations(LinkedList<Organisation> organisations_list)
-	{
-		organisations= (LinkedList) organisations_list.clone();
-	}
 	
 	/**
 	* Getter

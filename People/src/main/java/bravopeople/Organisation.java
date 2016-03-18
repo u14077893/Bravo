@@ -4,7 +4,7 @@
   *	This file defines the Organization Class for the Researcher Support System (RSS).
   */
 	
-//package bravopeople;
+package bravopeople;
 
 class Organisation
 {
