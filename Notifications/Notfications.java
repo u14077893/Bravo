@@ -61,6 +61,15 @@ class Notifications{
 			This will be used to email plain text emails no images/files etc. 
 			will use buildMessage to assist the contruction of the message.
 		*/
+		String recipientList=emailList[0];
+		String message="sample message"; //the message to be sent to the recipient
+		
+		//list of recipients seperated by commas : e.g banele@gmail.com , u12201911@tuks.co.za , mm@webmaster.com
+			for (int i=1;i<emailList.length;i++)
+			{
+				recList+=","+emailList[i];
+			}
+			
 	}
 
 	/*
