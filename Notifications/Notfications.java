@@ -27,9 +27,9 @@ class Notifications{
 			This will not use buildMessage as the user specified his own message.
 		*/
 		String message = "Sample message"; //this will be replaced with code to fetch the message stored on the database
-		String email = "Sample Email" //this will also have been fetched from the database
-		
 		message = message + "Sent via automatic notifications";
+		
+		submitEmail(emailList[i], "Automated Notification", message);
 	}
 
 	/*
