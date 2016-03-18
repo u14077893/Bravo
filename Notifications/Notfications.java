@@ -41,6 +41,15 @@ class Notifications{
 			All authors must be notified if someone made changes to their publication of any kind. (Note the publication name must be specified as an author can belong to multiple groups) 
 			Still to be figured out if it will tell the authors exactly what was changed. (to be discussed)
 		*/
+		String message = "";
+		
+		for (int i = 0; i < emailList.length; i ++){
+			if (emailList[i] != null && !emailList[i].isEmpty()){
+				message = buildMessage(emailList[i], "Change", publicationName)
+				//submitEmail(email_Address, email_subject, email_message)
+				submitEmail(emailList[i], "Change in Publication", message);
+			}
+		}
 	}
 
 	/*
