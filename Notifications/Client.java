@@ -12,14 +12,17 @@ public class Client extends Thread
     public Client(String host, Integer port)
     {
         super();
-        try{
-          Socket sock = new Socket(host, port);
 
-          writer = new PrintWriter( sock.getOutputStream() );
+        try
+        {
+            Socket sock = new Socket(host, port);
 
-          reader = new BufferedReader(
-                         new InputStreamReader( sock.getInputStream() ) );
-        } catch ( IOException e ){
+            writer = new PrintWriter( sock.getOutputStream() );
+
+            reader = new BufferedReader(new InputStreamReader( sock.getInputStream() ) );
+        } 
+        catch ( IOException e )
+        {
             e.toString();
         }
     }
@@ -31,7 +34,7 @@ public class Client extends Thread
             running = false;
             writer.close();
             reader.close();
-        }
+        } 
         catch ( IOException e )
         {
             e.toString();
@@ -42,7 +45,7 @@ public class Client extends Thread
     public void start()
     {
         running = true;
-        super.start();       
+        super.start();
     }
 
     @Override
@@ -77,24 +80,24 @@ public class Client extends Thread
 
     public static void main(String args[])
     {
-        Client c = new Client("kendy.up.ac.za", 25);
-        c.start();
+      Client c = new Client("kendy.up.ac.za", 25);
+      c.start();
 
-        try
+      try
+      {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String msg;
+
+        while(!(msg = reader.readLine()).equals("BYE") && c.running)
         {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            String msg = "";
-
-            while(c.running)
-            {
-              c.send(msg);
-            } 
-
-            c.terminate();
+          c.send(msg);
         }
-        catch(Exception e)
-        {
-            e.toString();
-        }
+
+        c.terminate();
+      } 
+      catch(Exception e)
+      {
+        e.toString();
+      }
     }
 }
