@@ -53,41 +53,35 @@ class Notifications{
 	/*
 		@param typeOfRequest specifies the type of request it will be eg a notification or a change notice.
 	*/
-	private String buildMessage(String typeOfRequest){ // Frederick
-		/*
-			This will generate a kind of "To whom it may concern" message when there are multiple clients in one email.
-			The type of request will let the function know which template file to use.
-		*/
-		/*String message;
-		
-		message = "To whom it may concern, \n" + typeOfRequest;
-            
-		return message;*/
-	}
 
 	/*
-		@param clientName this variable specifies the email receiptiant's name to make the mail look more professional
+		@param clientName this variable specifies the email receiptiant's name to make the mail look more professional may be null;
 		@param typeOfRequest specifies the type of request it will be eg a notification or a change notice.
+		@param publicationName is the name of the publication that is included in the report or has been changed. This field can be null
 	*/
 	private String buildMessage(String clientName, String typeOfRequest, String publicationName){ // Frederick
 		/*
 			This will take the client's name and add it to the message to give it a personal touch
 			The type of request will let the function know which template file to use.
 		*/
-		String message;
+		String message = "";
 		
-		if(typeOfRequest.equals("Change"){
+		if((typeOfRequest.equals("Change") && (!publicaionName.equals(""))){
 			message = publicationMessage(publicationName);
 		}
-		else if(typeOfRequest.equals("Notification")){
+		else if((typeOfRequest.equals("Notification")) && (!clientName.equals("")){
 			message = notificationMessage(clientName);
 		}
-		else if(typeOfRequest.equals("Report")){
-			message = reportMessage();
+		else if((typeOfRequest.equals("Report")) && (!publicaionName.equals("")){
+			message = reportMessage(publicationName);
+		}
+		else {
+			message = "";
 		}
 		return message;
 	}
-	/*Functions to help mock */
+	
+	/*Functions to help mock build message's functionality */
 
 	private String publicationMessage(String publicationName){
 		String intro = "To whom it may concern \n";
@@ -105,9 +99,9 @@ class Notifications{
 		return completed;
 	}
 
-	private String reportMessage(){
+	private String reportMessage(Srting publicationName){
 		String intro = "To whom it may concern \n";				// sql request to sql database to get the report file
-		String body = "Plesae find attached the report file";
+		String body = "Plesae find attached the report file for: ";
 		String salutation = "Regards \n Bravo team"
 		String completed = intro + body + publicationName + "\n" + salutation;
 		return completed;
