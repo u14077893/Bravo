@@ -23,8 +23,7 @@ public class home extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Create a new publication", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Create a new publication", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
     }
@@ -46,6 +45,7 @@ public class home extends AppCompatActivity {
 
         if (id == R.id.action_logout)
         {
+            // Just close the activity for now as the user is not really logged in yet (mock interface)
             finish();
             return true;
         }

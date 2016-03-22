@@ -17,35 +17,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/up_logo"
-        />
+        android:contentDescription="@string/up_logo_description"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/kevin_heritage"/>
+        android:text="@string/kevin_heritage"
+        android:gravity="center|top"
+        android:textIsSelectable="true"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/duncan_smallwood"/>
+        android:text="@string/duncan_smallwood"
+        android:gravity="center|top"
+        android:textIsSelectable="true"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/nathan_dunkley"/>
+        android:text="@string/priscilla_madigoe"
+        android:gravity="center|top"
+        android:textIsSelectable="true"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/priscilla_madigoe"/>
+        android:text="@string/nathan_dunkley"
+        android:gravity="center|top"
+        android:textIsSelectable="true"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tim_kirker"/>
+        android:text="@string/tim_kirker"
+        android:gravity="center|top"
+        android:textIsSelectable="true"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/vukile_langa"/>
+        android:text="@string/vukile_langa"
+        android:gravity="center|top"
+        android:textIsSelectable="true"/>
 </LinearLayout>

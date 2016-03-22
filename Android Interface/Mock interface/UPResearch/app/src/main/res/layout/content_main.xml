@@ -17,11 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:src="@drawable/up_logo"
-        />
-
+        android:contentDescription="@string/up_logo_description"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,14 +28,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/username"
-            android:layout_weight="1" />
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingTop="15dp"/>
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txt_username"
-            android:inputType="text"
-            android:layout_weight="2"/>
+            android:inputType="text"/>
 
     </LinearLayout>
 
@@ -51,21 +49,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/password"
-            android:layout_weight="1" />
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:paddingTop="15dp"/>
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:id="@+id/txt_password"
-            android:layout_weight="2"/>
+            android:id="@+id/txt_password"/>
 
     </LinearLayout>
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/btn_login"
-        android:onClick="login"/>
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:id="@+id/btn_login"
+            android:onClick="login"/>
+
+    </LinearLayout>
+
 </LinearLayout>
