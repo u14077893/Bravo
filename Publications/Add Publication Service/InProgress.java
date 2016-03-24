@@ -18,5 +18,10 @@ public class InProgress implements LifeCycleState {
     public String getStateString() {
         return "InProgress";
     }
+
+    public Integer getPercentageCompleted()
+    {
+        return percentageCompleted;
+    }
     
 }

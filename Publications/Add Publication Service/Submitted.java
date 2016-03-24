@@ -2,6 +2,7 @@ package za.ac.cs.teambravo.publications.publications;
 
 public class Submitted implements LifeCycleState{
 
+
     @Override
     public LifeCycleState getState() {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -14,7 +15,8 @@ public class Submitted implements LifeCycleState{
 
     @Override
     public String getStateString() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+
+        return "Submitted;
     }
     
     

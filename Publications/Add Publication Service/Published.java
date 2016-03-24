@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Published implements LifeCycleState{
 
-    Date publicationDate;
+    Date publicationDateObject;
     
     @Override
     public LifeCycleState getState() {
@@ -18,8 +18,14 @@ public class Published implements LifeCycleState{
     }
 
     @Override
-    public String getStateString() {
+    public String getStateString() 
+    {
         return "Published";
+    }
+
+    public Date getPublicationDateObject()
+    { 
+        return publicationDateObject;
     }
     
 }
