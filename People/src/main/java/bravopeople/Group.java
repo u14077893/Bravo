@@ -8,7 +8,7 @@ import java.util.*;
  * @author Bravo Team
  * @version 1.0
  */
-class Group {
+class Group implements GroupInterface {
 	private String name;
 	private ArrayList<Entity> entities;		// Composite Pattern
 
@@ -48,7 +48,12 @@ class Group {
 	 */
 	public void setName(String name) {
 		this.name = name;
-	}	
+	}
+
+	public void addEntity(Entity entity)
+	{
+		
+	}
 
 	/**
 	 * Setter
