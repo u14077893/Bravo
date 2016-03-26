@@ -9,7 +9,7 @@ import java.util.Date;
  * @author Bravo Team
  * @version 1.0
  */
-class ResearchGroupAssociation {
+class ResearchGroupAssociation implements ResearchGroupAssociationInterface{
 	private Date startDate;
 	private Date endDate;		// [0..1]
 	private ResearchGroupAssociationType role;
@@ -74,7 +74,7 @@ class ResearchGroupAssociation {
 	 * Getter
 	 * @return Role of the person within the research group
 	 */
-	public ResearchGroupAssociationType getRole() { return role; }
+	public String getRole() { return "STUDENT"; }
 
 	/**
 	 * Getter
