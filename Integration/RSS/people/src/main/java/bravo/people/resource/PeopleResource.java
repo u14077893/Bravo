@@ -19,7 +19,7 @@ import javax.ws.rs.Produces;
  * REST Web Service
  *
  */
-@Path("user")
+@Path("people")
 public class PeopleResource {
     public class Duke {
         private int age;
@@ -42,7 +42,7 @@ public class PeopleResource {
      */
     @GET
     @Produces("application/json")
-    @Path("getUser")
+    @Path("getPerson")
     public JsonObject getText() {
         // Create a new Calendar for Duke's birthday
         Calendar dukesBirthday = new GregorianCalendar(1995, Calendar.MAY, 23);

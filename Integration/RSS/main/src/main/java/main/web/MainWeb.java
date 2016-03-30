@@ -71,7 +71,7 @@ public class MainWeb implements Serializable {
         try {
             Client client = ClientBuilder.newClient();
             WebTarget target
-                    = client.target("http://localhost:8080/people/user/getUser");
+                    = client.target("http://localhost:8080/webapi/people/getPerson");
 //          String response = target.request().get(String.class);
             
             JsonObject response = target.request().get(JsonObject.class);
