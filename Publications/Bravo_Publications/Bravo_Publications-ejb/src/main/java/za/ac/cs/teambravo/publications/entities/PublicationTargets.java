@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class PublicationTarget implements Serializable {
+public class PublicationTargets implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,11 +24,11 @@ public class PublicationTarget implements Serializable {
     @Column
     private URL website;
 
-    public PublicationTarget() {
+    public PublicationTargets() {
         super();
     }
    
-    public PublicationTarget(Integer targetID, String name, URL website) {
+    public PublicationTargets(Integer targetID, String name, URL website) {
         super();
         this.targetID = targetID;
         this.name = name;
@@ -71,10 +71,10 @@ public class PublicationTarget implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PublicationTarget)) {
+        if (!(object instanceof PublicationTargets)) {
             return false;
         }
-        PublicationTarget other = (PublicationTarget) object;
+        PublicationTargets other = (PublicationTargets) object;
         if ((this.targetID == null && other.targetID != null) || (this.targetID != null && !this.targetID.equals(other.targetID))) {
             return false;
         }

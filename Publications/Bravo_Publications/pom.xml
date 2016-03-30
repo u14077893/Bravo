@@ -7,8 +7,6 @@
   <packaging>pom</packaging>
   <name>Bravo_Publications</name>
   <modules>
-    <module>Bravo_Publications-ear</module>
-    <module>Bravo_Publications-web</module>
     <module>Bravo_Publications-ejb</module>
   </modules>
   <dependencies>

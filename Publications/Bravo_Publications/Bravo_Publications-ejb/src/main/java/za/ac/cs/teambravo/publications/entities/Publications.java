@@ -24,7 +24,7 @@ public class Publications implements Serializable {
     private LifeCycleState state;
   
     @ManyToOne
-    private PublicationTarget target;
+    private PublicationTargets target;
     
     @ManyToOne
     private PublicationType type; 
@@ -62,11 +62,11 @@ public class Publications implements Serializable {
         this.state = state;
     }
 
-    public PublicationTarget getTarget() {
+    public PublicationTargets getTarget() {
         return target;
     }
 
-    public void setTarget(PublicationTarget target) {
+    public void setTarget(PublicationTargets target) {
         this.target = target;
     }
 
