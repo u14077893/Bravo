@@ -7,9 +7,13 @@ package bravo.publications.resource;
 
 import bravo.publications.ejb.PublicationsBean;
 import javax.ejb.EJB;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
 
 
 /**
@@ -25,6 +29,13 @@ public class PublicationsResource {
     @Path("createPublication")
     public void createPublication() {
         publicationsBean.createPublication("Publication Name", "14035538");
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Path("postPublication")
+    public void postPublication(@FormParam("title") String title, @FormParam("staffNumber") String staffNumber) {
+        publicationsBean.createPublication(title, staffNumber);
     }
     
     @GET
