@@ -24,13 +24,19 @@ public class PublicationsResource {
     @GET
     @Path("createPublication")
     public void createPublication() {
-        publicationsBean.createPublication();
+        publicationsBean.createPublication("Publication Name", "14035538");
     }
     
     @GET
     @Produces("text/plain")
     @Path("getPublication")
     public String getPublication() {
-        return publicationsBean.getPublication();
+        String publications = "";
+        
+        for (int i = 0; i < publicationsBean.getPublications().size(); ++i) {
+            publications += publicationsBean.getPublications().get(i) + "\n";
+        }
+        
+        return publications;
     }
 }

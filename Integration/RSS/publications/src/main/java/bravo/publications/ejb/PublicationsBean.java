@@ -6,6 +6,7 @@
 package bravo.publications.ejb;
 
 import bravo.publications.entity.PublicationEntity;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,16 +23,13 @@ public class PublicationsBean {
     @PersistenceContext
     private EntityManager em;
 
-    public void createPublication() {
-        String title = "A Comprehensive Experiment on Jargon";
-        String staffNumber = "14035538";
+    public void createPublication(String title, String staffNumber) {
         PublicationEntity publication = new PublicationEntity(title, staffNumber);
-
         em.persist(publication);
     }
     
-    public String getPublication() {
-        String title = (String) em.createNamedQuery("getTitle").getSingleResult();
-        return title;
+    public List<String> getPublications() {
+        List<String> titles = (List<String>) em.createNamedQuery("getTitle").getResultList();
+        return titles;
     }
 }
