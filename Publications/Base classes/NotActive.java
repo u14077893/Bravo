@@ -1,6 +1,14 @@
 public class NotActive implements PublicationTypeState
 {
 
+    public String getDeactivationReason() {
+        return deactivationReason;
+    }
+
+    public void setDeactivationReason(String deactivationReason) {
+        this.deactivationReason = deactivationReason;
+    }
+
 	private String deactivationReason;
 
 }
