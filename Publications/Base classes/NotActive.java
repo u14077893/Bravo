@@ -1,4 +1,4 @@
-public class NotActive implements PublicationTypeState
+public class NotActive extends PublicationTypeState
 {
 
     public String getDeactivationReason() {
