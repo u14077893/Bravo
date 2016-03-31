@@ -36,8 +36,6 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>people_ejb</artifactId>
             <version>${project.version}</version>
-            <type>jar</type>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>javax</groupId>

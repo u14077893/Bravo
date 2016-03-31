@@ -28,17 +28,23 @@ public class PersonEntity implements Serializable {
     private String firstName;
     private String surname;
     private String staffNumber;
-    
+
+    public PersonEntity(String firstName, String surname, String staffNumber) {
+        this.firstName = firstName;
+        this.surname = surname;
+        this.staffNumber = staffNumber;
+    }
+
     public String getFirstName() {
-        return this.firstName;
+        return firstName;
     }
     
     public String getSurname() {
-        return this.surname;
+        return surname;
     }
     
     public String getStaffNumber() {
-        return this.staffNumber;
+        return staffNumber;
     }
     
     public void setFirstName(String firstName) {
