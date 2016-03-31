@@ -1,4 +1,4 @@
-package za.ac.cs.teambravo.publications.publications;
+//package za.ac.cs.teambravo.publications.publications;
 
 public class Submitted implements LifeCycleState{
 
@@ -15,8 +15,5 @@ public class Submitted implements LifeCycleState{
     @Override
     public String getStateString() {
         throw new UnsupportedOperationException("Not supported yet."); 
-    }
-    
-    
-    
+    }    
 }

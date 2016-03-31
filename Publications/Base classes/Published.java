@@ -1,4 +1,4 @@
-package za.ac.cs.teambravo.publications.publications;
+//package za.ac.cs.teambravo.publications.publications;
 
 
 import java.util.Date;
