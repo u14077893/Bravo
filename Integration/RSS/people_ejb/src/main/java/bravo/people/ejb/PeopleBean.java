@@ -16,17 +16,16 @@ import bravo.people.entity.*;
  * @author Dillon
  */
 @Stateless
-@LocalBean
+//@LocalBean
 public class PeopleBean {
     public void createPerson(String firstName, String surname, String staffNumber) {
-//        PersonEntity person = new PersonEntity(firstName, surname, staffNumber);
-//        em.persist(person);
+        PersonEntity person = new PersonEntity(firstName, surname, staffNumber);
+        em.persist(person);
     }
 
     public String getFirstName() {
-//        String firstName = (String) em.createNamedQuery("getFirstName").getSingleResult();
-//        return firstName;
-        return "";
+        String firstName = (String) em.createNamedQuery("getFirstName").getSingleResult();
+        return firstName;
     }
     
     @PersistenceContext

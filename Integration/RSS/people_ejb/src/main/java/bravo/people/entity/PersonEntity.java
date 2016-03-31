@@ -29,6 +29,10 @@ public class PersonEntity implements Serializable {
     private String surname;
     private String staffNumber;
 
+    public PersonEntity() {
+        
+    }
+    
     public PersonEntity(String firstName, String surname, String staffNumber) {
         this.firstName = firstName;
         this.surname = surname;
