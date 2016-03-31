@@ -11,6 +11,7 @@
         <module>publications</module>
     <module>people</module>
     <module>people_ejb</module>
+    <module>reporting_ejb</module>
   </modules>
     <properties>
         <javaee.api.version>7.0</javaee.api.version>
