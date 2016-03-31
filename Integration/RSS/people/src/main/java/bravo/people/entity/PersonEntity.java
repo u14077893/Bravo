@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bravo.publications.entity;
+package bravo.people.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -17,38 +17,38 @@ import javax.persistence.NamedQuery;
  * @author Dillon
  */
 @Entity
-@NamedQuery(name = "getTitle",
-        query = "SELECT p.title FROM PublicationEntity p WHERE p.staffNumber = '14035538'")
-public class PublicationEntity implements Serializable {
+@NamedQuery(name = "getFirstName",
+        query = "SELECT p.firstName FROM PersonEntity p WHERE p.staffNumber = '14035538'")
+public class PersonEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String title;
+    private String firstName;
+    private String surname;
     private String staffNumber;
-
-    public PublicationEntity() {
-        
+    
+    public String getFirstName() {
+        return this.firstName;
     }
     
-    public PublicationEntity(String title, String staffNumber) {
-        this.title = title;
-        this.staffNumber = staffNumber;
-    }
-    
-    public String getTitle() {
-        return this.title;
-    }
-    
-    public void setTitle(String title) {
-        this.title = title;
+    public String getSurname() {
+        return this.surname;
     }
     
     public String getStaffNumber() {
         return this.staffNumber;
     }
     
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public void setStaffNumber(String staffNumber) {
         this.staffNumber = staffNumber;
     }
@@ -71,10 +71,10 @@ public class PublicationEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PublicationEntity)) {
+        if (!(object instanceof PersonEntity)) {
             return false;
         }
-        PublicationEntity other = (PublicationEntity) object;
+        PersonEntity other = (PersonEntity) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -83,7 +83,7 @@ public class PublicationEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "bravo.publications.entity.PublicationEntity[ id=" + id + " ]";
+        return "bravo.people.entity.PersonEntity[ id=" + id + " ]";
     }
     
 }
