@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Entities.Person</class>
     <class>Entities.Publicationtarget</class>
+    <class>Entities.Publicationtypestate</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/COS301"/>
       <property name="javax.persistence.jdbc.user" value="moses"/>

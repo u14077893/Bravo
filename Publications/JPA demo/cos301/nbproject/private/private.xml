@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/moses/NetBeansProjects/cos301/src/Period.java</file>
-            <file>file:/home/moses/NetBeansProjects/cos301/src/PublicationDetails.java</file>
+            <file>file:/home/moses/NetBeansProjects/cos301/src/TestEntities/TestPerson.java</file>
+            <file>file:/home/moses/NetBeansProjects/cos301/src/PublicationTarget.java</file>
+            <file>file:/home/moses/NetBeansProjects/cos301/src/Abandoned.java</file>
             <file>file:/home/moses/NetBeansProjects/cos301/src/PublicationState.java</file>
+            <file>file:/home/moses/NetBeansProjects/cos301/src/Entities/Person.java</file>
+            <file>file:/home/moses/NetBeansProjects/cos301/src/Entities/Publicationtypestate.java</file>
         </group>
     </open-files>
 </project-private>
