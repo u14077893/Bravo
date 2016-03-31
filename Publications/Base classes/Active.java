@@ -1,4 +1,4 @@
-public class Active implements PublicationTypeState
+public class Active extends PublicationTypeState
 {
 	private double accreditationPoints;
 
