@@ -6,6 +6,7 @@ package bravo.reporting.ejb;
 
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import bravo.people.ejb.*;
 
 /**
  *
