@@ -7,6 +7,7 @@
     <class>Entities.Publicationtypestate</class>
     <class>Entities.Publicationtype</class>
     <class>Entities.Publicationdetails</class>
+    <class>Entities.Publicationstate</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/COS301"/>
       <property name="javax.persistence.jdbc.user" value="moses"/>
