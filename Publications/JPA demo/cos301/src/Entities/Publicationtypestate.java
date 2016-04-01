@@ -30,7 +30,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Publicationtypestate.findAll", query = "SELECT p FROM Publicationtypestate p"),
     @NamedQuery(name = "Publicationtypestate.findById", query = "SELECT p FROM Publicationtypestate p WHERE p.id = :id"),
-    @NamedQuery(name = "Publicationtypestate.findByEffectivedate", query = "SELECT p FROM Publicationtypestate p WHERE p.effectivedate = :effectivedate")})
+    @NamedQuery(name = "Publicationtypestate.findByState", query = "SELECT p FROM Publicationtypestate p WHERE p.state = :state"),
+    @NamedQuery(name = "Publicationtypestate.findByEffectivedate", query = "SELECT p FROM Publicationtypestate p WHERE p.effectivedate = :effectivedate"),
+    @NamedQuery(name = "Publicationtypestate.findByAccredationpoints", query = "SELECT p FROM Publicationtypestate p WHERE p.accredationpoints = :accredationpoints"),
+    @NamedQuery(name = "Publicationtypestate.findByDeactivationreason", query = "SELECT p FROM Publicationtypestate p WHERE p.deactivationreason = :deactivationreason")})
 public class Publicationtypestate implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -38,9 +41,16 @@ public class Publicationtypestate implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "state")
+    private String state;
     @Column(name = "effectivedate")
     @Temporal(TemporalType.DATE)
     private Date effectivedate;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "accredationpoints")
+    private Float accredationpoints;
+    @Column(name = "deactivationreason")
+    private String deactivationreason;
 
     public Publicationtypestate() {
     }
@@ -57,12 +67,36 @@ public class Publicationtypestate implements Serializable {
         this.id = id;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     public Date getEffectivedate() {
         return effectivedate;
     }
 
     public void setEffectivedate(Date effectivedate) {
         this.effectivedate = effectivedate;
+    }
+
+    public Float getAccredationpoints() {
+        return accredationpoints;
+    }
+
+    public void setAccredationpoints(Float accredationpoints) {
+        this.accredationpoints = accredationpoints;
+    }
+
+    public String getDeactivationreason() {
+        return deactivationreason;
+    }
+
+    public void setDeactivationreason(String deactivationreason) {
+        this.deactivationreason = deactivationreason;
     }
 
     @Override
