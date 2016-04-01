@@ -6,9 +6,9 @@ package com.slugger7.upresearch;
  *
  */
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserRights
 {
     private String type;
@@ -32,5 +32,14 @@ public class UserRights
     public Value getValue()
     {
         return value;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Quote{" +
+                "type='" + type + '\'' +
+                ", value=" + value +
+                '}';
     }
 }
