@@ -1,5 +1,5 @@
 
-//package za.ac.cs.teambravo.publications.publications_exceptions;
+package za.ac.cs.teambravo.publications.publications_exceptions;
 
 /**
  *
