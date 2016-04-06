@@ -24,7 +24,7 @@ public class PublicationEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    
     private String title;
     private String staffNumber;
 
@@ -38,21 +38,21 @@ public class PublicationEntity implements Serializable {
     }
     
     public String getTitle() {
-        return this.title;
+        return title;
     }
-    
+
+    public String getStaffNumber() {
+        return staffNumber;
+    }
+
     public void setTitle(String title) {
         this.title = title;
-    }
-    
-    public String getStaffNumber() {
-        return this.staffNumber;
     }
     
     public void setStaffNumber(String staffNumber) {
         this.staffNumber = staffNumber;
     }
-    
+
     public Long getId() {
         return id;
     }

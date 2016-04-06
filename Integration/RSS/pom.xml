@@ -8,11 +8,11 @@
     <modules>
         <module>people_test</module>
         <module>main</module>
+        <module>people</module>
+        <module>people_ejb</module>
+        <module>reporting_ejb</module>
         <module>publications</module>
-    <module>people</module>
-    <module>people_ejb</module>
-    <module>reporting_ejb</module>
-  </modules>
+    </modules>
     <properties>
         <javaee.api.version>7.0</javaee.api.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
