@@ -9,7 +9,8 @@
         <module>people</module>
         <module>publications</module>
         <module>mainweb</module>
-    </modules>
+    <module>reporting</module>
+  </modules>
     <properties>
         <javaee.api.version>7.0</javaee.api.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

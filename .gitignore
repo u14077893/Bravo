@@ -48,3 +48,5 @@ captures/
 /Integration/RSS/publications/target/
 /Integration/Mocks/publications_ejb/target/
 /Integration/Mocks/people_ejb/target/
+/Integration/Mocks/reporting_ejb/target/
+/Integration/RSS/reporting/target/
