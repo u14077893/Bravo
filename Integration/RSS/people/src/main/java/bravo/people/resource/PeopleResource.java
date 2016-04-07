@@ -15,6 +15,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -30,12 +31,11 @@ public class PeopleResource {
     }*/
     
     @POST
-    @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    @Consumes(MediaType.APPLICATION_JSON)
     @Path("addPerson")
-    public void addPerson(PersonModel personModel) {
-        System.out.println(personModel.getFirstName());
-//        peopleBean.addPerson(personModel.getFirstName(), personModel.getSurname(), personModel.getStaffNumber());
+    public Response addPerson(PersonModel personModel) {
+        peopleBean.addPerson(personModel.getFirstName(), personModel.getSurname(), personModel.getStaffNumber());
+        return Response.ok("{}", MediaType.APPLICATION_JSON).build();
     }
     
     @GET

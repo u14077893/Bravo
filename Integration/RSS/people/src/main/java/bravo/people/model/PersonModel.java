@@ -5,6 +5,7 @@
  */
 package bravo.people.model;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -13,9 +14,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class PersonModel {
-    private String firstName;
-    private String surname;
-    private String staffNumber;
+    @XmlElement(name="firstName") public String firstName;
+    @XmlElement(name="surname") public String surname;
+    @XmlElement(name="staffNumber") public String staffNumber;
 
     public String getFirstName() {
         return firstName;
