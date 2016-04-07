@@ -85,4 +85,11 @@
         </plugins>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>snapshots</id>
+            <name>Snapshots</name>
+            <url>http://ec2-54-213-154-144.us-west-2.compute.amazonaws.com:8081/nexus/content/repositories/snapshots/</url>
+        </repository>
+    </distributionManagement>
 </project>
