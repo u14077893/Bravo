@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Dillon
  */
-@Path("publications")
+@Path("publicationsResource")
 public class PublicationsResource {
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)

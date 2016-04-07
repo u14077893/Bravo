@@ -21,7 +21,7 @@ import javax.ws.rs.core.Response;
  *
  * @author Dillon
  */
-@Path("people")
+@Path("peopleResource")
 public class PeopleResource {
     /*@POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)

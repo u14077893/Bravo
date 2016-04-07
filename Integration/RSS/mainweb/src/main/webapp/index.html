@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>Enter Publication</h1>
-        <form method="POST" action="/webapi/publications/addPublication">
+        <form method="POST" action="publications/webapi/publicationsResource/addPublication">
             Title: <input name="title" type="text">
             Staff Number: <input name="staffNumber" type="text">
             <input type="submit">
@@ -21,14 +21,14 @@
             <input type="button" id="addPerson" value="clik">
         <!-- </form> -->
 
-        <a href="../webapi/people/getPerson">GetPerson</a>
+        <a href="../people/webapi/peopleResource/getPerson">GetPerson</a>
 
         <script type="text/javascript">
         	$("#addPerson").on("click", function() {
         		$.ajax({
         			type: 'POST',
                     contentType: 'application/json',
-        			url: '../webapi/people/addPerson',
+        			url: '../people/webapi/peopleResource/addPerson',
         			dataType: 'json',
         			data: formToJSON(),
         			success: function(data, textStatus, jqXHR){
