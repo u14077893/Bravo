@@ -9,8 +9,8 @@
         <module>people</module>
         <module>publications</module>
         <module>mainweb</module>
-    <module>reporting</module>
-  </modules>
+        <module>reporting</module>
+    </modules>
     <properties>
         <javaee.api.version>7.0</javaee.api.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -65,4 +65,12 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+    
+    <repositories>
+        <repository>
+            <id>Snapshots</id>
+            <name>Snapshots</name>
+            <url>http://ec2-54-213-154-144.us-west-2.compute.amazonaws.com:8081/nexus/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
 </project>
