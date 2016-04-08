@@ -3,35 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Beans;
+package za.ac.cs.teambravo.publications.services;
 
-import Main.AlreadyPublishedException;
-import Main.AuthorizationException;
-import Main.EffectiveDateNotAfterEffectiveDateOfLastStateEntry;
-import Main.InvalidRequest;
-import Main.NoSuchPublicationException;
-import Main.NotAuthorized;
-import Main.PublicationWithTitleExistsForAuthors;
-import RequestsAndResponses.AddPublicationRequest;
-import RequestsAndResponses.AddPublicationResponse;
-import RequestsAndResponses.AddPublicationTypeRequest;
-import RequestsAndResponses.AddPublicationTypeResponse;
-import RequestsAndResponses.CalcAccreditationPointsForGroupRequest;
-import RequestsAndResponses.CalcAccreditationPointsForGroupResponse;
-import RequestsAndResponses.CalcAccreditationPointsForPersonRequest;
-import RequestsAndResponses.CalcAccreditationPointsForPersonResponse;
-import RequestsAndResponses.ChangePublicationStateRequest;
-import RequestsAndResponses.ChangePublicationStateResponse;
-import RequestsAndResponses.CreatePublicationRequest;
-import RequestsAndResponses.CreatePublicationResponse;
-import RequestsAndResponses.GetPublicationRequest;
-import RequestsAndResponses.GetPublicationResponse;
-import RequestsAndResponses.GetPublicationsForGroupRequest;
-import RequestsAndResponses.GetPublicationsForGroupResponse;
-import RequestsAndResponses.GetPublicationsForPersonRequest;
-import RequestsAndResponses.GetPublicationsForPersonResponse;
-import RequestsAndResponses.ModifyPublicationTypeRequest;
-import RequestsAndResponses.ModifyPublicationTypeResponse;
+import javax.ejb.Remote;
+import za.ac.cs.teambravo.publications.Publication;
+import za.ac.cs.teambravo.publications.entities.PublicationState;
+import za.ac.cs.teambravo.publications.entities.PublicationType;
+import za.ac.cs.teambravo.publications.exceptions.AlreadyPublishedException;
+import za.ac.cs.teambravo.publications.exceptions.AuthorizationException;
+import za.ac.cs.teambravo.publications.exceptions.EffectiveDateNotAfterEffectiveDateOfLastStateEntry;
+import za.ac.cs.teambravo.publications.exceptions.InvalidRequest;
+import za.ac.cs.teambravo.publications.exceptions.NoSuchPublicationException;
+import za.ac.cs.teambravo.publications.exceptions.NotAuthorized;
+import za.ac.cs.teambravo.publications.exceptions.PublicationWithTitleExistsForAuthors;
+import za.ac.cs.teambravo.publications.requestandresponses.AddPublicationRequest;
+import za.ac.cs.teambravo.publications.requestandresponses.AddPublicationResponse;
+import za.ac.cs.teambravo.publications.requestandresponses.AddPublicationTypeRequest;
+import za.ac.cs.teambravo.publications.requestandresponses.AddPublicationTypeResponse;
+import za.ac.cs.teambravo.publications.requestandresponses.CalcAccreditationPointsForGroupRequest;
+import za.ac.cs.teambravo.publications.requestandresponses.CalcAccreditationPointsForGroupResponse;
+import za.ac.cs.teambravo.publications.requestandresponses.CalcAccreditationPointsForPersonRequest;
+import za.ac.cs.teambravo.publications.requestandresponses.CalcAccreditationPointsForPersonResponse;
+import za.ac.cs.teambravo.publications.requestandresponses.ChangePublicationStateRequest;
+import za.ac.cs.teambravo.publications.requestandresponses.ChangePublicationStateResponse;
+import za.ac.cs.teambravo.publications.requestandresponses.CreatePublicationRequest;
+import za.ac.cs.teambravo.publications.requestandresponses.CreatePublicationResponse;
+import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationRequest;
+import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationResponse;
+import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationsForGroupRequest;
+import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationsForGroupResponse;
+import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationsForPersonRequest;
+import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationsForPersonResponse;
+import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationTypeRequest;
+import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationTypeResponse;
 
 
 /**
