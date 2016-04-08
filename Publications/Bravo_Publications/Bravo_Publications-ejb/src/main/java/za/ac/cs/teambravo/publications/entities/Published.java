@@ -18,12 +18,6 @@ public class Published extends LifeCycleState {
         super();
     }
  
-    public Published(Date publicationDate, String bibTexReference, Integer stateID) {
-        super(stateID);
-        this.publicationDate = publicationDate;
-        this.bibTexReference = bibTexReference;
-    }
-
     public Date getPublicationDate() {
         return publicationDate;
     }

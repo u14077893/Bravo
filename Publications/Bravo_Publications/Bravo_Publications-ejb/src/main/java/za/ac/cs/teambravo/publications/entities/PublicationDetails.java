@@ -2,8 +2,8 @@
 package za.ac.cs.teambravo.publications.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,20 +24,13 @@ public class PublicationDetails implements Serializable {
     private Date envisagedPublicationDate;
     
     @OneToMany(targetEntity = Person.class)
-    private LinkedList authors; //These IDS are keys to the persons table
+    private ArrayList authors; //These IDS are keys to the persons table
 
     public PublicationDetails() {
         super();
     }
 
-    public PublicationDetails(Integer detailsID, LinkedList authors, String title) {
-        super();
-        this.detailsID = detailsID;
-        this.authors = authors;
-        this.title = title;
-    }
-
-    public PublicationDetails(Integer detailsID, String title, LinkedList authors, Date envisagedPublicationDate) {
+    public PublicationDetails(Integer detailsID, String title, ArrayList authors, Date envisagedPublicationDate) {
         this.detailsID = detailsID;
         this.title = title;
         this.authors = authors;
@@ -68,11 +61,11 @@ public class PublicationDetails implements Serializable {
         this.envisagedPublicationDate = envisagedPublicationDate;
     }
     
-    public LinkedList getAuthors() {
+    public ArrayList getAuthors() {
         return authors;
     }
 
-    public void setAuthors(Integer[] authorIDs) {
+    public void setAuthors(ArrayList authors) {
         this.authors = authors;
     }
     

@@ -22,10 +22,6 @@ public class LifeCycleState implements Serializable {
     public LifeCycleState() {
     }
 
-    public LifeCycleState(Integer stateID) {
-        this.stateID = stateID;
-    }
-
     public Integer getStateID() {
         return stateID;
     }

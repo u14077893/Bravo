@@ -1,5 +1,5 @@
 
-package za.ac.cs.teambravo.publications.services;
+package za.ac.cs.teambravo.publications;
 
 import za.ac.cs.teambravo.publications.Response;
 

@@ -1,4 +1,4 @@
-package za.ac.cs.teambravo.publications;
+package za.ac.cs.teambravo.publications.exceptions;
 
 public class PublicationWithTitleExistsForAuthors extends PublicationException
 {

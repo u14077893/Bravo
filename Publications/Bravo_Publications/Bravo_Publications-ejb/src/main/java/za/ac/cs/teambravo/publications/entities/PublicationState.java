@@ -7,37 +7,43 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table
-public class Publications implements Serializable {
+public class PublicationState implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer publicationID;
     
-    @ManyToOne
+    @OneToOne
     private PublicationDetails details;
     
-    @ManyToOne
+    @OneToOne
     private LifeCycleState state;
   
-    @ManyToOne
-    private PublicationTargets target;
+    @OneToOne
+    private PublicationTarget target;
     
     @ManyToOne
     private PublicationType type; 
 
-    public Publications() {
+    public PublicationState() {
         super();
     }
 
-    public Publications(Integer pubID) {
+    public PublicationState(Integer publicationID, PublicationDetails details, LifeCycleState state, PublicationTarget target, PublicationType type) {
         super();
         this.publicationID = publicationID;
+        this.details = details;
+        this.state = state;
+        this.target = target;
+        this.type = type;
     }
 
+  
     public Integer getPublicationID() {
         return publicationID;
     }
@@ -62,11 +68,11 @@ public class Publications implements Serializable {
         this.state = state;
     }
 
-    public PublicationTargets getTarget() {
+    public PublicationTarget getTarget() {
         return target;
     }
 
-    public void setTarget(PublicationTargets target) {
+    public void setTarget(PublicationTarget target) {
         this.target = target;
     }
 
@@ -89,10 +95,10 @@ public class Publications implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Publications)) {
+        if (!(object instanceof PublicationState)) {
             return false;
         }
-        Publications other = (Publications) object;
+        PublicationState other = (PublicationState) object;
         if ((this.publicationID == null && other.publicationID != null) || (this.publicationID != null && !this.publicationID.equals(other.publicationID))) {
             return false;
         }

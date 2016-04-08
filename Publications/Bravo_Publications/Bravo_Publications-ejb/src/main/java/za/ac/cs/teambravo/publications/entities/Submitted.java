@@ -12,9 +12,5 @@ public class Submitted extends LifeCycleState {
         super();
     }
 
-    public Submitted(Integer stateID) {
-        super(stateID);
-    }
- 
 }
 

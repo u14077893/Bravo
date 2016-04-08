@@ -25,16 +25,19 @@ public class Person implements Serializable {
     private String firstNames;
     
     private String surname;
+    
+    private String groupName;
 
     public Person() {
         super();
     }
 
-    public Person(Integer personID, String firstNames, String surname) {
+    public Person(Integer personID, String firstNames, String surname, String groupName) {
         super();
         this.personID = personID;
         this.firstNames = firstNames;
         this.surname = surname;
+        this.groupName = groupName;
     }
 
     public Integer getPersonID() {

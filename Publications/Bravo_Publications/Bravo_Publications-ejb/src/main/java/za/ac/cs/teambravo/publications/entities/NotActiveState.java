@@ -1,7 +1,6 @@
 
 package za.ac.cs.teambravo.publications.entities;
 
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -17,12 +16,6 @@ public class NotActiveState extends PublicationTypeState {
         super();
     }
 
-    public NotActiveState(Integer activationID, Date dateEffective, String deactivationReason) {
-        super(activationID, dateEffective);
-        this.deactivationReason = deactivationReason;
-    }
-
-    
     public String getDeactivationReason() {
         return deactivationReason;
     }

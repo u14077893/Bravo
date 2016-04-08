@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package za.ac.cs.teambravo.publications.services;
+package za.ac.cs.teambravo.publications;
 
 import za.ac.cs.teambravo.publications.Request;
 import za.ac.cs.teambravo.publications.entities.Person;

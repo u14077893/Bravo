@@ -1,5 +1,7 @@
 package za.ac.cs.teambravo.publications;
 
+import za.ac.cs.teambravo.publications.entities.PublicationState;
+
 
 public class Publication {
     PublicationState publicationStateObject;

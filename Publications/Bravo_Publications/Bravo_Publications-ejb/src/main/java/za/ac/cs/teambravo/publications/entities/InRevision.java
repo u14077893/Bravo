@@ -11,10 +11,6 @@ public class InRevision extends LifeCycleState {
     public InRevision() {
         super();
     }
-
-    public InRevision(Integer stateID) {
-        super(stateID);
-    }
     
 }
 

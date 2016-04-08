@@ -15,11 +15,6 @@ public class ActiveState extends PublicationTypeState {
         super();
     }
 
-    public ActiveState(Integer activationID, Date dateEffective, double accreditationPoints) {
-        super(activationID, dateEffective);
-        this.accreditationPoints = accreditationPoints;
-    }
-
     public double getAccreditationPoints() {
         return accreditationPoints;
     }

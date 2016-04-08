@@ -14,11 +14,6 @@ public class InProgress extends LifeCycleState {
         super();
     }
 
-    public InProgress(Integer percentageComplete, Integer stateID) {
-        super(stateID);
-        this.percentageComplete = percentageComplete;
-    }
-
     public Integer getPercentageComplete() {
         return percentageComplete;
     }

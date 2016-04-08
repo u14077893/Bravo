@@ -12,10 +12,6 @@ public class Accepted extends LifeCycleState {
         super();
     }
 
-    public Accepted(Integer stateID) {
-        super(stateID);
-    }
-
    
     
 }
