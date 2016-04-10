@@ -12,7 +12,7 @@ How to deploy to Maven repo:
     </repository>
 </distributionManagement>
 ```
-2.) Add the following to your settings.xml file (located at C:\Users\username\.m2)
+2.) Add the following to your settings.xml file (located at C:\Users\username\\.m2)
 ```xml
 <servers>
 	<server>
