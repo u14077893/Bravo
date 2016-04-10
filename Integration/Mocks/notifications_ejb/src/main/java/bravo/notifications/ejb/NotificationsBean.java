@@ -11,6 +11,6 @@ import javax.ejb.LocalBean;
 @LocalBean
 public class NotificationsBean {
     public String getNotifications() {
-        return "This is the notifications' bean v2";
+        return "This is the notifications' bean v3";
     }
 }
