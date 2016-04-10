@@ -10,6 +10,7 @@ import javax.ejb.LocalBean;
 @Stateless
 @LocalBean
 public class NotificationsBean {
-    public void businessMethod() {
+    public String getNotifications() {
+        return "This is the notifications' bean";
     }
 }

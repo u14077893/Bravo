@@ -10,7 +10,8 @@
         <module>publications</module>
         <module>mainweb</module>
         <module>reporting</module>
-    </modules>
+    <module>notifications</module>
+  </modules>
     <properties>
         <javaee.api.version>7.0</javaee.api.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

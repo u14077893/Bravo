@@ -50,3 +50,5 @@ captures/
 /Integration/Mocks/people_ejb/target/
 /Integration/Mocks/reporting_ejb/target/
 /Integration/RSS/reporting/target/
+/Integration/Mocks/notifications_ejb/target/
+/Integration/RSS/notifications/target/

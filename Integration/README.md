@@ -27,6 +27,8 @@ How to deploy to Maven repo:
 	Feel free to use your corresponding ejb module under 'Mocks' as a template to place your business logic and entities in, we would prefer and
 	do recommend that you use this approach as it will ensure that it integrates with the system correctly.
 
-4.) Use `mvn install` to install your ejb module
+4.) Use `mvn install` to install your ejb module.
 
-5.) Use `mvn deploy` to deploy your jar to the Maven repository
+5.) Use `mvn deploy` to deploy your jar to the Maven repository.
+
+6.) Notify your Integration team leader that you have deployed.
