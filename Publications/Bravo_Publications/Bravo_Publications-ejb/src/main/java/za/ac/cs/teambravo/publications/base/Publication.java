@@ -1,4 +1,4 @@
-package Main;
+package za.ac.cs.teambravo.publications.base;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
