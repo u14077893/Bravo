@@ -1,4 +1,6 @@
-package Main;
+package za.ac.cs.teambravo.publications.base;
+
+import Main.PublicationException;
 
 public class PublicationWithTitleExistsForAuthors extends PublicationException
 {

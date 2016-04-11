@@ -1,5 +1,6 @@
 package za.ac.cs.teambravo.publications.requestandresponses;
 
+import java.util.Date;
 import za.ac.cs.teambravo.publications.base.*;
 
 /**
@@ -8,11 +9,37 @@ import za.ac.cs.teambravo.publications.base.*;
  */
 public class ChangePublicationStateRequest implements PublicationRequest {
     private PublicationState changeState;
-    private Publication publication;
+    private String publicationTitle;
+    private Boolean authorized;
 
-    public ChangePublicationStateRequest(Integer publicationID, PublicationDetails details, LifeCycleState state, PublicationTarget target, PublicationType type,Publication publication) {
-        this.changeState = new PublicationState(publicationID,details,state,target,type);
-        this.publication=publication;
+    public ChangePublicationStateRequest(String title,Date date, String reason, PublicationDetails publicationDetailsObject, LifeCycleState lifeCycleStateObject, PublicationType publicationTypeObject, PublicationTarget publicationTargetObject) throws InvalidRequest {
+        this.changeState = new PublicationState(date, reason, publicationDetailsObject, lifeCycleStateObject, publicationTypeObject, publicationTargetObject);
+        this.publicationTitle=title;
+        authorized=false;
+        if(title.equals("") || date==null||reason.equals("")|| publicationDetailsObject==null || lifeCycleStateObject==null||publicationTypeObject==null||publicationTargetObject==null)
+        {
+            throw(new InvalidRequest());
+        }
+    }
+
+    public Boolean isAuthorized() {
+        return authorized;
+    }
+
+    public void setAuthorized(Boolean authorized) {
+        this.authorized = authorized;
+    }
+
+    public String getPublicationTitle() {
+        return publicationTitle;
+    }
+
+    public void setPublicationTitle(String publicationTitle) {
+        this.publicationTitle = publicationTitle;
+    }
+
+    public PublicationState getChangeState() {
+        return changeState;
     }
     
     

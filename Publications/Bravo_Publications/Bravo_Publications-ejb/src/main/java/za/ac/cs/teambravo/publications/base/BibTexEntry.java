@@ -1,4 +1,4 @@
-package Main;
+package za.ac.cs.teambravo.publications.base;
 
 
 public class BibTexEntry {
