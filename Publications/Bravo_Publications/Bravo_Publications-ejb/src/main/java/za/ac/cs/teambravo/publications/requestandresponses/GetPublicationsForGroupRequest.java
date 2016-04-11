@@ -8,7 +8,7 @@ package za.ac.cs.teambravo.publications.requestandresponses;
 
 /**
  *
- * @author User
+ * @author Hlengekile
  */
 public class GetPublicationsForGroupRequest implements PublicationRequest{
     

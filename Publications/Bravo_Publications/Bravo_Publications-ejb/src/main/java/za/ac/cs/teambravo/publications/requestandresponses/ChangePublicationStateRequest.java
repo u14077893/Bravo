@@ -1,22 +1,15 @@
 package za.ac.cs.teambravo.publications.requestandresponses;
 
-import za.ac.cs.teambravo.publications.base.*;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 /**
  *
- * @author Jedd
+ * @author User
  */
 public class ChangePublicationStateRequest implements PublicationRequest {
-    private PublicationState changeState;
-    private Publication publication;
-
-    public ChangePublicationStateRequest(Integer publicationID, PublicationDetails details, LifeCycleState state, PublicationTarget target, PublicationType type,Publication publication) {
-        this.changeState = new PublicationState(publicationID,details,state,target,type);
-        this.publication=publication;
-    }
-    
-    
-    
-    
     
 }

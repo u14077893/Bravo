@@ -1,15 +1,23 @@
-package za.ac.cs.teambravo.publications.requestandresponses;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package za.ac.cs.teambravo.publications.requestandresponses;
 
 /**
  *
- * @author User
+ * @author Hlengekile
  */
-public class CalcAccreditationPointsForGroupResponse implements PublicationResponse{
+public class CalcAccreditationPointsForGroupResponse implements PublicationResponse 
+{
+    private double sumAccreditationPoints;
+
+    public double getSumAccreditationPoints() 
+    {
+        return sumAccreditationPoints;
+    }
+
+    public void setSumAccreditationPoints(double sumAccreditationPoints) 
+    {
+        this.sumAccreditationPoints = sumAccreditationPoints;
+    }
+    
     
 }
