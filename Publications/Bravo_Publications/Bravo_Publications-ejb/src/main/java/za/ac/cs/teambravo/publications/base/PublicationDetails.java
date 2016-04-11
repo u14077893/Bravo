@@ -14,6 +14,21 @@ public class PublicationDetails
 {
     private String pubTitle;
     private Date envisagedPublicationDate;
+    private Person person;
+
+    public PublicationDetails(String pubTitle, Date envisagedPublicationDate, Person person) {
+        this.pubTitle = pubTitle;
+        this.envisagedPublicationDate = envisagedPublicationDate;
+        this.person = person;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
     
     public void setTitle(String inTitle)
     {

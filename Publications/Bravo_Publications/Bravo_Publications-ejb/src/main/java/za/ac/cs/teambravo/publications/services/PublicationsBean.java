@@ -2,6 +2,7 @@
 package za.ac.cs.teambravo.publications.services;
 
 import javax.ejb.Stateless;
+import za.ac.cs.teambravo.publications.base.Publication;
 import za.ac.cs.teambravo.publications.exceptions.AlreadyPublishedException;
 import za.ac.cs.teambravo.publications.exceptions.AuthorizationException;
 import za.ac.cs.teambravo.publications.exceptions.EffectiveDateNotAfterEffectiveDateOfLastStateEntry;
@@ -90,7 +91,28 @@ public class PublicationsBean implements Publications {
 
     @Override
     public ChangePublicationStateResponse changePublicationState(ChangePublicationStateRequest changePublicationStateRequest) throws NotAuthorized, NoSuchPublicationException, AlreadyPublishedException, PublicationWithTitleExistsForAuthors {
-        throw new UnsupportedOperationException("Not supported yet."); 
+
+       // throw new UnsupportedOperationException("Not supported yet."); 
+
+        Publication publication = null;
+        if(!changePublicationStateRequest.isAuthorized())
+        {
+            throw(new NotAuthorized());
+        }
+        
+        //publication = getPublication(new GetPublicationRequest(changePublicationStateRequest.getPublicationTitle()));
+        if(publication==null)
+        {
+            throw(new NoSuchPublicationException());
+        }
+        if(publication.getPublicationStateObject().getLifeCycleStateObject().getStateString().equals("Published"))
+        {
+            throw(new AlreadyPublishedException());
+        }
+        //Persist
+        
+        return new ChangePublicationStateResponse(publication);
+        
     }
 
   

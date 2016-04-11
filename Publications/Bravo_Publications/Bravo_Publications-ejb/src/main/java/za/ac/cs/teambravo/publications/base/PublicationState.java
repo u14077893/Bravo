@@ -71,4 +71,14 @@ public class PublicationState
     private PublicationType publicationTypeObject;
     private PublicationTarget publicationTargetObject;
     
+
+    public PublicationState(Date date, String reason, PublicationDetails publicationDetailsObject, LifeCycleState lifeCycleStateObject, PublicationType publicationTypeObject, PublicationTarget publicationTargetObject) {
+        this.date = date;
+        this.reason = reason;
+        this.publicationDetailsObject = publicationDetailsObject;
+        this.lifeCycleStateObject = lifeCycleStateObject;
+        this.publicationTypeObject = publicationTypeObject;
+        this.publicationTargetObject = publicationTargetObject;
+    }
+    
 }
