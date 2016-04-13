@@ -9,7 +9,7 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import za.ac.cs.teambravo.publications.entities.AcceptedEntity;
+import za.ac.cs.teambravo.publications.entities.AbandonedEntity;
 import za.ac.cs.teambravo.publications.entities.InProgressEntity;
 import za.ac.cs.teambravo.publications.entities.InRevisionEntity;
 import za.ac.cs.teambravo.publications.entities.PublishedEntity;
@@ -32,7 +32,7 @@ public class TestLifeCycleState
         
         InProgressEntity f=new InProgressEntity();
         f.setPercentageComplete(55);
-        AcceptedEntity g = new AcceptedEntity(); 
+        AbandonedEntity g = new AbandonedEntity(); 
         SubmittedEntity h = new SubmittedEntity();
         InProgressEntity k = new InProgressEntity();
         k.setPercentageComplete(40);

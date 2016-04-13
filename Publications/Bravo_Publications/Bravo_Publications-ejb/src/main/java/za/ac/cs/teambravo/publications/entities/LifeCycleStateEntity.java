@@ -52,19 +52,5 @@ public class LifeCycleStateEntity implements Serializable {
         }
         return true;
     }
-
-    /*@Override
-    public String toString() {
-<<<<<<< HEAD:Publications/Bravo_Publications/Bravo_Publications-ejb/src/main/java/za/ac/cs/teambravo/publications/entities/LifeCycleStateEntity.java
-        return "za.ac.cs.teambravo.publications.entities.LifeCycleStateEntity[ id=" + stateID + " ]";
-    }*/
-=======
-        return "za.ac.cs.teambravo.publications.entities.LifeCycleState[ id=" + stateID + " ]";
-    }
-
-    public Object getStateString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
->>>>>>> origin/master:Publications/Bravo_Publications/Bravo_Publications-ejb/src/main/java/za/ac/cs/teambravo/publications/entities/LifeCycleState.java
-    
+ 
 }

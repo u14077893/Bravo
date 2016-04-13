@@ -1,24 +1,15 @@
 
 package za.ac.cs.teambravo.publications.services;
 
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-import za.ac.cs.teambravo.publications.base.PersonMock;
 import za.ac.cs.teambravo.publications.Publication;
-import za.ac.cs.teambravo.publications.base.Period;
-import za.ac.cs.teambravo.publications.base.PublicationConfidenceLevel;
-<<<<<<< HEAD
-import za.ac.cs.teambravo.publications.entities.PublicationTypeEntity;
-=======
-import za.ac.cs.teambravo.publications.entities.PublicationType;
-import za.ac.cs.teambravo.publications.entities.PublicationState;
->>>>>>> origin/master
+import za.ac.cs.teambravo.publications.base.PublicationState;
+
+
+
 import za.ac.cs.teambravo.publications.exceptions.AlreadyPublishedException;
 import za.ac.cs.teambravo.publications.exceptions.AuthorizationException;
 import za.ac.cs.teambravo.publications.exceptions.EffectiveDateNotAfterEffectiveDateOfLastStateEntry;
@@ -75,8 +66,8 @@ public class PublicationsBean implements Publications
     private void addPublicationState(Publication publication,PublicationState newState)
     {
       
-        publication.addStateEntry(newState);
-        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
+       // publication.addStateEntry(newState);
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
         EntityManager entityManager = emFactory.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(publication);
@@ -153,7 +144,7 @@ public class PublicationsBean implements Publications
     public CalcAccreditationPointsForPersonResponse calcAccreditationPointsForPerson(CalcAccreditationPointsForPersonRequest calcAccreditationPointsForPersonRequest) 
     {
       /*  CalcAccreditationPointsForPersonResponse response = null;
-        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
         EntityManager entityManager = emFactory.createEntityManager();
                 
         try
@@ -247,7 +238,7 @@ public class PublicationsBean implements Publications
     public CalcAccreditationPointsForGroupResponse calcAccreditationPointsForGroup(CalcAccreditationPointsForGroupRequest calcAccreditationPointsForGroupRequest) 
     {
        /* CalcAccreditationPointsForGroupResponse response = null;
-        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
         EntityManager entityManager = emFactory.createEntityManager();
         
         try
@@ -360,16 +351,16 @@ public class PublicationsBean implements Publications
         {
             throw(new AlreadyPublishedException());
         }
-<<<<<<< HEAD
+
         //Persist
         
-        return new ChangePublicationStateResponse(publication);*/
-=======
+        return new ChangePublicationStateResponse(publication);
+
         addPublicationState(publication,getState);
 
 
-        return new ChangePublicationStateResponse(publication);
->>>>>>> origin/master
+        return new ChangePublicationStateResponse(publication);*/
+
         
     }
 

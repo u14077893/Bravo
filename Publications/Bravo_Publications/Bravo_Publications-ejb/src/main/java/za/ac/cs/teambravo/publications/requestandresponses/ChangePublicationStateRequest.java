@@ -8,7 +8,11 @@ package za.ac.cs.teambravo.publications.requestandresponses;
  */
 
 import java.util.Date;
-import za.ac.cs.teambravo.publications.entities.*;
+import za.ac.cs.teambravo.publications.base.LifeCycleState;
+import za.ac.cs.teambravo.publications.base.PublicationDetails;
+import za.ac.cs.teambravo.publications.base.PublicationState;
+import za.ac.cs.teambravo.publications.base.PublicationTarget;
+import za.ac.cs.teambravo.publications.base.PublicationType;
 import za.ac.cs.teambravo.publications.exceptions.InvalidRequest;
 
 
