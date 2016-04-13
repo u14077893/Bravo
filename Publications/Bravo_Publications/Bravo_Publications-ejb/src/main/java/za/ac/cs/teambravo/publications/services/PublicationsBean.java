@@ -2,6 +2,8 @@
 package za.ac.cs.teambravo.publications.services;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,6 +14,7 @@ import za.ac.cs.teambravo.publications.Publication;
 import za.ac.cs.teambravo.publications.base.Period;
 import za.ac.cs.teambravo.publications.base.PublicationConfidenceLevel;
 import za.ac.cs.teambravo.publications.entities.PublicationType;
+import za.ac.cs.teambravo.publications.entities.PublicationState;
 import za.ac.cs.teambravo.publications.exceptions.AlreadyPublishedException;
 import za.ac.cs.teambravo.publications.exceptions.AuthorizationException;
 import za.ac.cs.teambravo.publications.exceptions.EffectiveDateNotAfterEffectiveDateOfLastStateEntry;
@@ -66,6 +69,18 @@ public class PublicationsBean implements Publications {
     @Override
     public CreatePublicationResponse createPublication(CreatePublicationRequest createPublicationRequest) throws InvalidRequest {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private void addPublicationState(Publication publication,PublicationState newState)
+    {
+      
+        publication.addStateEntry(newState);
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
+        EntityManager entityManager = emFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(publication);
+       entityManager.getTransaction().commit();
+      
     }
 
     @Override
@@ -332,12 +347,14 @@ public class PublicationsBean implements Publications {
         {
             throw(new NoSuchPublicationException());
         }
-        if(publication.getPublicationStateObject().getLifeCycleStateObject().getStateString().equals("Published"))
+         PublicationState getState =publication.getPublicationStateObject();
+        if(getState.getLifeCycleStateObject().getStateString().equals("Published"))
         {
             throw(new AlreadyPublishedException());
         }
-        //Persist
-        
+        addPublicationState(publication,getState);
+
+
         return new ChangePublicationStateResponse(publication);
         
     }

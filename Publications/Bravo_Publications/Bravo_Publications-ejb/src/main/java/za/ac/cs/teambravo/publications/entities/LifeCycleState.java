@@ -54,5 +54,9 @@ public class LifeCycleState implements Serializable {
     public String toString() {
         return "za.ac.cs.teambravo.publications.entities.LifeCycleState[ id=" + stateID + " ]";
     }
+
+    public Object getStateString() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

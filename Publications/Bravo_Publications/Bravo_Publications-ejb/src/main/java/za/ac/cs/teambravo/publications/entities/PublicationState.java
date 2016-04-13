@@ -2,6 +2,7 @@
 package za.ac.cs.teambravo.publications.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -41,6 +42,10 @@ public class PublicationState implements Serializable {
         this.state = state;
         this.target = target;
         this.type = type;
+    }
+
+    public PublicationState(Date date, String reason, PublicationDetails publicationDetailsObject, LifeCycleState lifeCycleStateObject, PublicationType publicationTypeObject, PublicationTarget publicationTargetObject) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
   
@@ -108,6 +113,10 @@ public class PublicationState implements Serializable {
     @Override
     public String toString() {
         return "za.ac.cs.teambravo.publications.entities.Publications[ id=" + publicationID + " ]";
+    }
+
+    public LifeCycleState getLifeCycleStateObject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
