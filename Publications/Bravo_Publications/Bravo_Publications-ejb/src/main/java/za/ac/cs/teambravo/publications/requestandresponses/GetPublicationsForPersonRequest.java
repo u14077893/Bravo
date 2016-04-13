@@ -1,7 +1,7 @@
 package za.ac.cs.teambravo.publications.requestandresponses;
 
 import za.ac.cs.teambravo.publications.base.Period;
-import za.ac.cs.teambravo.publications.base.Person;
+import za.ac.cs.teambravo.publications.base.PersonMock;
 import za.ac.cs.teambravo.publications.base.PublicationConfidenceLevel;
 
 /*
@@ -17,7 +17,7 @@ import za.ac.cs.teambravo.publications.base.PublicationConfidenceLevel;
 
 public class GetPublicationsForPersonRequest implements PublicationRequest
 {
-    private Person requester;
+    private PersonMock requester;
     
     private Period timePeriod;
     
@@ -27,24 +27,24 @@ public class GetPublicationsForPersonRequest implements PublicationRequest
     {
     }
 
-    public GetPublicationsForPersonRequest(Person requester, PublicationConfidenceLevel pubConfidence) 
+    public GetPublicationsForPersonRequest(PersonMock requester, PublicationConfidenceLevel pubConfidence) 
     {
         this.requester = requester;
         this.pubConfidence = pubConfidence;
     }
     
-    public GetPublicationsForPersonRequest(Person requester, PublicationConfidenceLevel pubConfidence, Period timePeriod)
+    public GetPublicationsForPersonRequest(PersonMock requester, PublicationConfidenceLevel pubConfidence, Period timePeriod)
     {
         this.requester = requester;
         this.timePeriod = timePeriod;
         this.pubConfidence = pubConfidence;
     }
 
-    public Person getRequester() {
+    public PersonMock getRequester() {
         return requester;
     }
 
-    public void setRequester(Person requester) {
+    public void setRequester(PersonMock requester) {
         this.requester = requester;
     }
 

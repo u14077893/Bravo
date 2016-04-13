@@ -6,7 +6,7 @@
 package za.ac.cs.teambravo.publications.requestandresponses;
 
 import za.ac.cs.teambravo.publications.base.Period;
-import za.ac.cs.teambravo.publications.base.Person;
+import za.ac.cs.teambravo.publications.base.PersonMock;
 import za.ac.cs.teambravo.publications.base.PublicationConfidenceLevel;
 
 /**
@@ -15,7 +15,7 @@ import za.ac.cs.teambravo.publications.base.PublicationConfidenceLevel;
  */
 public class CalcAccreditationPointsForPersonRequest implements PublicationRequest
 {
-    private Person forWho;
+    private PersonMock forWho;
     
     private Period timePeriod;
     
@@ -25,24 +25,24 @@ public class CalcAccreditationPointsForPersonRequest implements PublicationReque
     {
     }
 
-    public CalcAccreditationPointsForPersonRequest(Person forWho, PublicationConfidenceLevel pubConfidence) 
+    public CalcAccreditationPointsForPersonRequest(PersonMock forWho, PublicationConfidenceLevel pubConfidence) 
     {
         this.forWho = forWho;
         this.pubConfidence = pubConfidence;
     }
     
-    public CalcAccreditationPointsForPersonRequest(Person forWho, Period timePeriod, PublicationConfidenceLevel pubConfidence)
+    public CalcAccreditationPointsForPersonRequest(PersonMock forWho, Period timePeriod, PublicationConfidenceLevel pubConfidence)
     {
         this.forWho = forWho;
         this.timePeriod = timePeriod;
         this.pubConfidence = pubConfidence;
     }
 
-    public Person getForWho() {
+    public PersonMock getForWho() {
         return forWho;
     }
 
-    public void setForWho(Person forWho) {
+    public void setForWho(PersonMock forWho) {
         this.forWho = forWho;
     }
 

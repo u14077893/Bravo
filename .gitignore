@@ -53,3 +53,6 @@ captures/
 /Integration/Mocks/notifications_ejb/target/
 /Integration/RSS/notifications/target/
 /Publications/Bravo_Publications/Bravo_Publications-ejb/target/
+/Publications/Entity Tests/nbproject/private/
+/Publications/Entity Tests/Entity Tests-war/nbproject/private/
+/Publications/Entity Tests/Entity Tests-ejb/nbproject/private/

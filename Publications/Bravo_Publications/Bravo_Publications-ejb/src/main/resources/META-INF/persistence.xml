@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="za.ac.cs.teambravo.publications_Bravo_Publications-ejb_ejb_1.0-SNAPSHOTPU" transaction-type="JTA">
-    <jta-data-source>postgreDS</jta-data-source>
+  <persistence-unit name="EntityDemoPU" transaction-type="RESOURCE_LOCAL">
+    <class>za.ac.cs.teambravo.publications.entities.AcceptedEntity</class>
+    <class>za.ac.cs.teambravo.publications.entities.ActiveStateEntity</class>
+    <class>za.ac.cs.teambravo.publications.entities.InProgressEntity</class>
+    <class>za.ac.cs.teambravo.publications.entities.InRevisionEntity</class>
+    <class>za.ac.cs.teambravo.publications.entities.LifeCycleStateEntity</class>
+    <class>za.ac.cs.teambravo.publications.entities.NotActiveStateEntity</class>
+    <class>za.ac.cs.teambravo.publications.entities.PersonEntity</class>
+    <class>za.ac.cs.teambravo.publications.entities.PublicationDetailsEntity</class>
+    <class>za.ac.cs.teambravo.publications.entities.PublicationEntity</class>
+    <class>za.ac.cs.teambravo.publications.entities.PublicationStateEntity</class>
+    <class>za.ac.cs.teambravo.publications.entities.PublicationTargetEntity</class>
+    <class>za.ac.cs.teambravo.publications.entities.PublicationTypeEntity</class>
+    <class>za.ac.cs.teambravo.publications.entities.PublicationTypeStateEntity</class>
+    <class>za.ac.cs.teambravo.publications.entities.PublishedEntity</class>
+    <class>za.ac.cs.teambravo.publications.entities.SubmittedEntity</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="Hlenge@15"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>

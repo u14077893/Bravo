@@ -14,19 +14,19 @@ public class PublicationDetails
 {
     private String pubTitle;
     private Date envisagedPublicationDate;
-    private Person person;
+    private PersonMock person;
 
-    public PublicationDetails(String pubTitle, Date envisagedPublicationDate, Person person) {
+    public PublicationDetails(String pubTitle, Date envisagedPublicationDate, PersonMock person) {
         this.pubTitle = pubTitle;
         this.envisagedPublicationDate = envisagedPublicationDate;
         this.person = person;
     }
 
-    public Person getPerson() {
+    public PersonMock getPerson() {
         return person;
     }
 
-    public void setPerson(Person person) {
+    public void setPerson(PersonMock person) {
         this.person = person;
     }
     

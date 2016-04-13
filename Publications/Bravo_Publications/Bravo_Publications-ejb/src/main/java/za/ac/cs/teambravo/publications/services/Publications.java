@@ -6,8 +6,8 @@
 package za.ac.cs.teambravo.publications.services;
 
 import javax.ejb.Remote;
-import za.ac.cs.teambravo.publications.entities.PublicationState;
-import za.ac.cs.teambravo.publications.entities.PublicationType;
+import za.ac.cs.teambravo.publications.entities.PublicationStateEntity;
+import za.ac.cs.teambravo.publications.entities.PublicationTypeEntity;
 import za.ac.cs.teambravo.publications.exceptions.AlreadyPublishedException;
 import za.ac.cs.teambravo.publications.exceptions.AuthorizationException;
 import za.ac.cs.teambravo.publications.exceptions.EffectiveDateNotAfterEffectiveDateOfLastStateEntry;
@@ -44,16 +44,6 @@ import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationType
 @Remote
 public interface Publications {
 
-    void businessMethod();
-        /**
-     * Accepts an AddPublicationRequest object to create a new publication with its own state trace represented by a
-     time-ordered sequence of state entries
-     * @param  AddPublicationRequest a request object passed to create publication
-     * @return AddPublicationResponse a response object that confirms the creation of a new Publication
-     * @see    Publication
-     * @exception NotAuthorized if person is not one of the authors of the publication,a research group leader,one of the authors is not a member of the research
-    group, or the user does not have the role of research manager.
-     */
     public AddPublicationResponse addPublication(AddPublicationRequest addPublicationRequest) throws NotAuthorized;
 
     /**
@@ -77,9 +67,9 @@ public interface Publications {
 
     /**
      * Accepts a AddPublicationTypeRequest object to allow administrators to be able to add new publication types
-     * @param AddPublicationTypeRequest a request object passed to add a new PublicationType option
-     * @return AddPublicationTypeResponse a response object that confirms PublicationType ahs been added
-     * @see    PublicationType
+     * @param AddPublicationTypeRequest a request object passed to add a new PublicationTypeEntity option
+     * @return AddPublicationTypeResponse a response object that confirms PublicationTypeEntity ahs been added
+     * @see    PublicationTypeEntity
      * @exception PublicationTypeExists the publication type is already an option
      * @exception  AuthorizationException user is not an administrator
      */
@@ -87,9 +77,9 @@ public interface Publications {
 
     /**
      * Accepts a ModifyPublicationTypeRequest object to allow the state of publication types to change at anytime
-     * @param ModifyPublicationTypeRequest a request object passed to change a PublicationType
-     * @return ModifyPublicationTypeRequest a response object that confirms a PublicationType has been changed
-     * @see    PublicationType
+     * @param ModifyPublicationTypeRequest a request object passed to change a PublicationTypeEntity
+     * @return ModifyPublicationTypeRequest a response object that confirms a PublicationTypeEntity has been changed
+     * @see    PublicationTypeEntity
      * @exception EffectiveDateNotAfterEffectiveDateOfLastStateEntry the new effective Date is before previous effective date
      * @exception  AuthorizationException user is not an administrator
      */
@@ -120,7 +110,7 @@ public interface Publications {
      that paper.
      * @param CalcAccreditationPointsForPersonRequest a request object passed to get get all papers published for author
      * @return CalcAccreditationPointsForPersonResponse a response object that contains the total accredited score for author
-     * @see    PublicationType
+     * @see    PublicationTypeEntity
      */
     public CalcAccreditationPointsForPersonResponse calcAccreditationPointsForPerson(CalcAccreditationPointsForPersonRequest calcAccreditationPointsForPersonRequest);
 
@@ -129,7 +119,7 @@ public interface Publications {
      the accreditation points for all persons who are part of that group.
      * @param CalcAccreditationPointsForGroupRequest a request object passed to get get all papers published for group
      * @return CalcAccreditationPointsForGroupResponse a response object that contains the total accredited score for group
-     * @see    PublicationType
+     * @see    PublicationTypeEntity
      */
     public CalcAccreditationPointsForGroupResponse calcAccreditationPointsForGroup(CalcAccreditationPointsForGroupRequest calcAccreditationPointsForGroupRequest);
 
@@ -139,8 +129,8 @@ public interface Publications {
      Effectively it is an implementation of the memento pattern with each state entry being a memento
      capturing a snapshot of the state of the publication
      * @param ChangePublicationStateRequest a request object passed to change state of publication
-     * @return ChangePublicationStateResponse a response object that confirms that new PublicationState has been added to publication
-     * @see    PublicationState
+     * @return ChangePublicationStateResponse a response object that confirms that new PublicationStateEntity has been added to publication
+     * @see    PublicationStateEntity
      * @see    Publication
      * @exception NotAuthorized not an author of the publication
      * @exception NoSuchPublicationException specified publication could not be found

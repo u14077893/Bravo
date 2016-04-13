@@ -7,11 +7,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import za.ac.cs.teambravo.publications.base.Person;
+import za.ac.cs.teambravo.publications.base.PersonMock;
 import za.ac.cs.teambravo.publications.Publication;
 import za.ac.cs.teambravo.publications.base.Period;
 import za.ac.cs.teambravo.publications.base.PublicationConfidenceLevel;
-import za.ac.cs.teambravo.publications.entities.PublicationType;
+import za.ac.cs.teambravo.publications.entities.PublicationTypeEntity;
 import za.ac.cs.teambravo.publications.exceptions.AlreadyPublishedException;
 import za.ac.cs.teambravo.publications.exceptions.AuthorizationException;
 import za.ac.cs.teambravo.publications.exceptions.EffectiveDateNotAfterEffectiveDateOfLastStateEntry;
@@ -46,12 +46,9 @@ import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationType
  * @author Jedd, Hlengi, Moses, Gift, Kudzai, Vuyani
  */
 @Stateless
-public class PublicationsBean implements Publications {
+public class PublicationsBean implements Publications 
+{
 
-    @Override
-    public void businessMethod() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public AddPublicationResponse addPublication(AddPublicationRequest addPublicationRequest) throws NotAuthorized {
@@ -81,7 +78,7 @@ public class PublicationsBean implements Publications {
     @Override
     public GetPublicationsForPersonResponse getPublicationsForPerson(GetPublicationsForPersonRequest getPublicationsForPersonRequest) 
     {
-        GetPublicationsForPersonResponse response = null;
+       /* GetPublicationsForPersonResponse response = null;
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
         EntityManager entityManager = emFactory.createEntityManager();
                 
@@ -101,13 +98,14 @@ public class PublicationsBean implements Publications {
         {
         }
        
-        return response;
+        return response;*/
+      throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public GetPublicationsForGroupResponse getPublicationsForGroup(GetPublicationsForGroupRequest getPublicationsForGroupRequest) 
     {
-        GetPublicationsForGroupResponse response = null;
+        /*GetPublicationsForGroupResponse response = null;
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
         EntityManager entityManager = emFactory.createEntityManager();
                 
@@ -127,13 +125,15 @@ public class PublicationsBean implements Publications {
         {
         }
        
-        return response;
+        return response; */
+                
+      throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public CalcAccreditationPointsForPersonResponse calcAccreditationPointsForPerson(CalcAccreditationPointsForPersonRequest calcAccreditationPointsForPersonRequest) 
     {
-        CalcAccreditationPointsForPersonResponse response = null;
+      /*  CalcAccreditationPointsForPersonResponse response = null;
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
         EntityManager entityManager = emFactory.createEntityManager();
                 
@@ -147,7 +147,7 @@ public class PublicationsBean implements Publications {
             else
             {
                 //Get person publications
-                Person requester = calcAccreditationPointsForPersonRequest.getForWho();
+                PersonMock requester = calcAccreditationPointsForPersonRequest.getForWho();
                 PublicationConfidenceLevel pubConfidence = calcAccreditationPointsForPersonRequest.getPubConfidence();
                 
                 Period timePeriod;
@@ -171,13 +171,13 @@ public class PublicationsBean implements Publications {
                
                     //Get a list of all active publication types
                 Query activeTypesQuery = entityManager.createQuery("Select pubType from PublicationType pubType JOIN pubType.typeState state WHERE TYPE(state) ='Active' ");
-                ArrayList<PublicationType> activeTypes = (ArrayList<PublicationType>) activeTypesQuery.getResultList();
+                ArrayList<PublicationTypeEntity> activeTypes = (ArrayList<PublicationTypeEntity>) activeTypesQuery.getResultList();
                 
                     //Get names and points associated with active types
                 ArrayList<String> namesOfTypes = new ArrayList<>();
                 ArrayList<Double> typePoints = new ArrayList<>();
                 
-                for(PublicationType type : activeTypes)
+                for(PublicationTypeEntity type : activeTypes)
                 {
                     namesOfTypes.add(type.getTypeName());
                     
@@ -193,7 +193,7 @@ public class PublicationsBean implements Publications {
                     
                     for(Publication publication : listOfPublications)
                     {
-                       // if(/*the publications type name is == to typeName*/)
+                       // if(the publications type name is == to typeName)
                         {
                             count++;
                         }
@@ -219,13 +219,15 @@ public class PublicationsBean implements Publications {
         
         }
         
-        return response;
+        return response; */
+                
+                throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public CalcAccreditationPointsForGroupResponse calcAccreditationPointsForGroup(CalcAccreditationPointsForGroupRequest calcAccreditationPointsForGroupRequest) 
     {
-        CalcAccreditationPointsForGroupResponse response = null;
+       /* CalcAccreditationPointsForGroupResponse response = null;
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
         EntityManager entityManager = emFactory.createEntityManager();
         
@@ -263,13 +265,13 @@ public class PublicationsBean implements Publications {
                 
                     //Get a list of all active publication types
                 Query activeTypesQuery = entityManager.createQuery("Select pubType from PublicationType pubType JOIN pubType.typeState state WHERE TYPE(state) ='Active' ");
-                ArrayList<PublicationType> activeTypes = (ArrayList<PublicationType>) activeTypesQuery.getResultList();
+                ArrayList<PublicationTypeEntity> activeTypes = (ArrayList<PublicationTypeEntity>) activeTypesQuery.getResultList();
                 
                     //Get names and points associated with active types
                 ArrayList<String> namesOfTypes = new ArrayList<>();
                 ArrayList<Double> typePoints = new ArrayList<>();
                 
-                for(PublicationType type : activeTypes)
+                for(PublicationTypeEntity type : activeTypes)
                 {
                     namesOfTypes.add(type.getTypeName());
                     
@@ -285,7 +287,7 @@ public class PublicationsBean implements Publications {
                     
                     for(Publication publication : listOfPublications)
                     {
-                       // if(/*the publications type name is == to typeName*/)
+                       // if(the publications type name is == to typeName)
                         {
                             count++;
                         }
@@ -312,15 +314,17 @@ public class PublicationsBean implements Publications {
         {
         }
         
-        return response;
+        return response;*/
+                
+             throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public ChangePublicationStateResponse changePublicationState(ChangePublicationStateRequest changePublicationStateRequest) throws NotAuthorized, NoSuchPublicationException, AlreadyPublishedException, PublicationWithTitleExistsForAuthors {
 
-       // throw new UnsupportedOperationException("Not supported yet."); 
+        throw new UnsupportedOperationException("Not supported yet."); 
 
-        Publication publication = null;
+        /*Publication publication = null;
         
         if(!changePublicationStateRequest.isAuthorized())
         {
@@ -338,10 +342,8 @@ public class PublicationsBean implements Publications {
         }
         //Persist
         
-        return new ChangePublicationStateResponse(publication);
+        return new ChangePublicationStateResponse(publication);*/
         
     }
-
-  
 
 }
