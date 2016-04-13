@@ -1,8 +1,17 @@
-package za.ac.cs.teambravo.publications;
+package za.ac.cs.teambravo;
 
-import za.ac.cs.teambravo.publications.entities.PublicationState;
+import za.ac.cs.teambravo.publications.base.PublicationState;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
+/**
+ *
+ * @author Kudzai
+ */
 public class Publication {
     PublicationState publicationStateObject;
 

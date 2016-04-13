@@ -16,7 +16,7 @@ import javax.persistence.Temporal;
 
 @Entity
 @Inheritance( strategy = InheritanceType.SINGLE_TABLE )
-@DiscriminatorColumn( name="type" )
+@DiscriminatorColumn(name="StateOfType")
 public class PublicationTypeState implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

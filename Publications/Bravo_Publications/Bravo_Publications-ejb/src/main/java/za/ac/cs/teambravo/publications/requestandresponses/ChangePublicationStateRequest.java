@@ -18,7 +18,7 @@ import za.ac.cs.teambravo.publications.exceptions.InvalidRequest;
  */
 public class ChangePublicationStateRequest implements PublicationRequest {
 
-
+    // A Publication?
     private PublicationState changeState;
     private String publicationTitle;
     private Boolean authorized;

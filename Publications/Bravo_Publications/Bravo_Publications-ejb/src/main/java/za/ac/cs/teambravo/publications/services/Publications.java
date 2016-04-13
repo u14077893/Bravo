@@ -6,7 +6,6 @@
 package za.ac.cs.teambravo.publications.services;
 
 import javax.ejb.Remote;
-import za.ac.cs.teambravo.publications.Publication;
 import za.ac.cs.teambravo.publications.entities.PublicationState;
 import za.ac.cs.teambravo.publications.entities.PublicationType;
 import za.ac.cs.teambravo.publications.exceptions.AlreadyPublishedException;
@@ -103,7 +102,7 @@ public interface Publications {
      * @return GetPublicationsForPersonRequest a response object that contains all publications from that author
      * @see    Publication
      */
-    public GetPublicationsForPersonResponse getPublicationForPerson( GetPublicationsForPersonRequest getPublicationsForPersonRequest);
+    public GetPublicationsForPersonResponse getPublicationsForPerson( GetPublicationsForPersonRequest getPublicationsForPersonRequest);
 
     /**
      * Accepts a GetPublicationsForGroupRequest object. This service is similar to the getPublicationsForPerson service except that it returns all published,
@@ -112,7 +111,7 @@ public interface Publications {
      * @return GetPublicationsForGroupRequest a response object that contains all publications from that group
      * @see    Publication
      */
-    public GetPublicationsForGroupResponse getPublicationForGroup( GetPublicationsForGroupRequest getPublicationsForGroupRequest);
+    public GetPublicationsForGroupResponse getPublicationsForGroup( GetPublicationsForGroupRequest getPublicationsForGroupRequest);
 
     /**
      * This service finds all publications published, accepted or envisaged to be published for a period by
