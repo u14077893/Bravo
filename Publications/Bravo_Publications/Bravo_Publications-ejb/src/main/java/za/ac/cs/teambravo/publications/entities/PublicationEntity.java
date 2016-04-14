@@ -26,7 +26,7 @@ public class PublicationEntity implements Serializable {
     
     
     @OneToMany(targetEntity = PublicationStateEntity.class)
-    private List stateEntries;
+    private List<PublicationStateEntity> stateEntries;
 
     public Integer getPublicationID() {
         return publicationID;
@@ -36,11 +36,11 @@ public class PublicationEntity implements Serializable {
         this.publicationID = publicationID;
     }
     
-    public List getStateEntries() {
+    public List<PublicationStateEntity> getStateEntries() {
         return stateEntries;
     }
 
-    public void setStateEntries(List stateEntries) {
+    public void setStateEntries(List<PublicationStateEntity> stateEntries) {
         this.stateEntries = stateEntries;
     }
     

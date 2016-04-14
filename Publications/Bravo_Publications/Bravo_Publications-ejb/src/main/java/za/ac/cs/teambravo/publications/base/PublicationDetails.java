@@ -4,6 +4,7 @@ package za.ac.cs.teambravo.publications.base;
 //package za.ac.cs.teambravo.publications.publication_details;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -14,21 +15,22 @@ public class PublicationDetails
 {
     private String pubTitle;
     private Date envisagedPublicationDate;
-    private PersonMock person;
+    private ArrayList<PersonMock> authors;
 
-    public PublicationDetails(String pubTitle, Date envisagedPublicationDate, PersonMock person) {
+    public PublicationDetails(String pubTitle, Date envisagedPublicationDate, ArrayList<PersonMock> authors) {
         this.pubTitle = pubTitle;
         this.envisagedPublicationDate = envisagedPublicationDate;
-        this.person = person;
+        this.authors = authors;
     }
 
-    public PersonMock getPerson() {
-        return person;
+    public ArrayList<PersonMock> getAuthors() {
+        return authors;
     }
 
-    public void setPerson(PersonMock person) {
-        this.person = person;
+    public void setAuthors(ArrayList<PersonMock> authors) {
+        this.authors = authors;
     }
+
     
     public void setTitle(String inTitle)
     {

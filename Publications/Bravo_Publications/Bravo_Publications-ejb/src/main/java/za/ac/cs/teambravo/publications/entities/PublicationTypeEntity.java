@@ -34,7 +34,7 @@ public class PublicationTypeEntity implements Serializable {
     private String typeName;
     
     @OneToMany(targetEntity = PublicationTypeStateEntity.class)
-    private List typeStates;
+    private List<PublicationTypeStateEntity> typeStates;
     
     public Integer getTypeID() {
         return typeID;
@@ -52,11 +52,11 @@ public class PublicationTypeEntity implements Serializable {
         this.typeName = typeName;
     }
 
-    public List getTypeStates() {
+    public List<PublicationTypeStateEntity> getTypeStates() {
         return typeStates;
     }
 
-    public void setTypeStates(List typeStates) {
+    public void setTypeStates(List<PublicationTypeStateEntity> typeStates) {
         this.typeStates = typeStates;
     }
 
