@@ -37,6 +37,10 @@ import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationsForPer
 import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationsForPersonResponse;
 import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationTypeRequest;
 import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationTypeResponse;
+import za.ac.cs.teambravo.publications.entities.*;
+import za.ac.cs.teambravo.publications.base.*;
+import java.util.List;
+
 
 
 /**
@@ -82,7 +86,12 @@ public class PublicationsBean implements Publications
 
     @Override
     public ModifyPublicationTypeResponse modifyPublicationType(ModifyPublicationTypeRequest modifyPublicationTypeRequest) throws AuthorizationException, EffectiveDateNotAfterEffectiveDateOfLastStateEntry {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
+        EntityManager entityManager = emFactory.createEntityManager();
+        
+        List<PublicationTypeEntity> pubTypeList = (List<PublicationTypeEntity>)entityManager.createQuery("SELECT p FROM PublicationType p WHERE p.typeName ="+modifyPublicationTypeRequest.getPublicationTypeObject().getPublicationType())
+                              .getResultList(); 
         
     }
 
