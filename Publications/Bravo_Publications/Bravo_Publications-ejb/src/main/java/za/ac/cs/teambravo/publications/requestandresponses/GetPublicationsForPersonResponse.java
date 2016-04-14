@@ -1,7 +1,11 @@
 package za.ac.cs.teambravo.publications.requestandresponses;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import za.ac.cs.teambravo.publications.base.Publication;
+=======
+import za.ac.cs.teambravo.Publication;
+>>>>>>> b710192f94362d196b837f66ffb08a179b0bb84a
 
 /*
  * To change this license header, choose License Headers in Project Properties.
