@@ -21,12 +21,12 @@ import javax.persistence.OneToMany;
 public class PublicationEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer publicationID;
     
     
     @OneToMany(targetEntity = PublicationStateEntity.class)
-    private List<PublicationStateEntity> stateEntries;
+    private List stateEntries;
 
     public Integer getPublicationID() {
         return publicationID;
@@ -36,11 +36,11 @@ public class PublicationEntity implements Serializable {
         this.publicationID = publicationID;
     }
     
-    public List<PublicationStateEntity> getStateEntries() {
+    public List getStateEntries() {
         return stateEntries;
     }
 
-    public void setStateEntries(List<PublicationStateEntity> stateEntries) {
+    public void setStateEntries(List stateEntries) {
         this.stateEntries = stateEntries;
     }
     

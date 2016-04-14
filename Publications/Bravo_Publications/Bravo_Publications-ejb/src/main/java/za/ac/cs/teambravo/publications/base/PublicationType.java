@@ -3,7 +3,11 @@ package za.ac.cs.teambravo.publications.base;
 import java.util.ArrayList;
 
 
+//package za.ac.cs.teambravo.publications.publications;
+
 public class PublicationType 
+{
+    public class PublicationType
 {
     String name;
     ArrayList<PublicationTypeState> typeStates;
@@ -29,7 +33,13 @@ public class PublicationType
         this.typeStates = typeStates;
     }
     
-    
-    
+    public String getPublicationType(){
+        return name;
+    }
+    public void setPublicationType(String _name)
+    {
+        name = _name;
+    }
+
     
 }

@@ -61,16 +61,4 @@ public class GetPublicationsForGroupRequest implements PublicationRequest
     public void setPubConfidence(PublicationConfidenceLevel pubConfidence) {
         this.pubConfidence = pubConfidence;
     }
-    
-    public boolean hasTimePeriod()
-    {
-        if(timePeriod != null)
-        {
-           return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
 }

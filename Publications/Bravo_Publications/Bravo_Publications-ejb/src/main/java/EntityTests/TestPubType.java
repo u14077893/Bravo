@@ -5,8 +5,9 @@
  */
 package EntityTests;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Stack;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -40,7 +41,7 @@ public class TestPubType
         manager.persist(na);
         manager.getTransaction().commit();
         
-        Stack<PublicationTypeStateEntity> typeStates = new Stack();
+        List<PublicationTypeStateEntity> typeStates = new ArrayList();
         typeStates.add(as);
         typeStates.add(na);
        

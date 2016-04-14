@@ -1,20 +1,15 @@
 
 package za.ac.cs.teambravo.publications.services;
 
-import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-import za.ac.cs.teambravo.publications.base.Publication;
-import za.ac.cs.teambravo.publications.base.Period;
-import za.ac.cs.teambravo.publications.base.PersonMock;
-import za.ac.cs.teambravo.publications.base.PublicationConfidenceLevel;
+import za.ac.cs.teambravo.publications.Publication;
 import za.ac.cs.teambravo.publications.base.PublicationState;
-import za.ac.cs.teambravo.publications.entities.PublicationEntity;
-import za.ac.cs.teambravo.publications.entities.PublicationStateEntity;
-import za.ac.cs.teambravo.publications.entities.PublicationTypeEntity;
+
+
+
 import za.ac.cs.teambravo.publications.exceptions.AlreadyPublishedException;
 import za.ac.cs.teambravo.publications.exceptions.AuthorizationException;
 import za.ac.cs.teambravo.publications.exceptions.EffectiveDateNotAfterEffectiveDateOfLastStateEntry;
@@ -42,6 +37,11 @@ import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationsForPer
 import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationsForPersonResponse;
 import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationTypeRequest;
 import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationTypeResponse;
+import za.ac.cs.teambravo.publications.entities.*;
+import za.ac.cs.teambravo.publications.base.*;
+import java.util.List;
+
+
 
 /**
  *
@@ -50,6 +50,8 @@ import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationType
 @Stateless
 public class PublicationsBean implements Publications 
 {
+
+
     @Override
     public AddPublicationResponse addPublication(AddPublicationRequest addPublicationRequest) throws NotAuthorized {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -68,7 +70,7 @@ public class PublicationsBean implements Publications
     private void addPublicationState(Publication publication,PublicationState newState)
     {
       
-        publication.addStateEntry(newState);
+       // publication.addStateEntry(newState);
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
         EntityManager entityManager = emFactory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -84,14 +86,29 @@ public class PublicationsBean implements Publications
 
     @Override
     public ModifyPublicationTypeResponse modifyPublicationType(ModifyPublicationTypeRequest modifyPublicationTypeRequest) throws AuthorizationException, EffectiveDateNotAfterEffectiveDateOfLastStateEntry {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
+        EntityManager entityManager = emFactory.createEntityManager();
+        
+        List<PublicationTypeEntity> pubTypeList = (List<PublicationTypeEntity>)entityManager.createQuery("SELECT p FROM PublicationType p WHERE p.typeName ="+modifyPublicationTypeRequest.getPublicationTypeObject().getPublicationType())
+                              .getResultList();
+        
+        PublicationTypeEntity type = pubTypeList.get(pubTypeList.size()-1);
+        PublicationTypeStateEntity typeState = type.getTypeStates().get(pubTypeList.size()-1);
+        typeState.setDateEffective(modifyPublicationTypeRequest.getPublicationTypeStateObject().getEffectiveDate());
+        type.getTypeStates().add(typeState);
+        entityManager.getTransaction().begin();
+        entityManager.persist(type);
+        entityManager.getTransaction().commit();
+        
+        return new ModifyPublicationTypeResponse(type);
     }
 
     @Override
     public GetPublicationsForPersonResponse getPublicationsForPerson(GetPublicationsForPersonRequest getPublicationsForPersonRequest) 
     {
-        GetPublicationsForPersonResponse response = null;
-        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
+       /* GetPublicationsForPersonResponse response = null;
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
         EntityManager entityManager = emFactory.createEntityManager();
                 
         try
@@ -103,52 +120,22 @@ public class PublicationsBean implements Publications
             }
             else
             {
-                PersonMock requester = getPublicationsForPersonRequest.getRequester();
-                String personName = requester.getFirstName();
                 
-                //Find person in database and get their associated publications
-                ArrayList<PublicationEntity> personsPublications = null;
-                
-                PublicationConfidenceLevel confLevel = getPublicationsForPersonRequest.getPubConfidence();
-                
-                //Filter list of publications based on the confidence level
-                switch(confLevel)
-                {
-                    case PUBLISHED:
-                        //
-                        break;
-                    case ACCEPTED:
-                        //
-                        break;
-                    case ENVISAGEDTOBEPUBLISHED:
-                        //
-                        break;
-                }
-                
-                if(getPublicationsForPersonRequest.hasTimePeriod())
-                {
-                    Period time = getPublicationsForPersonRequest.getTimePeriod();
-                    
-                    //Filter list of publications based on time period
-                }
-               
-                response = new GetPublicationsForPersonResponse();
-                response.setPublications(personsPublications);
             }
-            
         }
         catch(InvalidRequest e)
         {
         }
        
-        return response;
+        return response;*/
+      throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public GetPublicationsForGroupResponse getPublicationsForGroup(GetPublicationsForGroupRequest getPublicationsForGroupRequest) 
     {
-        GetPublicationsForGroupResponse response = null;
-        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
+        /*GetPublicationsForGroupResponse response = null;
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
         EntityManager entityManager = emFactory.createEntityManager();
                 
         try
@@ -160,51 +147,22 @@ public class PublicationsBean implements Publications
             }
             else
             {
-                String groupName = getPublicationsForGroupRequest.getGroupName();
-                //Find people belonging to group in database and get their associated publications
                 
-                
-                ArrayList<PublicationEntity> personsPublications = null;
-                
-                PublicationConfidenceLevel confLevel = getPublicationsForGroupRequest.getPubConfidence();
-                
-                //Filter list of publications based on the confidence level
-                switch(confLevel)
-                {
-                    case PUBLISHED:
-                        //
-                        break;
-                    case ACCEPTED:
-                        //
-                        break;
-                    case ENVISAGEDTOBEPUBLISHED:
-                        //
-                        break;
-                }
-                
-                if(getPublicationsForGroupRequest.hasTimePeriod())
-                {
-                    Period time = getPublicationsForGroupRequest.getTimePeriod();
-                    
-                    //Filter list of publications based on time period
-                }
-               
-                response = new GetPublicationsForGroupResponse();
-                response.setPublications(personsPublications);  
             }
         }
         catch(InvalidRequest e)
         {
         }
        
-        return response;
+        return response; */
                 
+      throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public CalcAccreditationPointsForPersonResponse calcAccreditationPointsForPerson(CalcAccreditationPointsForPersonRequest calcAccreditationPointsForPersonRequest) 
     {
-        CalcAccreditationPointsForPersonResponse response = null;
+      /*  CalcAccreditationPointsForPersonResponse response = null;
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
         EntityManager entityManager = emFactory.createEntityManager();
                 
@@ -236,7 +194,7 @@ public class PublicationsBean implements Publications
                
                 GetPublicationsForPersonResponse publications = getPublicationsForPerson(getPublications);
                 
-                ArrayList<PublicationEntity> listOfPublications = publications.getPublications();
+                ArrayList<Publication> listOfPublications = publications.getPublications();
                 
                 //Get Publication types and associated points
                
@@ -262,12 +220,9 @@ public class PublicationsBean implements Publications
                 {
                     int count = 0;
                     
-                    for(PublicationEntity publication : listOfPublications)
+                    for(Publication publication : listOfPublications)
                     {
-                        PublicationStateEntity pubState = publication.getStateEntries().get(publication.getStateEntries().size());
-                        String pubTypeName = pubState.getType().getTypeName();
-                        
-                        if(typeName.equals(pubTypeName))
+                       // if(the publications type name is == to typeName)
                         {
                             count++;
                         }
@@ -293,14 +248,15 @@ public class PublicationsBean implements Publications
         
         }
         
-        return response; 
+        return response; */
                 
+                throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public CalcAccreditationPointsForGroupResponse calcAccreditationPointsForGroup(CalcAccreditationPointsForGroupRequest calcAccreditationPointsForGroupRequest) 
     {
-       CalcAccreditationPointsForGroupResponse response = null;
+       /* CalcAccreditationPointsForGroupResponse response = null;
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
         EntityManager entityManager = emFactory.createEntityManager();
         
@@ -332,7 +288,7 @@ public class PublicationsBean implements Publications
                
                 GetPublicationsForGroupResponse publications = getPublicationsForGroup(getPublications);
                 
-                ArrayList<PublicationEntity> listOfPublications = publications.getPublications();
+                ArrayList<Publication> listOfPublications = publications.getPublications();
                 
                 //Get Publication types and associated points
                 
@@ -358,12 +314,9 @@ public class PublicationsBean implements Publications
                 {
                     int count = 0;
                     
-                    for(PublicationEntity publication : listOfPublications)
+                    for(Publication publication : listOfPublications)
                     {
-                        PublicationStateEntity pubState = publication.getStateEntries().get(publication.getStateEntries().size());
-                        String pubTypeName = pubState.getType().getTypeName();
-                        
-                        if(typeName.equals(pubTypeName))
+                       // if(the publications type name is == to typeName)
                         {
                             count++;
                         }
@@ -390,13 +343,17 @@ public class PublicationsBean implements Publications
         {
         }
         
-        return response;
+        return response;*/
+                
+             throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public ChangePublicationStateResponse changePublicationState(ChangePublicationStateRequest changePublicationStateRequest) throws NotAuthorized, NoSuchPublicationException, AlreadyPublishedException, PublicationWithTitleExistsForAuthors {
 
-       Publication publication = null;
+        throw new UnsupportedOperationException("Not supported yet."); 
+
+        /*Publication publication = null;
         
         if(!changePublicationStateRequest.isAuthorized())
         {
@@ -408,19 +365,20 @@ public class PublicationsBean implements Publications
         {
             throw(new NoSuchPublicationException());
         }
-         PublicationState getState = publication.getPublicationStateObject().get(publication.getPublicationStateObject().size());
+         PublicationState getState =publication.getPublicationStateObject();
         if(getState.getLifeCycleStateObject().getStateString().equals("Published"))
         {
             throw(new AlreadyPublishedException());
         }
 
         //Persist
-      
+        
+        return new ChangePublicationStateResponse(publication);
 
         addPublicationState(publication,getState);
 
 
-        return new ChangePublicationStateResponse(publication);
+        return new ChangePublicationStateResponse(publication);*/
 
         
     }

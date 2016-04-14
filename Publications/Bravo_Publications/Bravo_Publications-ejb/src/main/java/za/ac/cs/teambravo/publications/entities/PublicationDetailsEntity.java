@@ -11,16 +11,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 @Entity
-@NamedQueries({
-    //@NamedQuery(name = "Lifecyclestate.findAll", query = "SELECT l FROM Lifecyclestate l"),
-    @NamedQuery(name = "PublicationDetailsEntity.findTitle", query = "SELECT l FROM PublicationDetailsEntity l WHERE l.title = :title")
-})
 public class PublicationDetailsEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

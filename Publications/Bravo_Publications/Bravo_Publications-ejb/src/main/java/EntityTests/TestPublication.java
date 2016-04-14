@@ -8,7 +8,6 @@ package EntityTests;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Stack;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -77,7 +76,7 @@ public class TestPublication
         //Query typeQuery = manager.createQuery("Select pubType from PublicationType pubType WHERE pubType.typeName = :book");
         
         TypedQuery<PublicationTypeEntity> query= manager.createNamedQuery("PublicationType.findBytypeName",PublicationTypeEntity.class);
-        query.setParameter("type", "book");  
+        query.setParameter("type", "book");     //name is what I am searching by, 'red meat' is the search
         List results=query.getResultList();
         
         PublicationTypeEntity f1=(PublicationTypeEntity) results.get(0);    
@@ -150,7 +149,7 @@ public class TestPublication
         
         manager.persist(pubState2);
         
-        Stack<PublicationStateEntity> stateList = new Stack();
+        List<PublicationStateEntity> stateList = new ArrayList();
         
         stateList.add(pubState);
         stateList.add(pubState2);
