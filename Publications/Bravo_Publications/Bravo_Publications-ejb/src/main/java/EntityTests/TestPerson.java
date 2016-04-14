@@ -8,7 +8,7 @@ package EntityTests;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import za.ac.cs.teambravo.publications.entities.PersonEntity;
+import za.ac.cs.teambravo.publications.entities.Person;
 
 /**
  *
@@ -23,7 +23,7 @@ public class TestPerson
         
         
         //To add a row
-        PersonEntity f=new PersonEntity();
+        Person f=new Person();
         f.setFirstName("Joseph");
         f.setSurname("Surname");
         
@@ -32,7 +32,7 @@ public class TestPerson
         manager.getTransaction().commit();
         
         //To search by ID
-        f=manager.find(PersonEntity.class,2);
+        f=manager.find(Person.class,2);
         System.out.println(f.getFirstName());
         System.out.println(f.getSurname());
         System.out.println("id:"+f.getPersonID());

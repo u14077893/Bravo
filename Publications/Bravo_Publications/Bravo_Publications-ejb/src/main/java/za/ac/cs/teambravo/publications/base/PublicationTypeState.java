@@ -7,9 +7,7 @@ import java.util.List;
 
 public class PublicationTypeState
 {
-<<<<<<< HEAD
-    Date effectiveDate;
-=======
+
     private Date effectiveDate;
     
     public PublicationTypeState() {
@@ -18,7 +16,6 @@ public class PublicationTypeState
     public PublicationTypeState(Date effectiveDate) {
         this.effectiveDate = effectiveDate;
     }
->>>>>>> origin/master
 
     public Date getEffectiveDate() {
         return effectiveDate;
@@ -27,8 +24,5 @@ public class PublicationTypeState
     public void setEffectiveDate(Date effectiveDate) {
         this.effectiveDate = effectiveDate;
     }
-<<<<<<< HEAD
-=======
-    
->>>>>>> origin/master
+
 }

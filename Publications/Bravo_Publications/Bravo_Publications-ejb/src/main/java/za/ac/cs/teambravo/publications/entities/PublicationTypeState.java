@@ -19,7 +19,7 @@ import javax.persistence.Temporal;
 @Entity
 @Inheritance( strategy = InheritanceType.SINGLE_TABLE )
 @DiscriminatorColumn(name="StateOfType")
-public class PublicationTypeStateEntity implements Serializable {
+public class PublicationTypeState implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +30,11 @@ public class PublicationTypeStateEntity implements Serializable {
     private Date dateEffective;
 
 
-    public PublicationTypeStateEntity() {
+    public PublicationTypeState() {
         super();
     }
     
-    public PublicationTypeStateEntity(Integer activationID, Date dateEffective) {
+    public PublicationTypeState(Integer activationID, Date dateEffective) {
         super();
         this.activationID = activationID;
         this.dateEffective = dateEffective;
@@ -66,10 +66,10 @@ public class PublicationTypeStateEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PublicationTypeStateEntity)) {
+        if (!(object instanceof PublicationTypeState)) {
             return false;
         }
-        PublicationTypeStateEntity other = (PublicationTypeStateEntity) object;
+        PublicationTypeState other = (PublicationTypeState) object;
         if ((this.activationID == null && other.activationID != null) || (this.activationID != null && !this.activationID.equals(other.activationID))) {
             return false;
         }

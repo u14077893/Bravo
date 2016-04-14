@@ -25,7 +25,7 @@ import za.ac.cs.teambravo.publications.base.PublicationTypeState;
     //@NamedQuery(name = "Lifecyclestate.findByPublicationdate", query = "SELECT l FROM Lifecyclestate l WHERE l.publicationdate = :publicationdate"),
     //@NamedQuery(name = "Lifecyclestate.findByBibtexentry", query = "SELECT l FROM Lifecyclestate l WHERE l.bibtexentry = :bibtexentry")
 })
-public class PublicationTypeEntity implements Serializable {
+public class PublicationType implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,8 +34,8 @@ public class PublicationTypeEntity implements Serializable {
     @Column
     private String typeName;
     
-    @OneToMany(targetEntity = PublicationTypeStateEntity.class)
-    private List<PublicationTypeStateEntity> typeStates;
+    @OneToMany(targetEntity = PublicationTypeState.class)
+    private List<PublicationTypeState> typeStates;
     
     public Integer getTypeID() {
         return typeID;
@@ -53,19 +53,19 @@ public class PublicationTypeEntity implements Serializable {
         this.typeName = typeName;
     }
 
-    public List<PublicationTypeStateEntity> getTypeStates() {
+    public List<PublicationTypeState> getTypeStates() {
         return typeStates;
     }
 
-    public void setTypeStates(List<PublicationTypeStateEntity> typeStates) {
+    public void setTypeStates(List typeStates) {
         this.typeStates = typeStates;
     }
 
     
      public void addStateEntry(PublicationTypeState pState)
     {
-        PublicationTypeStateEntity p = new PublicationTypeStateEntity();
-        p.setDateEffective(pState.getEffectiveDate());
+        PublicationTypeState p = new PublicationTypeState();
+        p.setEffectiveDate(pState.getEffectiveDate());
         this.getTypeStates().add(p);
     }
     
@@ -81,10 +81,10 @@ public class PublicationTypeEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PublicationTypeEntity)) {
+        if (!(object instanceof PublicationType)) {
             return false;
         }
-        PublicationTypeEntity other = (PublicationTypeEntity) object;
+        PublicationType other = (PublicationType) object;
         if ((this.typeID == null && other.typeID != null) || (this.typeID != null && !this.typeID.equals(other.typeID))) {
             return false;
         }

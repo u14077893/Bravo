@@ -15,29 +15,29 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class PublicationStateEntity implements Serializable {
+public class PublicationState implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer publicationID;
     
     @OneToOne
-    private PublicationDetailsEntity details;
+    private PublicationDetails details;
     
     @OneToOne
-    private LifeCycleStateEntity state;
+    private LifeCycleState state;
   
     @OneToOne
-    private PublicationTargetEntity target;
+    private PublicationTarget target;
     
     @ManyToOne
-    private PublicationTypeEntity type; 
+    private PublicationType type; 
 
-    public PublicationStateEntity() {
+    public PublicationState() {
         super();
     }
 
-    public PublicationStateEntity(Integer publicationID, PublicationDetailsEntity details, LifeCycleStateEntity state, PublicationTargetEntity target, PublicationTypeEntity type) {
+    public PublicationState(Integer publicationID, PublicationDetails details, LifeCycleState state, PublicationTarget target, PublicationType type) {
         super();
         this.publicationID = publicationID;
         this.details = details;
@@ -54,35 +54,35 @@ public class PublicationStateEntity implements Serializable {
         this.publicationID = publicationID;
     }
 
-    public PublicationDetailsEntity getDetails() {
+    public PublicationDetails getDetails() {
         return details;
     }
 
-    public void setDetails(PublicationDetailsEntity details) {
+    public void setDetails(PublicationDetails details) {
         this.details = details;
     }
 
-    public LifeCycleStateEntity getState() {
+    public LifeCycleState getState() {
         return state;
     }
 
-    public void setState(LifeCycleStateEntity state) {
+    public void setState(LifeCycleState state) {
         this.state = state;
     }
 
-    public PublicationTargetEntity getTarget() {
+    public PublicationTarget getTarget() {
         return target;
     }
 
-    public void setTarget(PublicationTargetEntity target) {
+    public void setTarget(PublicationTarget target) {
         this.target = target;
     }
 
-    public PublicationTypeEntity getType() {
+    public PublicationType getType() {
         return type;
     }
 
-    public void setType(PublicationTypeEntity type) {
+    public void setType(PublicationType type) {
         this.type = type;
     }
 
@@ -97,10 +97,10 @@ public class PublicationStateEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PublicationStateEntity)) {
+        if (!(object instanceof PublicationState)) {
             return false;
         }
-        PublicationStateEntity other = (PublicationStateEntity) object;
+        PublicationState other = (PublicationState) object;
         if ((this.publicationID == null && other.publicationID != null) || (this.publicationID != null && !this.publicationID.equals(other.publicationID))) {
             return false;
         }
@@ -110,6 +110,10 @@ public class PublicationStateEntity implements Serializable {
     @Override
     public String toString() {
         return "za.ac.cs.teambravo.publications.entities.Publications[ id=" + publicationID + " ]";
+    }
+
+    public LifeCycleState getLifeCycleStateObject() {
+      return this.state;
     }
     
 }

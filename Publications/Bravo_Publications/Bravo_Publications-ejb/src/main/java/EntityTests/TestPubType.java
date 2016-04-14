@@ -11,10 +11,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import za.ac.cs.teambravo.publications.entities.ActiveStateEntity;
-import za.ac.cs.teambravo.publications.entities.NotActiveStateEntity;
-import za.ac.cs.teambravo.publications.entities.PublicationTypeEntity;
-import za.ac.cs.teambravo.publications.entities.PublicationTypeStateEntity;
+import za.ac.cs.teambravo.publications.entities.ActiveState;
+import za.ac.cs.teambravo.publications.entities.NotActiveState;
+import za.ac.cs.teambravo.publications.entities.PublicationType;
+import za.ac.cs.teambravo.publications.entities.PublicationTypeState;
 
 /**
  *
@@ -27,12 +27,12 @@ public class TestPubType
         EntityManagerFactory factory=Persistence.createEntityManagerFactory("EntityDemoPU"); //"JPA1" is the project name and the "PU" is added by the system
         EntityManager manager=factory.createEntityManager();
         
-        ActiveStateEntity as = new ActiveStateEntity();
+        ActiveState as = new ActiveState();
         
         as.setDateEffective(new Date("2016/04/12"));
         as.setAccreditationPoints(5.5);
         
-        NotActiveStateEntity na = new NotActiveStateEntity();
+        NotActiveState na = new NotActiveState();
         na.setDateEffective(new Date("2016/04/12"));
         na.setDeactivationReason("don't like it");
         
@@ -41,12 +41,12 @@ public class TestPubType
         manager.persist(na);
         manager.getTransaction().commit();
         
-        List<PublicationTypeStateEntity> typeStates = new ArrayList();
+        List<PublicationTypeState> typeStates = new ArrayList();
         typeStates.add(as);
         typeStates.add(na);
        
         
-        PublicationTypeEntity type = new PublicationTypeEntity();
+        PublicationType type = new PublicationType();
         
         type.setTypeName("book");
         type.setTypeStates(typeStates);

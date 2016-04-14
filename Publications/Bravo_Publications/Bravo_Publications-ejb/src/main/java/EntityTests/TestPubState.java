@@ -13,12 +13,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-import za.ac.cs.teambravo.publications.entities.InProgressEntity;
-import za.ac.cs.teambravo.publications.entities.PersonEntity;
-import za.ac.cs.teambravo.publications.entities.PublicationDetailsEntity;
-import za.ac.cs.teambravo.publications.entities.PublicationStateEntity;
-import za.ac.cs.teambravo.publications.entities.PublicationTargetEntity;
-import za.ac.cs.teambravo.publications.entities.PublicationTypeEntity;
+import za.ac.cs.teambravo.publications.entities.InProgress;
+import za.ac.cs.teambravo.publications.entities.Person;
+import za.ac.cs.teambravo.publications.entities.PublicationDetails;
+import za.ac.cs.teambravo.publications.entities.PublicationState;
+import za.ac.cs.teambravo.publications.entities.PublicationTarget;
+import za.ac.cs.teambravo.publications.entities.PublicationType;
 
 /**
  *
@@ -32,24 +32,24 @@ public class TestPubState
         EntityManager manager=factory.createEntityManager();
         manager.getTransaction().begin();
         
-        PersonEntity f=new PersonEntity();
+        Person f=new Person();
         f.setFirstName("Joseph");
         f.setSurname("Surname");
         
         manager.persist(f);
         
-        PersonEntity g = new PersonEntity();
+        Person g = new Person();
         g.setFirstName("Moses");
         g.setSurname("Surname2");
        
         manager.persist(g);
         
         
-        List<PersonEntity> authorList = new ArrayList();
+        List<Person> authorList = new ArrayList();
         authorList.add(f);
         authorList.add(g);
         
-        PublicationDetailsEntity details = new PublicationDetailsEntity();
+        PublicationDetails details = new PublicationDetails();
         details.setTitle("ThePaper");
         Date today = new Date("2016/04/13");
         details.setEnvisagedPublicationDate(today);
@@ -59,14 +59,14 @@ public class TestPubState
         
         
         
-        PublicationTargetEntity target = new PublicationTargetEntity();
+        PublicationTarget target = new PublicationTarget();
         target.setName("SA Journal");
         target.setWebsite("www.cs.up.ac.za");
         
         manager.persist(target);
         
         
-        InProgressEntity prog = new InProgressEntity();
+        InProgress prog = new InProgress();
         prog.setPercentageComplete(55);
         
         manager.persist(prog);
@@ -74,15 +74,15 @@ public class TestPubState
         //fetch existing pub type??
         //Query typeQuery = manager.createQuery("Select pubType from PublicationType pubType WHERE pubType.typeName = :book");
         String ng="";
-        TypedQuery<PublicationTypeEntity> query= manager.createNamedQuery("PublicationType.findBytypeName",PublicationTypeEntity.class);
+        TypedQuery<PublicationType> query= manager.createNamedQuery("PublicationType.findBytypeName",PublicationType.class);
         query.setParameter("type", "book");     //name is what I am searching by, 'red meat' is the search
         List results=query.getResultList();
         
-        PublicationTypeEntity f1=(PublicationTypeEntity) results.get(0);    
+        PublicationType f1=(PublicationType) results.get(0);    
         //System.out.println(f1.getSurname());
         
         
-        PublicationStateEntity pubState = new PublicationStateEntity();
+        PublicationState pubState = new PublicationState();
         pubState.setDetails(details);
         pubState.setTarget(target);
         pubState.setState(prog);

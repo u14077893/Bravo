@@ -4,7 +4,7 @@ import java.util.List;
 import javax.ejb.Remote;
 import za.ac.cs.teambravo.publications.base.PublicationType;
 import za.ac.cs.teambravo.publications.base.PublicationTypeState;
-import za.ac.cs.teambravo.publications.entities.PublicationTypeEntity;
+
 import za.ac.cs.teambravo.publications.exceptions.AuthorizationException;
 import za.ac.cs.teambravo.publications.exceptions.PublicationTypeExistsException;
 import za.ac.cs.teambravo.publications.requestandresponses.AddPublicationTypeRequest;
@@ -27,6 +27,6 @@ public interface PublicationTypes
      */
     public AddPublicationTypeResponse addPublicationType(AddPublicationTypeRequest addPublicationTypeRequest)throws AuthorizationException, PublicationTypeExistsException ;
 
-    public PublicationTypeEntity createPublicationType(PublicationType p);
+    public PublicationType createPublicationType(PublicationType p);
     
    }

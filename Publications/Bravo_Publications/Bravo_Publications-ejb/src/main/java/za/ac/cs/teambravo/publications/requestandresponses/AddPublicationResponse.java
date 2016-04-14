@@ -1,6 +1,6 @@
 package za.ac.cs.teambravo.publications.requestandresponses;
 
-import za.ac.cs.teambravo.publications.entities.PublicationTypeEntity;
+import za.ac.cs.teambravo.publications.entities.PublicationType;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

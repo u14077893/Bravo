@@ -9,11 +9,11 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue(value="Active")
-public class ActiveStateEntity extends PublicationTypeStateEntity {
+public class ActiveState extends PublicationTypeState {
 
     private double accreditationPoints;
 
-    public ActiveStateEntity() {
+    public ActiveState() {
         super();
     }
 
@@ -27,7 +27,7 @@ public class ActiveStateEntity extends PublicationTypeStateEntity {
 
   
 
-    public ActiveStateEntity(double accreditationPoints, Integer activationID, Date dateEffective) {
+    public ActiveState(double accreditationPoints, Integer activationID, Date dateEffective) {
         super(activationID, dateEffective);
         this.accreditationPoints = accreditationPoints;
     }

@@ -12,13 +12,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-import za.ac.cs.teambravo.publications.entities.InProgressEntity;
-import za.ac.cs.teambravo.publications.entities.PersonEntity;
-import za.ac.cs.teambravo.publications.entities.PublicationDetailsEntity;
-import za.ac.cs.teambravo.publications.entities.PublicationEntity;
-import za.ac.cs.teambravo.publications.entities.PublicationStateEntity;
-import za.ac.cs.teambravo.publications.entities.PublicationTargetEntity;
-import za.ac.cs.teambravo.publications.entities.PublicationTypeEntity;
+import za.ac.cs.teambravo.publications.entities.InProgress;
+import za.ac.cs.teambravo.publications.entities.Person;
+import za.ac.cs.teambravo.publications.entities.PublicationDetails;
+import za.ac.cs.teambravo.publications.entities.Publication;
+import za.ac.cs.teambravo.publications.entities.PublicationState;
+import za.ac.cs.teambravo.publications.entities.PublicationTarget;
+import za.ac.cs.teambravo.publications.entities.PublicationType;
 
 /**
  *
@@ -33,24 +33,24 @@ public class TestPublication
         
         manager.getTransaction().begin();
         
-        PersonEntity f=new PersonEntity();
+        Person f=new Person();
         f.setFirstName("Joseph");
         f.setSurname("Surname");
         
         manager.persist(f);
         
-        PersonEntity g = new PersonEntity();
+        Person g = new Person();
         g.setFirstName("Moses");
         g.setSurname("Surname2");
        
         manager.persist(g);
         
         
-        List<PersonEntity> authorList = new ArrayList();
+        List<Person> authorList = new ArrayList();
         authorList.add(f);
         authorList.add(g);
         
-        PublicationDetailsEntity details = new PublicationDetailsEntity();
+        PublicationDetails details = new PublicationDetails();
         details.setTitle("ThePaper");
         Date today = new Date("2016/04/13");
         details.setEnvisagedPublicationDate(today);
@@ -60,14 +60,14 @@ public class TestPublication
         
         
         
-        PublicationTargetEntity target = new PublicationTargetEntity();
+        PublicationTarget target = new PublicationTarget();
         target.setName("SA Journal");
         target.setWebsite("www.cs.up.ac.za");
         
         manager.persist(target);
         
         
-        InProgressEntity prog = new InProgressEntity();
+        InProgress prog = new InProgress();
         prog.setPercentageComplete(55);
         
         manager.persist(prog);
@@ -75,15 +75,15 @@ public class TestPublication
         //fetch existing pub type??
         //Query typeQuery = manager.createQuery("Select pubType from PublicationType pubType WHERE pubType.typeName = :book");
         
-        TypedQuery<PublicationTypeEntity> query= manager.createNamedQuery("PublicationType.findBytypeName",PublicationTypeEntity.class);
+        TypedQuery<PublicationType> query= manager.createNamedQuery("PublicationType.findBytypeName",PublicationType.class);
         query.setParameter("type", "book");     //name is what I am searching by, 'red meat' is the search
         List results=query.getResultList();
         
-        PublicationTypeEntity f1=(PublicationTypeEntity) results.get(0);    
+        PublicationType f1=(PublicationType) results.get(0);    
         //System.out.println(f1.getSurname());
         
         
-        PublicationStateEntity pubState = new PublicationStateEntity();
+        PublicationState pubState = new PublicationState();
         pubState.setDetails(details);
         pubState.setTarget(target);
         pubState.setState(prog);
@@ -92,24 +92,24 @@ public class TestPublication
         manager.persist(pubState);
         
         
-        PersonEntity f2=new PersonEntity();
+        Person f2=new Person();
         f2.setFirstName("Joseph");
         f2.setSurname("Surname");
         
         manager.persist(f2);
         
-        PersonEntity g2 = new PersonEntity();
+        Person g2 = new Person();
         g2.setFirstName("Moses");
         g2.setSurname("Surname2");
        
         manager.persist(g2);
         
         
-        List<PersonEntity> authorList2 = new ArrayList();
+        List<Person> authorList2 = new ArrayList();
         authorList2.add(f2);
         authorList2.add(g2);
         
-        PublicationDetailsEntity details2 = new PublicationDetailsEntity();
+        PublicationDetails details2 = new PublicationDetails();
         details2.setTitle("ThePaper");
         Date today2 = new Date("2016/04/13");
         details2.setEnvisagedPublicationDate(today2);
@@ -119,29 +119,29 @@ public class TestPublication
         
         
         
-        PublicationTargetEntity target2 = new PublicationTargetEntity();
+        PublicationTarget target2 = new PublicationTarget();
         target2.setName("SA Journal");
         target2.setWebsite("www.cs.up.ac.za");
         
         manager.persist(target2);
         
         
-        InProgressEntity prog2 = new InProgressEntity();
+        InProgress prog2 = new InProgress();
         prog2.setPercentageComplete(55);
         
         manager.persist(prog2);
         
         //fetch existing pub type??
         //Query typeQuery = manager.createQuery("Select pubType from PublicationType pubType WHERE pubType.typeName = :book");
-        TypedQuery<PublicationTypeEntity> query2= manager.createNamedQuery("PublicationType.findBytypeName",PublicationTypeEntity.class);
+        TypedQuery<PublicationType> query2= manager.createNamedQuery("PublicationType.findBytypeName",PublicationType.class);
         query2.setParameter("type", "book");     //name is what I am searching by, 'red meat' is the search
         List results2 =query2.getResultList();
         
-        PublicationTypeEntity f12=(PublicationTypeEntity) results.get(0);    
+        PublicationType f12=(PublicationType) results.get(0);    
         //System.out.println(f1.getSurname());
         
         
-        PublicationStateEntity pubState2 = new PublicationStateEntity();
+        PublicationState pubState2 = new PublicationState();
         pubState.setDetails(details2);
         pubState.setTarget(target2);
         pubState.setState(prog2);
@@ -149,13 +149,13 @@ public class TestPublication
         
         manager.persist(pubState2);
         
-        List<PublicationStateEntity> stateList = new ArrayList();
+        List<PublicationState> stateList = new ArrayList();
         
         stateList.add(pubState);
         stateList.add(pubState2);
         
         
-        PublicationEntity pub = new PublicationEntity();
+        Publication pub = new Publication();
         pub.setStateEntries(stateList);
         
         manager.persist(pub);
