@@ -65,15 +65,7 @@ public interface Publications {
      */
     public CreatePublicationResponse createPublication(CreatePublicationRequest createPublicationRequest) throws InvalidRequest;
 
-    /**
-     * Accepts a AddPublicationTypeRequest object to allow administrators to be able to add new publication types
-     * @param AddPublicationTypeRequest a request object passed to add a new PublicationTypeEntity option
-     * @return AddPublicationTypeResponse a response object that confirms PublicationTypeEntity ahs been added
-     * @see    PublicationTypeEntity
-     * @exception PublicationTypeExists the publication type is already an option
-     * @exception  AuthorizationException user is not an administrator
-     */
-    public AddPublicationTypeResponse addPublicationType(AddPublicationTypeRequest addPublicationTypeRequest)throws AuthorizationException;
+   
 
     /**
      * Accepts a ModifyPublicationTypeRequest object to allow the state of publication types to change at anytime

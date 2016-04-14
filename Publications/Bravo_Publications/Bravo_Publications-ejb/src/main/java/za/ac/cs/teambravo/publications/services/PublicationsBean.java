@@ -1,12 +1,21 @@
 
 package za.ac.cs.teambravo.publications.services;
 
+import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import za.ac.cs.teambravo.publications.Publication;
+import za.ac.cs.teambravo.Publication;
+import za.ac.cs.teambravo.publications.base.Active;
 import za.ac.cs.teambravo.publications.base.PublicationState;
+import za.ac.cs.teambravo.publications.base.PublicationType;
+import za.ac.cs.teambravo.publications.base.PublicationTypeState;
+import za.ac.cs.teambravo.publications.entities.ActiveStateEntity;
+import za.ac.cs.teambravo.publications.entities.PublicationTypeEntity;
+import za.ac.cs.teambravo.publications.entities.PublicationTypeStateEntity;
 
 
 
@@ -16,6 +25,7 @@ import za.ac.cs.teambravo.publications.exceptions.EffectiveDateNotAfterEffective
 import za.ac.cs.teambravo.publications.exceptions.InvalidRequest;
 import za.ac.cs.teambravo.publications.exceptions.NoSuchPublicationException;
 import za.ac.cs.teambravo.publications.exceptions.NotAuthorized;
+import za.ac.cs.teambravo.publications.exceptions.PublicationTypeExistsException;
 import za.ac.cs.teambravo.publications.exceptions.PublicationWithTitleExistsForAuthors;
 import za.ac.cs.teambravo.publications.requestandresponses.AddPublicationRequest;
 import za.ac.cs.teambravo.publications.requestandresponses.AddPublicationResponse;
@@ -37,6 +47,8 @@ import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationsForPer
 import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationsForPersonResponse;
 import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationTypeRequest;
 import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationTypeResponse;
+import za.ac.cs.teambravo.publications.requestandresponses.ReactivatePublicationTypeRequest;
+import za.ac.cs.teambravo.publications.requestandresponses.ReactivatePublicationTypeResponse;
 
 
 /**
@@ -44,7 +56,7 @@ import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationType
  * @author Jedd, Hlengi, Moses, Gift, Kudzai, Vuyani
  */
 @Stateless
-public class PublicationsBean implements Publications 
+public class PublicationsBean implements Publications, PublicationTypes 
 {
 
 
@@ -76,8 +88,47 @@ public class PublicationsBean implements Publications
     }
 
     @Override
-    public AddPublicationTypeResponse addPublicationType(AddPublicationTypeRequest addPublicationTypeRequest) throws AuthorizationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public AddPublicationTypeResponse addPublicationType(AddPublicationTypeRequest addPublicationTypeRequest) throws AuthorizationException, PublicationTypeExistsException {
+        
+        EntityManagerFactory factory=Persistence.createEntityManagerFactory("EntityDemoPU"); //"JPA1" is the project name and the "PU" is added by the system
+        EntityManager manager=factory.createEntityManager();
+       
+        PublicationType pTest = getPublicationType(addPublicationTypeRequest.getPublicationTypeObject());
+        
+        if(pTest == null) {
+            throw new PublicationTypeExistsException("Publication type already exists.");
+        }
+        else
+        {
+             PublicationTypeEntity pTnew = createPublicationType(pTest);
+        
+        // addStateEntry function here
+        pTnew.addStateEntry(pTest.getTypeState());
+        //persistObject funtion here
+//        if(addPublicationTypeRequest.isIsActive())
+//        {
+//           // pTnew.
+////            ActiveSta a = (Active)pTnew.getTypeStates().get( pTnew.getTypeStates().size()-1);
+//            ActiveStateEntity as ;
+//            as.setAccreditationPoints(pTnew.getTypeStates().get( pTnew.getTypeStates().size()-1).getAccreditationPoints);
+//            
+//        }
+//        ActiveStateEntity pTE = (ActiveStateEntity) new PublicationTypeStateEntity();
+//        pTE.setDateEffective(pTnew.getTypeStates().get( pTnew.getTypeStates().size()-1).getDateEffective());
+//        pTE.setAccreditationPoints((pTnew.getTypeStates().get( pTnew.getTypeStates().size()-1).);
+        
+        manager.getTransaction().begin();
+        manager.persist(pTnew.getTypeStates().get( pTnew.getTypeStates().size()-1));
+        manager.persist(pTnew);
+        manager.getTransaction().commit();
+        //return response with pT
+        AddPublicationTypeResponse aPR = new AddPublicationTypeResponse();
+        aPR.setPublicationTypeEntity(pTnew);
+        return aPR;
+        }
+        
+       
+        
     }
 
     @Override
@@ -363,5 +414,29 @@ public class PublicationsBean implements Publications
 
         
     }
+
+    @Override
+    public PublicationType getPublicationType(PublicationType pubType) {
+      EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
+      EntityManager entitymanager = emfactory.createEntityManager();
+      
+      TypedQuery<PublicationTypeEntity> query;
+        query = entitymanager.createNamedQuery("PublicationType.findBytypeName", PublicationTypeEntity.class).setParameter("typeName", pubType.getTypeName());
+      List<PublicationTypeEntity> result = query.getResultList();
+      
+       if(result.isEmpty())
+           return null;
+       else
+           return pubType;
+    }
+
+    @Override
+    public PublicationTypeEntity createPublicationType(PublicationType p) {
+        PublicationTypeEntity pE = null;
+        pE.setTypeName(p.getTypeName());
+        return pE;
+    }
+
+   
 
 }

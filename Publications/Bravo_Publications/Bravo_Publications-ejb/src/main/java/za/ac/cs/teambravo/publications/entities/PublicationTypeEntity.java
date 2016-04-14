@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import za.ac.cs.teambravo.publications.base.PublicationTypeState;
 
 
 @Entity
@@ -34,7 +35,7 @@ public class PublicationTypeEntity implements Serializable {
     private String typeName;
     
     @OneToMany(targetEntity = PublicationTypeStateEntity.class)
-    private List typeStates;
+    private List<PublicationTypeStateEntity> typeStates;
     
     public Integer getTypeID() {
         return typeID;
@@ -52,16 +53,21 @@ public class PublicationTypeEntity implements Serializable {
         this.typeName = typeName;
     }
 
-    public List getTypeStates() {
+    public List<PublicationTypeStateEntity> getTypeStates() {
         return typeStates;
     }
 
-    public void setTypeStates(List typeStates) {
+    public void setTypeStates(List<PublicationTypeStateEntity> typeStates) {
         this.typeStates = typeStates;
     }
 
     
-    
+     public void addStateEntry(PublicationTypeState pState)
+    {
+        PublicationTypeStateEntity p = new PublicationTypeStateEntity();
+        p.setDateEffective(pState.getEffectiveDate());
+        this.getTypeStates().add(p);
+    }
     
     
 
