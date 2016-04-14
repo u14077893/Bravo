@@ -56,7 +56,7 @@ public class PublicationTypeEntity implements Serializable {
         return typeStates;
     }
 
-    public void setTypeStates(List typeStates) {
+    public void setTypeStates(List<PublicationTypeStateEntity> typeStates) {
         this.typeStates = typeStates;
     }
 

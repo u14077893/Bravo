@@ -5,10 +5,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import za.ac.cs.teambravo.publications.Publication;
+import za.ac.cs.teambravo.publications.base.Publication;
 import za.ac.cs.teambravo.publications.base.PublicationState;
-
-
 
 import za.ac.cs.teambravo.publications.exceptions.AlreadyPublishedException;
 import za.ac.cs.teambravo.publications.exceptions.AuthorizationException;
