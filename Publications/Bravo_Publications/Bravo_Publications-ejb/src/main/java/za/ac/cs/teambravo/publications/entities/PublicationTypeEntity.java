@@ -34,7 +34,7 @@ public class PublicationTypeEntity implements Serializable {
     private String typeName;
     
     @OneToMany(targetEntity = PublicationTypeStateEntity.class)
-    private List typeStates;
+    private List<PublicationTypeStateEntity> typeStates;
     
     public Integer getTypeID() {
         return typeID;
