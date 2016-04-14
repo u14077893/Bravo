@@ -17,10 +17,18 @@ import javax.persistence.InheritanceType;
 @DiscriminatorColumn(name="StateType" )
 public class LifeCycleState implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    public String getStateString() {
+        return stateString;
+    }
+
+    public void setStateString(String stateString) {
+        this.stateString = stateString;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer stateID;
-
+    private String stateString;
     public LifeCycleState() 
     {
     }
@@ -52,5 +60,7 @@ public class LifeCycleState implements Serializable {
         }
         return true;
     }
+
+  
  
 }
