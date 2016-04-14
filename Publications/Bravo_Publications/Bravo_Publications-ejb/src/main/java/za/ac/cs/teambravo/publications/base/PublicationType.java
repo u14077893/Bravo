@@ -4,9 +4,16 @@ package za.ac.cs.teambravo.publications.base;
 
 //package za.ac.cs.teambravo.publications.publications;
 
-public interface PublicationType 
+public class PublicationType 
 {
-    public String getPublicationType();
-    public void setPublicationType();
+    String name;
+    
+    public String getPublicationType(){
+        return name;
+    }
+    public void setPublicationType(String _name)
+    {
+        name = _name;
+    }
     
 }
