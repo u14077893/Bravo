@@ -52,7 +52,7 @@ public class PublicationTypeEntity implements Serializable {
         this.typeName = typeName;
     }
 
-    public List getTypeStates() {
+    public List<PublicationTypeStateEntity> getTypeStates() {
         return typeStates;
     }
 

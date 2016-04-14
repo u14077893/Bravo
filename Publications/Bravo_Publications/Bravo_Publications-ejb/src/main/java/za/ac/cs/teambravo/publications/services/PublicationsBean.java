@@ -91,8 +91,17 @@ public class PublicationsBean implements Publications
         EntityManager entityManager = emFactory.createEntityManager();
         
         List<PublicationTypeEntity> pubTypeList = (List<PublicationTypeEntity>)entityManager.createQuery("SELECT p FROM PublicationType p WHERE p.typeName ="+modifyPublicationTypeRequest.getPublicationTypeObject().getPublicationType())
-                              .getResultList(); 
+                              .getResultList();
         
+        PublicationTypeEntity type = pubTypeList.get(pubTypeList.size()-1);
+        PublicationTypeStateEntity typeState = type.getTypeStates().get(pubTypeList.size()-1);
+        typeState.setDateEffective(modifyPublicationTypeRequest.getPublicationTypeStateObject().getEffectiveDate());
+        type.getTypeStates().add(typeState);
+        entityManager.getTransaction().begin();
+        entityManager.persist(type);
+        entityManager.getTransaction().commit();
+        
+        return new ModifyPublicationTypeResponse(type);
     }
 
     @Override
