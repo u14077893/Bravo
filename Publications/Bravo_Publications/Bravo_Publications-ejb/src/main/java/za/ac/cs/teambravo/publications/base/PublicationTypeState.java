@@ -6,5 +6,14 @@ import java.util.Date;
 
 public class PublicationTypeState
 {
-    Date effectiveDate;
+    private Date effectiveDate;
+
+    public Date getEffectiveDate() {
+        return effectiveDate;
+    }
+
+    public void setEffectiveDate(Date effectiveDate) {
+        this.effectiveDate = effectiveDate;
+    }
+    
 }
