@@ -8,16 +8,22 @@ import javax.persistence.TypedQuery;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+<<<<<<< HEAD
 import za.ac.cs.teambravo.Publication;
 import za.ac.cs.teambravo.publications.base.Active;
+=======
+<<<<<<< HEAD
+import za.ac.cs.teambravo.publications.base.Publication;
+=======
+import za.ac.cs.teambravo.Publication;
+>>>>>>> b710192f94362d196b837f66ffb08a179b0bb84a
+>>>>>>> origin/master
 import za.ac.cs.teambravo.publications.base.PublicationState;
 import za.ac.cs.teambravo.publications.base.PublicationType;
 import za.ac.cs.teambravo.publications.base.PublicationTypeState;
 import za.ac.cs.teambravo.publications.entities.ActiveStateEntity;
 import za.ac.cs.teambravo.publications.entities.PublicationTypeEntity;
 import za.ac.cs.teambravo.publications.entities.PublicationTypeStateEntity;
-
-
 
 import za.ac.cs.teambravo.publications.exceptions.AlreadyPublishedException;
 import za.ac.cs.teambravo.publications.exceptions.AuthorizationException;
@@ -47,8 +53,15 @@ import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationsForPer
 import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationsForPersonResponse;
 import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationTypeRequest;
 import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationTypeResponse;
+<<<<<<< HEAD
 import za.ac.cs.teambravo.publications.requestandresponses.ReactivatePublicationTypeRequest;
 import za.ac.cs.teambravo.publications.requestandresponses.ReactivatePublicationTypeResponse;
+=======
+import za.ac.cs.teambravo.publications.entities.*;
+import za.ac.cs.teambravo.publications.base.*;
+import java.util.List;
+
+>>>>>>> origin/master
 
 
 /**
@@ -78,7 +91,7 @@ public class PublicationsBean implements Publications, PublicationTypes
     private void addPublicationState(Publication publication,PublicationState newState)
     {
       
-       // publication.addStateEntry(newState);
+       publication.addStateEntry(newState);
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
         EntityManager entityManager = emFactory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -133,7 +146,22 @@ public class PublicationsBean implements Publications, PublicationTypes
 
     @Override
     public ModifyPublicationTypeResponse modifyPublicationType(ModifyPublicationTypeRequest modifyPublicationTypeRequest) throws AuthorizationException, EffectiveDateNotAfterEffectiveDateOfLastStateEntry {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
+        EntityManager entityManager = emFactory.createEntityManager();
+        
+        List<PublicationTypeEntity> pubTypeList = (List<PublicationTypeEntity>)entityManager.createQuery("SELECT p FROM PublicationType p WHERE p.typeName ="+modifyPublicationTypeRequest.getPublicationTypeObject().getPublicationType())
+                              .getResultList();
+        
+        PublicationTypeEntity type = pubTypeList.get(pubTypeList.size()-1);
+        PublicationTypeStateEntity typeState = type.getTypeStates().get(pubTypeList.size()-1);
+        typeState.setDateEffective(modifyPublicationTypeRequest.getPublicationTypeStateObject().getEffectiveDate());
+        type.getTypeStates().add(typeState);
+        entityManager.getTransaction().begin();
+        entityManager.persist(type);
+        entityManager.getTransaction().commit();
+        
+        return new ModifyPublicationTypeResponse(type);
     }
 
     @Override
@@ -383,9 +411,8 @@ public class PublicationsBean implements Publications, PublicationTypes
     @Override
     public ChangePublicationStateResponse changePublicationState(ChangePublicationStateRequest changePublicationStateRequest) throws NotAuthorized, NoSuchPublicationException, AlreadyPublishedException, PublicationWithTitleExistsForAuthors {
 
-        throw new UnsupportedOperationException("Not supported yet."); 
-
-        /*Publication publication = null;
+      
+        Publication publication = null;
         
         if(!changePublicationStateRequest.isAuthorized())
         {
@@ -403,14 +430,11 @@ public class PublicationsBean implements Publications, PublicationTypes
             throw(new AlreadyPublishedException());
         }
 
-        //Persist
-        
-        return new ChangePublicationStateResponse(publication);
 
         addPublicationState(publication,getState);
 
 
-        return new ChangePublicationStateResponse(publication);*/
+        return new ChangePublicationStateResponse(publication);
 
         
     }
