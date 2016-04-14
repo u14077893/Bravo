@@ -20,4 +20,14 @@ public class ModifyPublicationTypeRequest implements PublicationRequest{
         publicationTypeObject.setPublicationType(publicationTypeName);
         publicationTypeStateObject.setEffectiveDate(effectiveDate);
     }
+
+    public PublicationType getPublicationTypeObject() {
+        return this.publicationTypeObject;
+
+    }
+
+    public PublicationTypeState getPublicationTypeStateObject() {
+      return this.publicationTypeStateObject;
+    }
+
 }

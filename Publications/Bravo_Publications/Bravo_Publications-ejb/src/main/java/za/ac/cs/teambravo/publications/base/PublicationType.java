@@ -7,8 +7,7 @@ import java.util.ArrayList;
 
 public class PublicationType 
 {
-    public class PublicationType
-{
+   
     String name;
     ArrayList<PublicationTypeState> typeStates;
 

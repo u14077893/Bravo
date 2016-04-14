@@ -5,7 +5,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import za.ac.cs.teambravo.publications.Publication;
+import za.ac.cs.teambravo.Publication;
 import za.ac.cs.teambravo.publications.base.PublicationState;
 
 
@@ -70,7 +70,7 @@ public class PublicationsBean implements Publications
     private void addPublicationState(Publication publication,PublicationState newState)
     {
       
-       // publication.addStateEntry(newState);
+       publication.addStateEntry(newState);
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
         EntityManager entityManager = emFactory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -351,9 +351,8 @@ public class PublicationsBean implements Publications
     @Override
     public ChangePublicationStateResponse changePublicationState(ChangePublicationStateRequest changePublicationStateRequest) throws NotAuthorized, NoSuchPublicationException, AlreadyPublishedException, PublicationWithTitleExistsForAuthors {
 
-        throw new UnsupportedOperationException("Not supported yet."); 
-
-        /*Publication publication = null;
+      
+        Publication publication = null;
         
         if(!changePublicationStateRequest.isAuthorized())
         {
@@ -371,14 +370,11 @@ public class PublicationsBean implements Publications
             throw(new AlreadyPublishedException());
         }
 
-        //Persist
-        
-        return new ChangePublicationStateResponse(publication);
 
         addPublicationState(publication,getState);
 
 
-        return new ChangePublicationStateResponse(publication);*/
+        return new ChangePublicationStateResponse(publication);
 
         
     }
