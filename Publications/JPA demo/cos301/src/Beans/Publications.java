@@ -38,7 +38,7 @@ import RequestsAndResponses.ModifyPublicationTypeResponse;
  *
  * @author Jedd
  */
-@Remote
+//@Remote
 public interface Publications {
 
     void businessMethod();
