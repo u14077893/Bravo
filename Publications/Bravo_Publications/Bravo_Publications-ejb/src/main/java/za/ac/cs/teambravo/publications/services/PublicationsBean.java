@@ -203,7 +203,7 @@ public class PublicationsBean implements Publications
        {
            tmpPersonEntity.setFirstName(stateToPersist.getPublicationDetailsObject().getAuthors().get(i).getFirstName());
            tmpPersonEntity.setSurname(stateToPersist.getPublicationDetailsObject().getAuthors().get(i).getSurname());
-           //tmpPersonEntity.setGroupName(stateToPersist.getPublicationDetailsObject().getAuthors().get(i).getGroupName()); 
+           tmpPersonEntity.setGroupName(stateToPersist.getPublicationDetailsObject().getAuthors().get(i).getGroupName()); 
            tmpList.add(tmpPersonEntity);
        }
        
