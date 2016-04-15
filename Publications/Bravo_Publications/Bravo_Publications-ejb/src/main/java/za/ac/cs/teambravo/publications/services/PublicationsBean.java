@@ -172,7 +172,10 @@ public class PublicationsBean implements Publications
             }
             else
             {
+                //Get person and their associated publications
                 
+                
+                //Filter list of publications based on time period and pub confidence level
             }
         }
         catch(InvalidRequest e)

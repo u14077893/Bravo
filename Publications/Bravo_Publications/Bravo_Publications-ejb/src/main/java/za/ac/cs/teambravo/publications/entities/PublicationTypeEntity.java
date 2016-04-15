@@ -1,8 +1,6 @@
 package za.ac.cs.teambravo.publications.entities;
 
 
-//package za.ac.cs.teambravo.publications.entities;
-
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -14,7 +12,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-
+/**
+ *
+ * @author Hlengekile
+ */
 @Entity
 @NamedQueries({
     //@NamedQuery(name = "Lifecyclestate.findAll", query = "SELECT l FROM Lifecyclestate l"),

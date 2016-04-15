@@ -42,22 +42,7 @@ public class PublicationsBeanTest {
     public PublicationsBeanTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
+   
     /**
      * Test of addPublication method, of class PublicationsBean.
      * @throws java.lang.Exception
@@ -192,12 +177,12 @@ public class PublicationsBeanTest {
     public void testCalcAccreditationPointsForPerson() throws Exception {
         System.out.println("calcAccreditationPointsForPerson");
         CalcAccreditationPointsForPersonRequest calcAccreditationPointsForPersonRequest = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        Publications instance = (Publications)container.getContext().lookup("java:global/classes/PublicationsBean");
-        CalcAccreditationPointsForPersonResponse expResult = null;
-        CalcAccreditationPointsForPersonResponse result = instance.calcAccreditationPointsForPerson(calcAccreditationPointsForPersonRequest);
-        assertEquals(expResult, result);
-        container.close();
+        try (EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer()) {
+            Publications instance = (Publications)container.getContext().lookup("java:global/classes/PublicationsBean");
+            CalcAccreditationPointsForPersonResponse expResult = null;
+            CalcAccreditationPointsForPersonResponse result = instance.calcAccreditationPointsForPerson(calcAccreditationPointsForPersonRequest);
+            assertEquals(expResult, result);
+        }
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
