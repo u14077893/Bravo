@@ -135,7 +135,14 @@ public class PublicationsBean implements Publications
         }
         return aPR;
     }
-
+    
+    /**
+     * 
+     * @param modifyPublicationTypeRequest This request must have the new effective date of the entity state, and the name of the publication type to be changed.
+     * @return returns a modify publication response with the entity that has just been inserted to the db.
+     * @throws AuthorizationException
+     * @throws EffectiveDateNotAfterEffectiveDateOfLastStateEntry 
+     */
     @Override
     public ModifyPublicationTypeResponse modifyPublicationType(ModifyPublicationTypeRequest modifyPublicationTypeRequest) throws AuthorizationException, EffectiveDateNotAfterEffectiveDateOfLastStateEntry {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -155,7 +162,7 @@ public class PublicationsBean implements Publications
         
         return new ModifyPublicationTypeResponse();
     }
-
+    
     @Override
     public GetPublicationsForPersonResponse getPublicationsForPerson(GetPublicationsForPersonRequest getPublicationsForPersonRequest) 
     {
