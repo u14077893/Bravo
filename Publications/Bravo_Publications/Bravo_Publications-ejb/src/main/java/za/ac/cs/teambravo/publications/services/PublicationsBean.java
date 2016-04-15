@@ -2,6 +2,7 @@
 package za.ac.cs.teambravo.publications.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 import javax.ejb.Stateless;
@@ -15,6 +16,7 @@ import za.ac.cs.teambravo.publications.entities.*;
 import za.ac.cs.teambravo.publications.base.*;
 import java.util.List;
 import javax.persistence.Query;
+import javax.validation.constraints.NotNull;
 import za.ac.cs.teambravo.publications.base.PublicationType;
 import za.ac.cs.teambravo.publications.base.PublicationTypeState;
 import za.ac.cs.teambravo.publications.exceptions.AlreadyPublishedException;
@@ -65,9 +67,375 @@ public class PublicationsBean implements Publications
 
     @Override
     public AddPublicationResponse addPublication(AddPublicationRequest addPublicationRequest) throws NotAuthorized {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        PublicationState publicationState = addPublicationRequest.publicationState;
+     PersonMock owner = publicationState.getPublicationDetailsObject().getPerson();
+     
+        
+        //He/she is one of the authors of the publication.
+        
+        String nameSurname = publicationState.getPublicationDetailsObject().getPerson().getFirstName() + " " + publicationState.getPublicationDetailsObject().getPerson().getSurname();
+        Boolean authorsFlag = false;
+        
+        for(int i = 0; i < publicationState.getPublicationDetailsObject().getAuthors().size(); i++)
+        {
+              String authorsNameSurname = publicationState.getPublicationDetailsObject().getAuthors().get(i).getFirstName() +
+                      " " + publicationState.getPublicationDetailsObject().getAuthors().get(i).getSurname();
+              if(nameSurname.equals(authorsNameSurname))
+              {
+                  authorsFlag = true;
+                  break;
+              }
+        }
+        
+        if(authorsFlag == false)
+        {
+            throw new NotAuthorized();
+        }
+        
+       //The user is a research group leader and at least one of the authors is a member of the research group.
+        
+        Boolean groupLeaderFlag = false;
+        
+        if(owner.getResearchGroupAssociationType().equals("groupLeader"))
+        {
+            groupLeaderFlag = true;
+        }
+       
+        String researchGroup = owner.getResearchCategory();
+        Boolean researchGroupFlag = false;
+        for(int i = 0; i < publicationState.getPublicationDetailsObject().getAuthors().size(); i++)
+        {
+            if(researchGroup.equals(publicationState.getPublicationDetailsObject().getAuthors().get(i).getResearchCategory()))
+            {
+                researchGroupFlag = true;
+                break;
+            }
+            if(researchGroupFlag == true)
+            {
+                break;
+            }
+        }
+        
+        if(groupLeaderFlag == false && researchGroupFlag == false)
+        {
+            throw new NotAuthorized();
+        }
+        
+        // everything seems okay
+        // check if the publication is already in the database
+        GetPublicationRequest tmpGetPubRequest = new GetPublicationRequest(publicationState.getPublicationDetailsObject().getTitle());
+        GetPublicationResponse tmpResponse = null;
+        try {
+            tmpResponse = getPublication(tmpGetPubRequest);
+        } catch (PublicationWithTitleExistsForAuthors ex) {
+                System.out.println(ex.getMessage());
+        }
+        
+       if(tmpResponse != null)  //initialised publication is returned
+        {
+            try {
+                throw new PublicationWithTitleExistsForAuthors("Publication already exists.");
+            } catch (PublicationWithTitleExistsForAuthors ex) {
+                ex.getMessage();
+            }
+        }
+        
+      
+       CreatePublicationRequest createRequest = new CreatePublicationRequest(addPublicationRequest.publicationState);
+       CreatePublicationResponse createResponse = new CreatePublicationResponse(createRequest.getPublicationState());
+        try {
+            createResponse = createPublication(createRequest);
+        } catch (InvalidRequest ex) {
+            System.out.println(ex.getMessage());
+        }
+       
+       PublicationState stateToPersist = createResponse.getNewPublicationState();
+       
+       if(stateToPersist == null)
+       {
+           return null;
+           //create a response object, with null and return that
+       } //  otherwise persist
+       else
+       {
+          persistObject(stateToPersist);
+       }
+       
+        return null;
+    
+        
+        
+        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+    public void persistObject(PublicationState stateToPersist)
+    {
+    
+        EntityManagerFactory emfactory = Persistence.
+       // createEntityManagerFactory( "Eclipselink_JPA" );
+        createEntityManagerFactory( "EntityDemoPU" );
+        EntityManager entitymanager = emfactory.
+        createEntityManager( );
+        entitymanager.getTransaction( ).begin( );
+        
+      
+      /*    //persist person
+       PersonEntity person = new PersonEntity();
+       person.setFirstNames(stateToPersist.getPublicationDetailsObject().getPersonObject().getFirstName());
+       person.setSurname(stateToPersist.getPublicationDetailsObject().getPersonObject().getSurname());
+       person.setGroupName(stateToPersist.getPublicationDetailsObject().getPersonObject().getGroupName());
+       entitymanager.persist(person); */
+       
+       
+       //persist publicationTarget
+       PublicationTargetEntity pubTarget = new PublicationTargetEntity();
+       pubTarget.setName(stateToPersist.getPublicationTargetObject().getName());
+       pubTarget.setWebsite(stateToPersist.getPublicationTargetObject().getWebsite().toString());
+       entitymanager.persist(pubTarget);
+       
+       //Adding list of authors to db
+       ArrayList<PersonEntity> tmpList = new ArrayList();
+       PersonEntity tmpPersonEntity = new PersonEntity();
+       for(int i = 0; i < stateToPersist.getPublicationDetailsObject().getAuthors().size();i++)
+       {
+           tmpPersonEntity.setFirstName(stateToPersist.getPublicationDetailsObject().getAuthors().get(i).getFirstName());
+           tmpPersonEntity.setSurname(stateToPersist.getPublicationDetailsObject().getAuthors().get(i).getSurname());
+           //tmpPersonEntity.setGroupName(stateToPersist.getPublicationDetailsObject().getAuthors().get(i).getGroupName()); 
+           tmpList.add(tmpPersonEntity);
+       }
+       
+       ArrayList<PersonEntity> authorList = new ArrayList();
+       for(int i = 0; i < tmpList.size() ; i++)
+       {
+          entitymanager.persist(tmpList.get(i));
+          authorList.add(tmpList.get(i));
+       }
+       
+       //persist publicationDetails
+       PublicationDetailsEntity pubDetails =  new PublicationDetailsEntity();
+       pubDetails.setTitle(stateToPersist.getPublicationDetailsObject().getTitle());
+       pubDetails.setEnvisagedPublicationDate(stateToPersist.getPublicationDetailsObject().getEnvisagedPublicationDate());
+       pubDetails.setAuthors(authorList);
+       entitymanager.persist(pubDetails);
+       
+       // adding life cycle state
+       
+        //LifeCycleStateEntity state = null;
+       
+        
+        PublicationStateEntity pubState = new PublicationStateEntity();
+       
+        pubState.setDetails(pubDetails);
+        pubState.setTarget(pubTarget);
+        //state done in the function
+        //type done below
+        
+       if(stateToPersist.getLifeCycleStateObject().getState().equals("InProgress"))
+       {
+           InProgressEntity state = new InProgressEntity();
+           state.setPercentageComplete(stateToPersist.getLifeCycleStateObject().getPercentageCompleted());
+           entitymanager.persist(state);
+           pubState.setState(state);
+       }
+       
+       if(stateToPersist.getLifeCycleStateObject().getState().equals("Published"))
+       {
+          PublishedEntity state = new PublishedEntity();
+           state.setPublicationDate(stateToPersist.getLifeCycleStateObject().getPublicationDate());
+           state.setBibTexReference(stateToPersist.getLifeCycleStateObject().getBibTexEntry());
+           
+           entitymanager.persist(state);
+           pubState.setState(state);
+       }
+       
+       if(stateToPersist.getLifeCycleStateObject().getState().equals("Submitted"))
+       {
+          SubmittedEntity  state = new SubmittedEntity();
+           entitymanager.persist(state);
+           pubState.setState(state);
+       }
+       
+       if(stateToPersist.getLifeCycleStateObject().getState().equals("Accepted"))
+       {
+           AcceptedEntity state = new AcceptedEntity();
+           entitymanager.persist(state);
+           pubState.setState(state);
+       }
+       
+        if(stateToPersist.getLifeCycleStateObject().getState().equals("Abandoned"))
+       {
+          AbandonedEntity state = new AbandonedEntity();
+           entitymanager.persist(state);
+           pubState.setState(state);
+       }
+        
+       if(stateToPersist.getLifeCycleStateObject().getState().equals("Rejected"))
+       {
+          RejectedEntity state = new RejectedEntity();
+           entitymanager.persist(state);
+           pubState.setState(state);
+       }
+       
+       //publication type
+    
+       
+       TypedQuery<PublicationTypeEntity> query = entitymanager.createNamedQuery("PublicationType.findBytypeName", PublicationTypeEntity.class);
+       query.setParameter("type", stateToPersist.getPublicationTypeObject().getName()); 
+       List results = query.getResultList();
+       
+       PublicationTypeEntity type = (PublicationTypeEntity)  results.get(0);
+       
+      //  PublicationStateEntity pubState = new PublicationStateEntity();
+       
+       // pubState.setDetails(pubDetails);
+        //pubState.setTarget(pubTarget);
+        //state done in the function
+        pubState.setType(type);
+       
+        entitymanager.persist(pubState);
+        entitymanager.getTransaction().commit();
+        
+    }
+    
+    
+    
+     
+     public Boolean validStateElements(@NotNull Date date, @NotNull String reason)
+   {    
+       return !reason.isEmpty();
+   }
+   
+   public Boolean validatePublicationTarget(@NotNull PublicationTarget publicationTarget)
+   {
+       if(publicationTarget.getWebsite() == null || publicationTarget.getName().isEmpty())
+       {
+           return false;
+       }
+       return true;
+   }
+   
+   public Boolean validatePublicationDetails(@NotNull PublicationDetails publicationDetails)
+   {
+       
+       if(publicationDetails.getTitle().isEmpty() ||
+          publicationDetails.getAuthors().size() < 0 ||
+          publicationDetails.getEnvisagedPublicationDate() == null ||
+          publicationDetails.getPerson().getFirstName().isEmpty() || 
+          publicationDetails.getPerson().getSurname().isEmpty() ||
+          publicationDetails.getPerson().getEmailAdress().isEmpty() ||
+          publicationDetails.getPerson().getOrganizationName().isEmpty() ||
+          publicationDetails.getPerson().getResearchCategory().isEmpty() ||
+          publicationDetails.getPerson().getResearchCategoryAssociationEffectiveDate() == null  ||
+          publicationDetails.getPerson().getResearchCategoryStateEffectiveDate() == null ||
+          publicationDetails.getPerson().getResearchCategoryStateResearchOutputTarget() < 0 ||
+          publicationDetails.getPerson().getResearchGroupAssociationEndDate() == null ||
+          publicationDetails.getPerson().getResearchGroupAssociationStartDate() == null ||
+          publicationDetails.getPerson().getResearchGroupAssociationType().isEmpty() )
+       {
+           return false;
+       }
+       return true;
+   }
+   
+   public Boolean validatePublicationType(@NotNull PublicationType publicationType)
+   {
+       return !(publicationType.getName().isEmpty() ||
+               publicationType.getTypeStates().size() < 1);
+   }
+ 
+   public Boolean validateLifeCycleState(@NotNull LifeCycleState lifeCycleState)
+   {
+       boolean validState = false;
+       if(lifeCycleState.getState().equals("InProgress") || lifeCycleState.getState().equals("InRevision") ||
+          lifeCycleState.getState().equals("Published") || lifeCycleState.getState().equals("Abandoned") ||
+          lifeCycleState.getState().equals("Submitted") || lifeCycleState.getState().equals("Rejected"))
+       {
+           validState = true;
+       }
+       
+       if(validState)
+       {
+           if(lifeCycleState.getState().equals("InProgress"))
+           {
+               if(lifeCycleState.getPercentageCompleted() < 0 || lifeCycleState.getPercentageCompleted() > 100)
+                   return false;
+               if(!lifeCycleState.getBibTexEntry().isEmpty())
+                   return false;
+               if(lifeCycleState.getPublicationDate() != null)
+                   return false;
+               
+               return true;
+           }
+           
+            if(lifeCycleState.getState().equals("Published"))
+           {
+               if(lifeCycleState.getPercentageCompleted() != null)
+                   return false;
+               if(lifeCycleState.getBibTexEntry().isEmpty())
+                   return false;
+               if(lifeCycleState.getPublicationDate() == null)
+                   return false;
+               
+               return true;
+           }
+           
+            if(lifeCycleState.getState().equals("Rejected"))
+           {
+               if(lifeCycleState.getPercentageCompleted() != null)
+                   return false;
+               if(!lifeCycleState.getBibTexEntry().isEmpty())
+                   return false;
+               if(lifeCycleState.getPublicationDate() != null)
+                   return false;
+               
+               return true;
+           }
+           
+             if(lifeCycleState.getState().equals("Submitted"))
+           {
+               if(lifeCycleState.getPercentageCompleted() != null)
+                   return false;
+               if(!lifeCycleState.getBibTexEntry().isEmpty())
+                   return false;
+               if(lifeCycleState.getPublicationDate() != null)
+                   return false;
+               
+               return true;
+           }
+           
+              if(lifeCycleState.getState().equals("Abandoned"))
+           {
+               if(lifeCycleState.getPercentageCompleted() != null)
+                   return false;
+               if(!lifeCycleState.getBibTexEntry().isEmpty())
+                   return false;
+               if(lifeCycleState.getPublicationDate() != null)
+                   return false;
+               
+               return true;
+           }
+             
+               if(lifeCycleState.getState().equals("InRevision"))
+           {
+               if(lifeCycleState.getPercentageCompleted() != null)
+                   return false;
+               if(!lifeCycleState.getBibTexEntry().isEmpty())
+                   return false;
+               if(lifeCycleState.getPublicationDate() != null)
+                   return false;
+               
+               return true;
+           } 
+            
+       }    
+       return true;
+   }
 
+    
+   
     
     public static int getPublicationId(int stateid)
     {
@@ -244,9 +612,10 @@ public class PublicationsBean implements Publications
         return new ModifyPublicationTypeResponse();
     }
     
-    @Override
+    //@Override
     public DeactivatePublicationTypeResponse deactivatePublicationType(DeactivatePublicationTypeRequest deactivatePublicationTypeResponse){
         
+        return null;
     }
     
     @Override
