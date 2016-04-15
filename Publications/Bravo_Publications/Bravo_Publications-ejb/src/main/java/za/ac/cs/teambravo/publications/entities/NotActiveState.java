@@ -9,12 +9,12 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue(value="NotActive")
-public class NotActiveStateEntity extends PublicationTypeStateEntity {
+public class NotActiveState extends PublicationTypeState {
    
     @Column
     private String deactivationReason;
 
-    public NotActiveStateEntity() {
+    public NotActiveState() {
         super();
     }
 

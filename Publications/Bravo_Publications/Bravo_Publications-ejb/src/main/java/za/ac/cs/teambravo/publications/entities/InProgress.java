@@ -8,11 +8,11 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue(value="InProgress")
-public class InProgressEntity extends LifeCycleStateEntity {
+public class InProgress extends LifeCycleState {
     
     private Integer percentageComplete;
 
-    public InProgressEntity() {
+    public InProgress() {
         super();
     }
 

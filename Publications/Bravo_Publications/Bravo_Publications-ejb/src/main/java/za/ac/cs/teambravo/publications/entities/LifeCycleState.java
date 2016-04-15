@@ -15,13 +15,21 @@ import javax.persistence.InheritanceType;
 @Entity
 @Inheritance( strategy = InheritanceType.SINGLE_TABLE )
 @DiscriminatorColumn(name="StateType" )
-public class LifeCycleStateEntity implements Serializable {
+public class LifeCycleState implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    public String getStateString() {
+        return stateString;
+    }
+
+    public void setStateString(String stateString) {
+        this.stateString = stateString;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer stateID;
-
-    public LifeCycleStateEntity() 
+    private String stateString;
+    public LifeCycleState() 
     {
     }
 
@@ -43,14 +51,16 @@ public class LifeCycleStateEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof LifeCycleStateEntity)) {
+        if (!(object instanceof LifeCycleState)) {
             return false;
         }
-        LifeCycleStateEntity other = (LifeCycleStateEntity) object;
+        LifeCycleState other = (LifeCycleState) object;
         if ((this.stateID == null && other.stateID != null) || (this.stateID != null && !this.stateID.equals(other.stateID))) {
             return false;
         }
         return true;
     }
+
+  
  
 }

@@ -10,13 +10,13 @@ import javax.persistence.Temporal;
 
 @Entity
 @DiscriminatorValue(value="Published")
-public class PublishedEntity extends LifeCycleStateEntity {
+public class Published extends LifeCycleState {
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date publicationDate;
     private String bibTexReference;
 
-    public PublishedEntity() {
+    public Published() {
         super();
     }
  

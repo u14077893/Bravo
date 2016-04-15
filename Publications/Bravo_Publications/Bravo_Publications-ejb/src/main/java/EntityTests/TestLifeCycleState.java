@@ -9,11 +9,11 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import za.ac.cs.teambravo.publications.entities.AbandonedEntity;
-import za.ac.cs.teambravo.publications.entities.InProgressEntity;
-import za.ac.cs.teambravo.publications.entities.InRevisionEntity;
-import za.ac.cs.teambravo.publications.entities.PublishedEntity;
-import za.ac.cs.teambravo.publications.entities.SubmittedEntity;
+import za.ac.cs.teambravo.publications.entities.Abandoned;
+import za.ac.cs.teambravo.publications.entities.InProgress;
+import za.ac.cs.teambravo.publications.entities.InRevision;
+import za.ac.cs.teambravo.publications.entities.Published;
+import za.ac.cs.teambravo.publications.entities.Submitted;
 
 /**
  *
@@ -30,15 +30,15 @@ public class TestLifeCycleState
         //To add a row
         //LifeCycleState a = new LifeCycleState();
         
-        InProgressEntity f=new InProgressEntity();
+        InProgress f=new InProgress();
         f.setPercentageComplete(55);
-        AbandonedEntity g = new AbandonedEntity(); 
-        SubmittedEntity h = new SubmittedEntity();
-        InProgressEntity k = new InProgressEntity();
+        Abandoned g = new Abandoned(); 
+        Submitted h = new Submitted();
+        InProgress k = new InProgress();
         k.setPercentageComplete(40);
-        PublishedEntity p = new PublishedEntity();
+        Published p = new Published();
         p.setPublicationDate(new Date("2016/04/29"));
-        InRevisionEntity r = new InRevisionEntity();
+        InRevision r = new InRevision();
         
         
         //f.setFirstNames("Sam");

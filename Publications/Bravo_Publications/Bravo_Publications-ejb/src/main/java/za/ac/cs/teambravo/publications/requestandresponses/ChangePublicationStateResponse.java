@@ -1,6 +1,6 @@
 package za.ac.cs.teambravo.publications.requestandresponses;
 
-import za.ac.cs.teambravo.publications.base.Publication;
+import za.ac.cs.teambravo.publications.entities.Publication;
 
 /**
  *

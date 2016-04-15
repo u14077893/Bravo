@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+<<<<<<< HEAD
   <persistence-unit name="EntityDemoPU" transaction-type="JTA">
     <jta-data-source>postgreDS</jta-data-source>
     <class>za.ac.cs.teambravo.publications.entities.ActiveStateEntity</class>
@@ -17,6 +18,24 @@
     <class>za.ac.cs.teambravo.publications.entities.PublishedEntity</class>
     <class>za.ac.cs.teambravo.publications.entities.SubmittedEntity</class>
     <class>za.ac.cs.teambravo.publications.entities.AbandonedEntity</class>
+=======
+  <persistence-unit name="EntityDemoPU" transaction-type="RESOURCE_LOCAL">
+    <class>za.ac.cs.teambravo.publications.entities.Abandoned</class>
+    <class>za.ac.cs.teambravo.publications.entities.ActiveState</class>
+    <class>za.ac.cs.teambravo.publications.entities.InProgress</class>
+    <class>za.ac.cs.teambravo.publications.entities.InRevision</class>
+    <class>za.ac.cs.teambravo.publications.entities.LifeCycleState</class>
+    <class>za.ac.cs.teambravo.publications.entities.Publication</class>
+    <class>za.ac.cs.teambravo.publications.entities.NotActiveState</class>
+    <class>za.ac.cs.teambravo.publications.entities.Person</class>
+    <class>za.ac.cs.teambravo.publications.entities.PublicationDetails</class>
+    <class>za.ac.cs.teambravo.publications.entities.PublicationState</class>
+    <class>za.ac.cs.teambravo.publications.entities.PublicationTarget</class>
+    <class>za.ac.cs.teambravo.publications.entities.PublicationType</class>
+    <class>za.ac.cs.teambravo.publications.entities.PublicationTypeState</class>
+    <class>za.ac.cs.teambravo.publications.entities.Published</class>
+    <class>za.ac.cs.teambravo.publications.entities.Submitted</class>
+>>>>>>> 4049fcc9c967af92f865119b8ad8ba284b52459d
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>

@@ -18,7 +18,7 @@ import javax.persistence.Id;
  * @author Hlengekile
  */
 @Entity
-public class PersonEntity implements Serializable {
+public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,11 +31,11 @@ public class PersonEntity implements Serializable {
     
     private String groupName;
 
-    public PersonEntity() {
+    public Person() {
         super();
     }
 
-    public PersonEntity(Integer personID, String firstName, String surname, String groupName) {
+    public Person(Integer personID, String firstName, String surname, String groupName) {
         super();
         this.personID = personID;
         this.firstName = firstName;
@@ -77,10 +77,10 @@ public class PersonEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PersonEntity)) {
+        if (!(object instanceof Person)) {
             return false;
         }
-        PersonEntity other = (PersonEntity) object;
+        Person other = (Person) object;
         if ((this.personID == null && other.personID!= null) || (this.personID != null && !this.personID.equals(other.personID))) {
             return false;
         }

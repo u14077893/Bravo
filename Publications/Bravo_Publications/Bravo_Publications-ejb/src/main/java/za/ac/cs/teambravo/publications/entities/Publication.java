@@ -6,7 +6,9 @@
 package za.ac.cs.teambravo.publications.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,15 +20,24 @@ import javax.persistence.OneToMany;
  * @author moses
  */
 @Entity
-public class PublicationEntity implements Serializable {
+public class Publication implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer publicationID;
+    Stack<PublicationState> publicationStateObject;
+
+    public Stack<PublicationState> getPublicationStateObject() {
+        return publicationStateObject;
+    }
+
+    public void setPublicationStateObject(Stack<PublicationState> publicationStateObject) {
+        this.publicationStateObject = publicationStateObject;
+    }
     
     
-    @OneToMany(targetEntity = PublicationStateEntity.class)
-    private List<PublicationStateEntity> stateEntries;
+    @OneToMany(targetEntity = PublicationState.class)
+    private List stateEntries;
 
     public Integer getPublicationID() {
         return publicationID;
@@ -36,11 +47,11 @@ public class PublicationEntity implements Serializable {
         this.publicationID = publicationID;
     }
     
-    public List<PublicationStateEntity> getStateEntries() {
+    public List getStateEntries() {
         return stateEntries;
     }
 
-    public void setStateEntries(List<PublicationStateEntity> stateEntries) {
+    public void setStateEntries(List stateEntries) {
         this.stateEntries = stateEntries;
     }
     
@@ -56,10 +67,10 @@ public class PublicationEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PublicationEntity)) {
+        if (!(object instanceof Publication)) {
             return false;
         }
-        PublicationEntity other = (PublicationEntity) object;
+        Publication other = (Publication) object;
         if ((this.publicationID == null && other.publicationID != null) || (this.publicationID != null && !this.publicationID.equals(other.publicationID))) {
             return false;
         }
@@ -69,6 +80,10 @@ public class PublicationEntity implements Serializable {
     @Override
     public String toString() {
         return "Entity.Publication[ id=" + publicationID + " ]";
+    }
+
+    public void addStateEntry(PublicationState newState) {
+        this.publicationStateObject.add(newState);
     }
     
 }
