@@ -613,18 +613,16 @@ public class PublicationsBean implements Publications
         return new ModifyPublicationTypeResponse();
     }
     
-<<<<<<< HEAD
     //@Override
     public DeactivatePublicationTypeResponse deactivatePublicationType(DeactivatePublicationTypeRequest deactivatePublicationTypeResponse){
         
         return null;
     }
-=======
    /* @Override
     public DeactivatePublicationTypeResponse deactivatePublicationType(DeactivatePublicationTypeRequest deactivatePublicationTypeResponse){
         
     }*/
->>>>>>> d35a724c35e28e0959a8428f794b791651edc078
+
     
     @Override
     public GetPublicationsForPersonResponse getPublicationsForPerson(GetPublicationsForPersonRequest getPublicationsForPersonRequest) 
@@ -902,7 +900,7 @@ public class PublicationsBean implements Publications
         
          PublicationState getState = publication.getPublicationStateObject().get(publication.getPublicationStateObject().size());
 
-        if(getState.getLifeCycleStateObject().getStateString().equals("Published"))
+        if(getState.getLifeCycleStateObject().getState().equals("Published"))
         {
             throw(new AlreadyPublishedException());
         }
