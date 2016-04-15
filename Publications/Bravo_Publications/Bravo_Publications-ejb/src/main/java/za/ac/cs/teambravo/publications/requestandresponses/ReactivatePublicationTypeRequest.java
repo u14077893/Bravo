@@ -12,9 +12,17 @@ import za.ac.cs.teambravo.publications.base.PublicationType;
  * @author Kudzai
  */
 public class ReactivatePublicationTypeRequest {
-    PublicationType publicationTypeObject;
+    String typeName;
 
-    public PublicationType getPublicationTypeObject() {
-        return publicationTypeObject;
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public ReactivatePublicationTypeRequest(String typeName) {
+        this.typeName = typeName;
     }
 }

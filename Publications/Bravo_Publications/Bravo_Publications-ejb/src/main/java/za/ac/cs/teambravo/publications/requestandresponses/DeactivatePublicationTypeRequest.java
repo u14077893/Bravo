@@ -10,5 +10,17 @@ package za.ac.cs.teambravo.publications.requestandresponses;
  * @author vuyani
  */
 public class DeactivatePublicationTypeRequest {
-    
+    String typeName;
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public DeactivatePublicationTypeRequest(String typeName) {
+        this.typeName = typeName;
+    }
 }
