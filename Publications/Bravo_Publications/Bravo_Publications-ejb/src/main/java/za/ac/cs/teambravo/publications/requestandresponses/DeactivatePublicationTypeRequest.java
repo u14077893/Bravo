@@ -5,13 +5,11 @@
  */
 package za.ac.cs.teambravo.publications.requestandresponses;
 
-import za.ac.cs.teambravo.publications.base.PublicationType;
-
 /**
  *
- * @author Kudzai
+ * @author vuyani
  */
-public class ReactivatePublicationTypeRequest {
+public class DeactivatePublicationTypeRequest {
     String typeName;
 
     public String getTypeName() {
@@ -22,7 +20,7 @@ public class ReactivatePublicationTypeRequest {
         this.typeName = typeName;
     }
 
-    public ReactivatePublicationTypeRequest(String typeName) {
+    public DeactivatePublicationTypeRequest(String typeName) {
         this.typeName = typeName;
     }
 }

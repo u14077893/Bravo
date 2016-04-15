@@ -33,7 +33,7 @@
             <version>2.5.2</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.urdad.services</groupId>
             <artifactId>services-utilities</artifactId>
             <version>1.0.2-SNAPSHOT</version>
@@ -43,7 +43,7 @@
             <artifactId>Bravo_Publications-ejb</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.glassfish.main.extras</groupId>
             <artifactId>glassfish-embedded-static-shell</artifactId>
