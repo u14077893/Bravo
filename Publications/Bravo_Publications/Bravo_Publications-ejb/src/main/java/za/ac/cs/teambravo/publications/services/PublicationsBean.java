@@ -238,6 +238,8 @@ public class PublicationsBean implements Publications
         
         PublicationStateEntity pubState = new PublicationStateEntity();
        
+        pubState.setDate(stateToPersist.getDate());
+        pubState.setReason(stateToPersist.getReason());
         pubState.setDetails(pubDetails);
         pubState.setTarget(pubTarget);
         //state done in the function
