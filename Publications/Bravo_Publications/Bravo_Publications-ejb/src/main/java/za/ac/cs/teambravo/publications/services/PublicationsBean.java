@@ -126,11 +126,10 @@ public class PublicationsBean implements Publications
         // check if the publication is already in the database
         GetPublicationRequest tmpGetPubRequest = new GetPublicationRequest(publicationState.getPublicationDetailsObject().getTitle());
         GetPublicationResponse tmpResponse = null;
-        try {
+       
             tmpResponse = getPublication(tmpGetPubRequest);
-        } catch (PublicationWithTitleExistsForAuthors ex) {
-                System.out.println(ex.getMessage());
-        }
+        
+        
         
        if(tmpResponse != null)  //initialised publication is returned
         {
@@ -154,15 +153,26 @@ public class PublicationsBean implements Publications
        
        if(stateToPersist == null)
        {
-           return null;
+          
+           AddPublicationResponse addResponse = new AddPublicationResponse();
+           addResponse.setPublication(null);
+           return addResponse;
            //create a response object, with null and return that
        } //  otherwise persist
        else
        {
           persistObject(stateToPersist);
-       }
-       
-        return null;
+          AddPublicationResponse addResponse = new AddPublicationResponse();
+          Publication publication = new Publication();
+          publication.addStateEntry(stateToPersist);
+          addResponse.setPublication(publication);
+          
+          return addResponse;
+          
+         // addResponse.setPublication(publication.getPublicationStateObject().get(publication.getPublicationStateObject().size() - 1));
+    
+           }
+      
     
         
         
