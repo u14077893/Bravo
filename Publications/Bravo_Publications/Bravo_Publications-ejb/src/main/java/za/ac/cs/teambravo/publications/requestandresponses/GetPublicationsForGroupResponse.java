@@ -1,11 +1,7 @@
 package za.ac.cs.teambravo.publications.requestandresponses;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-import za.ac.cs.teambravo.publications.base.Publication;
-=======
-import za.ac.cs.teambravo.Publication;
->>>>>>> b710192f94362d196b837f66ffb08a179b0bb84a
+import za.ac.cs.teambravo.publications.entities.PublicationEntity;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,23 +15,36 @@ import za.ac.cs.teambravo.Publication;
  */
 public class GetPublicationsForGroupResponse implements PublicationResponse
 {
-    private ArrayList<Publication> publications;
+    private ArrayList<PublicationEntity> publications;
 
+    
     public GetPublicationsForGroupResponse() 
     {
     }
   
-    public GetPublicationsForGroupResponse(ArrayList<Publication> publications) 
+    /**
+     *
+     * @param publications
+     */
+    public GetPublicationsForGroupResponse(ArrayList<PublicationEntity> publications) 
     {
         this.publications = publications;
     }
 
-    public ArrayList<Publication> getPublications() 
+    /**
+     *
+     * @return
+     */
+    public ArrayList<PublicationEntity> getPublications() 
     {
         return publications;
     }
 
-    public void setPublications(ArrayList<Publication> publications) 
+    /**
+     *
+     * @param publications
+     */
+    public void setPublications(ArrayList<PublicationEntity> publications) 
     {
         this.publications = publications;
     }

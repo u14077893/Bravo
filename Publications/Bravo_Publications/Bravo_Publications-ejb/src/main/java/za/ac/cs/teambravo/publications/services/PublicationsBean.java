@@ -1,17 +1,14 @@
 
 package za.ac.cs.teambravo.publications.services;
 
+import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-<<<<<<< HEAD
-import za.ac.cs.teambravo.publications.base.Publication;
-=======
-import za.ac.cs.teambravo.Publication;
->>>>>>> b710192f94362d196b837f66ffb08a179b0bb84a
-import za.ac.cs.teambravo.publications.base.PublicationState;
 
+import za.ac.cs.teambravo.publications.base.Publication;
+import za.ac.cs.teambravo.publications.base.PublicationState;
 import za.ac.cs.teambravo.publications.exceptions.AlreadyPublishedException;
 import za.ac.cs.teambravo.publications.exceptions.AuthorizationException;
 import za.ac.cs.teambravo.publications.exceptions.EffectiveDateNotAfterEffectiveDateOfLastStateEntry;
@@ -42,6 +39,7 @@ import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationType
 import za.ac.cs.teambravo.publications.entities.*;
 import za.ac.cs.teambravo.publications.base.*;
 import java.util.List;
+import javax.persistence.Query;
 
 
 
@@ -109,8 +107,8 @@ public class PublicationsBean implements Publications
     @Override
     public GetPublicationsForPersonResponse getPublicationsForPerson(GetPublicationsForPersonRequest getPublicationsForPersonRequest) 
     {
-       /* GetPublicationsForPersonResponse response = null;
-        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
+       GetPublicationsForPersonResponse response = null;
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
         EntityManager entityManager = emFactory.createEntityManager();
                 
         try
@@ -129,15 +127,14 @@ public class PublicationsBean implements Publications
         {
         }
        
-        return response;*/
-      throw new UnsupportedOperationException("Not supported yet."); 
+        return response; 
     }
 
     @Override
     public GetPublicationsForGroupResponse getPublicationsForGroup(GetPublicationsForGroupRequest getPublicationsForGroupRequest) 
     {
-        /*GetPublicationsForGroupResponse response = null;
-        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
+        GetPublicationsForGroupResponse response = null;
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
         EntityManager entityManager = emFactory.createEntityManager();
                 
         try
@@ -156,15 +153,13 @@ public class PublicationsBean implements Publications
         {
         }
        
-        return response; */
-                
-      throw new UnsupportedOperationException("Not supported yet."); 
+        return response; 
     }
 
     @Override
     public CalcAccreditationPointsForPersonResponse calcAccreditationPointsForPerson(CalcAccreditationPointsForPersonRequest calcAccreditationPointsForPersonRequest) 
     {
-      /*  CalcAccreditationPointsForPersonResponse response = null;
+        CalcAccreditationPointsForPersonResponse response = null;
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
         EntityManager entityManager = emFactory.createEntityManager();
                 
@@ -196,24 +191,32 @@ public class PublicationsBean implements Publications
                
                 GetPublicationsForPersonResponse publications = getPublicationsForPerson(getPublications);
                 
-                ArrayList<Publication> listOfPublications = publications.getPublications();
+                ArrayList<PublicationEntity> listOfPublications = publications.getPublications();
                 
                 //Get Publication types and associated points
                
                     //Get a list of all active publication types
-                Query activeTypesQuery = entityManager.createQuery("Select pubType from PublicationType pubType JOIN pubType.typeState state WHERE TYPE(state) ='Active' ");
-                ArrayList<PublicationTypeEntity> activeTypes = (ArrayList<PublicationTypeEntity>) activeTypesQuery.getResultList();
+                Query typesQuery = entityManager.createQuery("Select pubType from PublicationTypeEntity pubType");
+                ArrayList<PublicationTypeEntity> types = (ArrayList<PublicationTypeEntity>) typesQuery.getResultList();
                 
                     //Get names and points associated with active types
                 ArrayList<String> namesOfTypes = new ArrayList<>();
                 ArrayList<Double> typePoints = new ArrayList<>();
                 
-                for(PublicationTypeEntity type : activeTypes)
+                int numActiveTypes = 0;
+                
+                for(PublicationTypeEntity type : types)
                 {
-                    namesOfTypes.add(type.getTypeName());
-                    
-                    Query pointsQuery = entityManager.createQuery("Select active.accreditationPoints from ActiveState active, PublicationType pubType WHERE active.activationID = pubType.typeState.activationID ");
-                    typePoints.add((Double) pointsQuery.getSingleResult());
+                    if(type.getTypeStates().get(type.getTypeStates().size()) instanceof ActiveStateEntity)
+                    {
+                        namesOfTypes.add(type.getTypeName());
+
+                        Query pointsQuery = entityManager.createQuery("Select active.accreditationPoints from ActiveStateEntity active WHERE active.activationID = :id ");
+                        pointsQuery.setParameter("id", type.getTypeStates().get(type.getTypeStates().size()).getId());
+                        typePoints.add((Double) pointsQuery.getSingleResult());
+                        
+                        numActiveTypes++;
+                    }
                 }
                 
                 //Count publications that match types
@@ -222,9 +225,9 @@ public class PublicationsBean implements Publications
                 {
                     int count = 0;
                     
-                    for(Publication publication : listOfPublications)
+                    for(PublicationEntity publication : listOfPublications)
                     {
-                       // if(the publications type name is == to typeName)
+                       if(publication.getStateEntries().get(publication.getStateEntries().size()).getType().getTypeName().equals(typeName))
                         {
                             count++;
                         }
@@ -250,15 +253,13 @@ public class PublicationsBean implements Publications
         
         }
         
-        return response; */
-                
-                throw new UnsupportedOperationException("Not supported yet."); 
+        return response;
     }
 
     @Override
     public CalcAccreditationPointsForGroupResponse calcAccreditationPointsForGroup(CalcAccreditationPointsForGroupRequest calcAccreditationPointsForGroupRequest) 
     {
-       /* CalcAccreditationPointsForGroupResponse response = null;
+        CalcAccreditationPointsForGroupResponse response = null;
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory( "EntityDemoPU" );
         EntityManager entityManager = emFactory.createEntityManager();
         
@@ -290,24 +291,32 @@ public class PublicationsBean implements Publications
                
                 GetPublicationsForGroupResponse publications = getPublicationsForGroup(getPublications);
                 
-                ArrayList<Publication> listOfPublications = publications.getPublications();
+                ArrayList<PublicationEntity> listOfPublications = publications.getPublications();
                 
                 //Get Publication types and associated points
                 
                     //Get a list of all active publication types
-                Query activeTypesQuery = entityManager.createQuery("Select pubType from PublicationType pubType JOIN pubType.typeState state WHERE TYPE(state) ='Active' ");
-                ArrayList<PublicationTypeEntity> activeTypes = (ArrayList<PublicationTypeEntity>) activeTypesQuery.getResultList();
+                Query typesQuery = entityManager.createQuery("Select pubType from PublicationTypeEntity pubType");
+                ArrayList<PublicationTypeEntity> types = (ArrayList<PublicationTypeEntity>) typesQuery.getResultList();
                 
                     //Get names and points associated with active types
                 ArrayList<String> namesOfTypes = new ArrayList<>();
                 ArrayList<Double> typePoints = new ArrayList<>();
                 
-                for(PublicationTypeEntity type : activeTypes)
+                int numActiveTypes = 0;
+                
+                for(PublicationTypeEntity type : types)
                 {
-                    namesOfTypes.add(type.getTypeName());
-                    
-                    Query pointsQuery = entityManager.createQuery("Select active.accreditationPoints from ActiveState active, PublicationType pubType WHERE active.activationID = pubType.typeState.activationID ");
-                    typePoints.add((Double) pointsQuery.getSingleResult());
+                    if(type.getTypeStates().get(type.getTypeStates().size()) instanceof ActiveStateEntity)
+                    {
+                        namesOfTypes.add(type.getTypeName());
+
+                        Query pointsQuery = entityManager.createQuery("Select active.accreditationPoints from ActiveStateEntity active WHERE active.activationID = :id ");
+                        pointsQuery.setParameter("id", type.getTypeStates().get(type.getTypeStates().size()).getId());
+                        typePoints.add((Double) pointsQuery.getSingleResult());
+                        
+                        numActiveTypes++;
+                    }
                 }
                 
                 //Count publications that match types
@@ -316,9 +325,9 @@ public class PublicationsBean implements Publications
                 {
                     int count = 0;
                     
-                    for(Publication publication : listOfPublications)
+                    for(PublicationEntity publication : listOfPublications)
                     {
-                       // if(the publications type name is == to typeName)
+                       if(publication.getStateEntries().get(publication.getStateEntries().size()).getType().getTypeName().equals(typeName))
                         {
                             count++;
                         }
@@ -345,9 +354,8 @@ public class PublicationsBean implements Publications
         {
         }
         
-        return response;*/
-                
-             throw new UnsupportedOperationException("Not supported yet."); 
+        return response;
+               
     }
 
     @Override
@@ -366,7 +374,7 @@ public class PublicationsBean implements Publications
         {
             throw(new NoSuchPublicationException());
         }
-         PublicationState getState =publication.getPublicationStateObject();
+         PublicationState getState = publication.getPublicationStateObject().get(publication.getPublicationStateObject().size());
         if(getState.getLifeCycleStateObject().getStateString().equals("Published"))
         {
             throw(new AlreadyPublishedException());
