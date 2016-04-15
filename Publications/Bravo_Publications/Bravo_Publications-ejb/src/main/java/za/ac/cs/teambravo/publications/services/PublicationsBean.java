@@ -63,10 +63,86 @@ public class PublicationsBean implements Publications
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public GetPublicationResponse getPublication(GetPublicationRequest getPublicationRequest) throws PublicationWithTitleExistsForAuthors {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public static int getPublicationId(int stateid)
+    {
+        EntityManagerFactory factory=Persistence.createEntityManagerFactory("EntityDemoPU");
+        EntityManager manager=factory.createEntityManager();
+        
+        TypedQuery<PublicationEntity> query= manager.createNamedQuery("PublicationEntity.findAll",PublicationEntity.class);
+        List results=query.getResultList();
+        int pubRows=results.size();
+        
+        PublicationEntity tempPublication;
+        List statesList;
+        int tempSize=0;
+        PublicationStateEntity tempPubState;
+        for(int i=0;i<pubRows;i++)
+        {
+            tempPublication=(PublicationEntity)results.get(i);
+            statesList=tempPublication.getStateEntries();
+            tempSize=statesList.size();
+            for(int x=0;x<tempSize;x++)
+            {
+                tempPubState=(PublicationStateEntity)statesList.get(x);
+                //System.out.println(tempPubState.getPublicationID()+":"+tempPubState.getDate());
+                
+                if(tempPubState.getPublicationID()==stateid)
+                    return tempPublication.getPublicationID();  //id is here
+            }    
+        }
+        return 0;
     }
+    
+    @Override
+    public GetPublicationResponse getPublication(GetPublicationRequest request)
+    {
+        EntityManagerFactory factory=Persistence.createEntityManagerFactory("EntityDemoPU");
+        EntityManager manager=factory.createEntityManager();
+        
+        String title=request.getTitle();
+        
+        TypedQuery<PublicationDetailsEntity> query= manager.createNamedQuery("PublicationDetailsEntity.findTitle",PublicationDetailsEntity.class);
+        query.setParameter("title", title);     //name is what I am searching by, 'red meat' is the search
+        
+        List results=query.getResultList();
+        
+        int rows=results.size();
+        
+        if(rows==0)
+        {
+            System.out.println("Publication not found.");
+            return null;
+        }
+        else 
+        {
+            PublicationDetailsEntity detObject=(PublicationDetailsEntity) results.get(0);
+            int id=detObject.getDetailsID();
+            //System.out.println("Detail found with id:"+id);
+            
+            TypedQuery<PublicationStateEntity> queryStateObject;
+            queryStateObject = manager.createNamedQuery("PublicationStateEntity.findByDetails",PublicationStateEntity.class);
+            queryStateObject.setParameter("detailsObject", detObject);
+            
+            List stateResults=queryStateObject.getResultList();
+            
+            PublicationStateEntity pubStateObject= (PublicationStateEntity) stateResults.get(0);
+            //System.out.println("State found with id:"+pubStateObject.getPublicationID());
+            
+            int thePublication=getPublicationId(pubStateObject.getPublicationID());
+            
+            
+            //To search by ID
+            PublicationEntity publication=manager.find(PublicationEntity.class, thePublication);
+            //System.out.println(publication.getPublicationID());
+            
+            GetPublicationResponse response=new GetPublicationResponse(publication);
+            return response;
+        }
+    }
+    /*public GetPublicationResponse getPublication(GetPublicationRequest getPublicationRequest) throws PublicationWithTitleExistsForAuthors {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
 
     @Override
     public CreatePublicationResponse createPublication(CreatePublicationRequest createPublicationRequest) throws InvalidRequest {
