@@ -5,6 +5,8 @@
  */
 package za.ac.cs.teambravo.publications.services;
 
+import java.util.ArrayList;
+import java.util.Date;
 import javax.ejb.embeddable.EJBContainer;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,6 +14,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import za.ac.cs.teambravo.publications.base.Active;
+import za.ac.cs.teambravo.publications.base.PublicationType;
+import za.ac.cs.teambravo.publications.base.PublicationTypeState;
+import za.ac.cs.teambravo.publications.entities.ActiveStateEntity;
+import za.ac.cs.teambravo.publications.entities.PublicationTypeEntity;
+import za.ac.cs.teambravo.publications.entities.PublicationTypeStateEntity;
 import za.ac.cs.teambravo.publications.requestandresponses.AddPublicationRequest;
 import za.ac.cs.teambravo.publications.requestandresponses.AddPublicationResponse;
 import za.ac.cs.teambravo.publications.requestandresponses.AddPublicationTypeRequest;
@@ -103,15 +111,47 @@ public class PublicationsBeanTest {
      */
     @Test
     public void testAddPublicationType() throws Exception {
+        
+        PublicationType publicationType = new PublicationType();
+        PublicationTypeEntity publicationTypeEntity = new PublicationTypeEntity();
+        
+        PublicationTypeState publicationTypeState = new Active();
+        PublicationTypeStateEntity publicationTypeStateEntity = new ActiveStateEntity();
+        
+        ArrayList<PublicationTypeState> typeStates = new ArrayList<>();
+        ArrayList<PublicationTypeStateEntity> typeStatesEntity = new ArrayList<>();
+        
+        typeStates.add(publicationTypeState);
+        typeStatesEntity.add(publicationTypeStateEntity);
+        
+        Date date = new Date(1994, 02, 10);
+        publicationTypeState.setEffectiveDate(date);
+        publicationTypeStateEntity.setDateEffective(date);
+        
+        publicationType.setName("Book");
+        publicationTypeEntity.setTypeName("Book");
+        
+        publicationType.setPublicationType("Book");
+        publicationTypeEntity.setTypeName("Book");
+        
+        publicationType.setTypeStates(typeStates);
+        publicationTypeEntity.setTypeStates(typeStatesEntity);
+        
+        AddPublicationTypeRequest aPTR = new AddPublicationTypeRequest(publicationType);
+        AddPublicationTypeResponse aP = new AddPublicationTypeResponse();
+        aP.setPublicationTypeEntity(publicationTypeEntity);
+        
         System.out.println("addPublicationType");
-        AddPublicationTypeRequest addPublicationTypeRequest = null;
+        AddPublicationTypeRequest addPublicationTypeRequest = aPTR;
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         Publications instance = (Publications)container.getContext().lookup("java:global/classes/PublicationsBean");
-        AddPublicationTypeResponse expResult = null;
+        AddPublicationTypeResponse expResult = aP;
         AddPublicationTypeResponse result = instance.addPublicationType(addPublicationTypeRequest);
         assertEquals(expResult, result);
         container.close();
         // TODO review the generated test code and remove the default call to fail.
+        
+                
         fail("The test case is a prototype.");
     }
 

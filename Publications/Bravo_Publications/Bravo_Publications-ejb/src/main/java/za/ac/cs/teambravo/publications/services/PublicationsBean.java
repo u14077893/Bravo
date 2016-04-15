@@ -88,24 +88,25 @@ public class PublicationsBean implements Publications
     @Override
     public AddPublicationTypeResponse addPublicationType(AddPublicationTypeRequest addPublicationTypeRequest) 
     {
-        AddPublicationTypeResponse aPR = null;
+        AddPublicationTypeResponse aPR = new AddPublicationTypeResponse();
         
         try
         {
             EntityManagerFactory factory=Persistence.createEntityManagerFactory("EntityDemoPU"); //"JPA1" is the project name and the "PU" is added by the system
             EntityManager manager=factory.createEntityManager();
-
+            
+            // Get publication type if it exists
             PublicationType pTest = getPublicationType(addPublicationTypeRequest.getPublicationTypeObject());
 
-            if(pTest == null) {
+            if(pTest != null) {
                 throw new PublicationTypeExistsException("Publication type already exists.");
             }
             else
             {
-                 PublicationType pTnew = createPublicationType(pTest);
+                 PublicationTypeEntity pTnew = createPublicationType(addPublicationTypeRequest.getPublicationTypeObject());
 
             // addStateEntry function here
-            pTnew.addStateEntry(pTest.getTypeStates().get(pTest.getTypeStates().size()));
+            pTnew.addStateEntry(pTnew.getTypeStates().get(pTest.getTypeStates().size()-1));
             //persistObject funtion here
     //        if(addPublicationTypeRequest.isIsActive())
     //        {
@@ -124,7 +125,7 @@ public class PublicationsBean implements Publications
             manager.persist(pTnew);
             manager.getTransaction().commit();
             //return response with pT
-            aPR  = new AddPublicationTypeResponse();
+//            aPR  = new AddPublicationTypeResponse();
             aPR.setPublicationTypeEntity(pTnew);
             
             }
@@ -460,9 +461,14 @@ public class PublicationsBean implements Publications
            return pubType;
     }
 
-    public PublicationType createPublicationType(PublicationType p) {
-        PublicationType pE = new PublicationType();
-        pE.setName(p.getName());
+    public PublicationTypeEntity createPublicationType(PublicationType p) {
+        PublicationTypeEntity pE = new PublicationTypeEntity();
+        pE.setTypeName(p.getPublicationType());
+        PublicationTypeStateEntity publicationTypeStateEntity = new PublicationTypeStateEntity();
+        publicationTypeStateEntity.setDateEffective(p.getTypeStates().get(p.getTypeStates().size()-1).getEffectiveDate());
+        List<PublicationTypeStateEntity> list = new ArrayList<>();
+        list.add(publicationTypeStateEntity);
+        pE.setTypeStates(list);
         return pE;
     }
 
