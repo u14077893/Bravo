@@ -11,8 +11,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import za.ac.cs.teambravo.publications.entities.Person;
-import za.ac.cs.teambravo.publications.entities.PublicationDetails;
+import za.ac.cs.teambravo.publications.entities.PersonEntity;
+import za.ac.cs.teambravo.publications.entities.PublicationDetailsEntity;
 
 /**
  *
@@ -25,7 +25,7 @@ public class TestDetails
         EntityManagerFactory factory=Persistence.createEntityManagerFactory("EntityDemoPU"); //"JPA1" is the project name and the "PU" is added by the system
         EntityManager manager=factory.createEntityManager();
         
-        Person f=new Person();
+        PersonEntity f=new PersonEntity();
         f.setFirstName("Joseph");
         f.setSurname("Surname");
         
@@ -33,7 +33,7 @@ public class TestDetails
         manager.persist(f);
         manager.getTransaction().commit();
         
-        Person g = new Person();
+        PersonEntity g = new PersonEntity();
         g.setFirstName("Moses");
         g.setSurname("Surname2");
         
@@ -41,11 +41,11 @@ public class TestDetails
         manager.persist(g);
         manager.getTransaction().commit();
         
-        List<Person> authorList = new ArrayList();
+        List<PersonEntity> authorList = new ArrayList();
         authorList.add(f);
         authorList.add(g);
         
-        PublicationDetails details = new PublicationDetails();
+        PublicationDetailsEntity details = new PublicationDetailsEntity();
         details.setTitle("ThePaper");
         Date today = new Date("2016/04/13");
         details.setEnvisagedPublicationDate(today);

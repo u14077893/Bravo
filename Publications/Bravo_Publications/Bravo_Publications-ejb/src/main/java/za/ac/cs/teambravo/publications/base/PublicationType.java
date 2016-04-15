@@ -1,30 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package za.ac.cs.teambravo.publications.base;
-
-
-import java.util.List;
-import za.ac.cs.teambravo.publications.base.PublicationTypeState;
 
 import java.util.ArrayList;
 
 
-/**
- *
- * @author Kudzai
- */
-
-//package za.ac.cs.teambravo.publications.publications;
-
-
-    public class PublicationType
+public class PublicationType 
 {
 
     String name;
     ArrayList<PublicationTypeState> typeStates;
+
+    public PublicationType() {
+    }
+    
+ 
 
     public PublicationType(String name, ArrayList<PublicationTypeState> typeStates) {
         this.name = name;
@@ -54,6 +42,11 @@ import java.util.ArrayList;
     {
         name = _name;
     }
+    
+    public void addStateEntry(PublicationTypeState state)
+    {
+        typeStates.add(state);
+    }
 
-
+    
 }

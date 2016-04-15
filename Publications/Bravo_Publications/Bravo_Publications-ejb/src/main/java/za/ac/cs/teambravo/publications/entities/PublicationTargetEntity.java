@@ -4,7 +4,6 @@ package za.ac.cs.teambravo.publications.entities;
 //package za.ac.cs.teambravo.publications.entities;
 
 import java.io.Serializable;
-import java.net.URL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class PublicationTarget implements Serializable {
+public class PublicationTargetEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,12 +25,12 @@ public class PublicationTarget implements Serializable {
     @Column
     private String website;
 
-    public PublicationTarget() 
+    public PublicationTargetEntity() 
     {
         
     }
    
-    public PublicationTarget(Integer targetID, String name, String website) 
+    public PublicationTargetEntity(Integer targetID, String name, String website) 
     {
         this.targetID = targetID;
         this.name = name;
@@ -74,10 +73,10 @@ public class PublicationTarget implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PublicationTarget)) {
+        if (!(object instanceof PublicationTargetEntity)) {
             return false;
         }
-        PublicationTarget other = (PublicationTarget) object;
+        PublicationTargetEntity other = (PublicationTargetEntity) object;
         if ((this.targetID == null && other.targetID != null) || (this.targetID != null && !this.targetID.equals(other.targetID))) {
             return false;
         }

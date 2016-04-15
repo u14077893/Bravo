@@ -3,11 +3,9 @@ package za.ac.cs.teambravo.publications.base;
 
 
 import java.util.Date;
-import java.util.List;
 
 public class PublicationTypeState
 {
-
     private Date effectiveDate;
     
     public PublicationTypeState() {
@@ -24,5 +22,5 @@ public class PublicationTypeState
     public void setEffectiveDate(Date effectiveDate) {
         this.effectiveDate = effectiveDate;
     }
-
+    
 }

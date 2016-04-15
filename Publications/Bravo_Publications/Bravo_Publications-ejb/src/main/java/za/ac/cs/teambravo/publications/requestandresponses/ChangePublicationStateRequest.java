@@ -12,7 +12,7 @@ import za.ac.cs.teambravo.publications.base.LifeCycleState;
 import za.ac.cs.teambravo.publications.base.PublicationDetails;
 import za.ac.cs.teambravo.publications.base.PublicationState;
 import za.ac.cs.teambravo.publications.base.PublicationTarget;
-import za.ac.cs.teambravo.publications.services.PublicationTypes;
+import za.ac.cs.teambravo.publications.base.PublicationType;
 import za.ac.cs.teambravo.publications.exceptions.InvalidRequest;
 
 
@@ -27,7 +27,7 @@ public class ChangePublicationStateRequest implements PublicationRequest {
     private String publicationTitle;
     private Boolean authorized;
 
-    public ChangePublicationStateRequest(String title,Date date, String reason, PublicationDetails publicationDetailsObject, LifeCycleState lifeCycleStateObject, PublicationTypes publicationTypeObject, PublicationTarget publicationTargetObject) throws InvalidRequest {
+    public ChangePublicationStateRequest(String title,Date date, String reason, PublicationDetails publicationDetailsObject, LifeCycleState lifeCycleStateObject, PublicationType publicationTypeObject, PublicationTarget publicationTargetObject) throws InvalidRequest {
         this.changeState = new PublicationState(date, reason, publicationDetailsObject, lifeCycleStateObject, publicationTypeObject, publicationTargetObject);
         this.publicationTitle=title;
         authorized=false;

@@ -15,10 +15,10 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue(value="Rejected")
-public class Rejected extends LifeCycleState 
+public class RejectedEntity extends LifeCycleStateEntity 
 {
 
-    public Rejected() 
+    public RejectedEntity() 
     {
         super();
     }

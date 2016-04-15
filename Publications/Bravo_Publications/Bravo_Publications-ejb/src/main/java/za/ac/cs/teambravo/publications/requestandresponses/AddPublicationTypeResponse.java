@@ -1,6 +1,6 @@
 package za.ac.cs.teambravo.publications.requestandresponses;
 
-import za.ac.cs.teambravo.publications.entities.PublicationType;
+import za.ac.cs.teambravo.publications.base.PublicationType;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +12,8 @@ import za.ac.cs.teambravo.publications.entities.PublicationType;
  *
  * @author User
  */
-public class AddPublicationTypeResponse implements PublicationResponse{
+public class AddPublicationTypeResponse implements PublicationResponse
+{
      PublicationType publicationTypeEntity = new PublicationType();
 
     public AddPublicationTypeResponse() {

@@ -2,7 +2,6 @@ package za.ac.cs.teambravo.publications.base;
 
 
 
-import za.ac.cs.teambravo.publications.services.PublicationTypes;
 import java.util.Date;
 
 /*
@@ -50,11 +49,11 @@ public class PublicationState
         this.lifeCycleStateObject = lifeCycleStateObject;
     }
 
-    public PublicationTypes getPublicationTypeObject() {
+    public PublicationType getPublicationTypeObject() {
         return publicationTypeObject;
     }
 
-    public void setPublicationTypeObject(PublicationTypes publicationTypeObject) {
+    public void setPublicationTypeObject(PublicationType publicationTypeObject) {
         this.publicationTypeObject = publicationTypeObject;
     }
 
@@ -69,11 +68,11 @@ public class PublicationState
     private String reason;
     private PublicationDetails publicationDetailsObject;
     private LifeCycleState lifeCycleStateObject;
-    private PublicationTypes publicationTypeObject;
+    private PublicationType publicationTypeObject;
     private PublicationTarget publicationTargetObject;
     
 
-    public PublicationState(Date date, String reason, PublicationDetails publicationDetailsObject, LifeCycleState lifeCycleStateObject, PublicationTypes publicationTypeObject, PublicationTarget publicationTargetObject) {
+    public PublicationState(Date date, String reason, PublicationDetails publicationDetailsObject, LifeCycleState lifeCycleStateObject, PublicationType publicationTypeObject, PublicationTarget publicationTargetObject) {
         this.date = date;
         this.reason = reason;
         this.publicationDetailsObject = publicationDetailsObject;

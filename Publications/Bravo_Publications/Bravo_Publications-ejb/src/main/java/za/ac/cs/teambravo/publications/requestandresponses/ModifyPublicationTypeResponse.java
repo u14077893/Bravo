@@ -1,5 +1,5 @@
 package za.ac.cs.teambravo.publications.requestandresponses;
-import za.ac.cs.teambravo.publications.base.*;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,6 +10,7 @@ import za.ac.cs.teambravo.publications.base.*;
  *
  * @author User
  */
-public class ModifyPublicationTypeResponse implements PublicationResponse{
+public class ModifyPublicationTypeResponse implements PublicationResponse
+{
      //PublicationType b = new PublicationType(); 
 }

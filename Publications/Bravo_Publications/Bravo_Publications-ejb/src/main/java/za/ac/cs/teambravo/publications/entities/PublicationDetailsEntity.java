@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 @Entity
-public class PublicationDetails implements Serializable {
+public class PublicationDetailsEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,14 +26,14 @@ public class PublicationDetails implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date envisagedPublicationDate;
     
-    @OneToMany(targetEntity = Person.class)
+    @OneToMany(targetEntity = PersonEntity.class)
     private List authors; //These IDS are keys to the persons table
 
-    public PublicationDetails() {
+    public PublicationDetailsEntity() {
         super();
     }
 
-    public PublicationDetails(Integer detailsID, String title, ArrayList authors, Date envisagedPublicationDate) {
+    public PublicationDetailsEntity(Integer detailsID, String title, ArrayList authors, Date envisagedPublicationDate) {
         this.detailsID = detailsID;
         this.title = title;
         this.authors = authors;
@@ -82,10 +82,10 @@ public class PublicationDetails implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PublicationDetails)) {
+        if (!(object instanceof PublicationDetailsEntity)) {
             return false;
         }
-        PublicationDetails other = (PublicationDetails) object;
+        PublicationDetailsEntity other = (PublicationDetailsEntity) object;
         if ((this.detailsID == null && other.detailsID != null) || (this.detailsID != null && !this.detailsID.equals(other.detailsID))) {
             return false;
         }

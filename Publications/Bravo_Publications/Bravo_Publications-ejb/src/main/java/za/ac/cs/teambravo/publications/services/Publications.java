@@ -6,8 +6,8 @@
 package za.ac.cs.teambravo.publications.services;
 
 import javax.ejb.Remote;
-import za.ac.cs.teambravo.publications.entities.PublicationState;
-import za.ac.cs.teambravo.publications.entities.PublicationType;
+import za.ac.cs.teambravo.publications.entities.PublicationStateEntity;
+import za.ac.cs.teambravo.publications.entities.PublicationTypeEntity;
 import za.ac.cs.teambravo.publications.exceptions.AlreadyPublishedException;
 import za.ac.cs.teambravo.publications.exceptions.AuthorizationException;
 import za.ac.cs.teambravo.publications.exceptions.EffectiveDateNotAfterEffectiveDateOfLastStateEntry;
@@ -65,13 +65,21 @@ public interface Publications {
      */
     public CreatePublicationResponse createPublication(CreatePublicationRequest createPublicationRequest) throws InvalidRequest;
 
-   
+    /**
+     * Accepts a AddPublicationTypeRequest object to allow administrators to be able to add new publication types
+     * @param AddPublicationTypeRequest a request object passed to add a new PublicationTypeEntity option
+     * @return AddPublicationTypeResponse a response object that confirms PublicationTypeEntity ahs been added
+     * @see    PublicationTypeEntity
+     * @exception PublicationTypeExists the publication type is already an option
+     * @exception  AuthorizationException user is not an administrator
+     */
+    public AddPublicationTypeResponse addPublicationType(AddPublicationTypeRequest addPublicationTypeRequest)throws AuthorizationException;
 
     /**
      * Accepts a ModifyPublicationTypeRequest object to allow the state of publication types to change at anytime
      * @param ModifyPublicationTypeRequest a request object passed to change a PublicationTypeEntity
      * @return ModifyPublicationTypeRequest a response object that confirms a PublicationTypeEntity has been changed
-     * @see    PublicationType
+     * @see    PublicationTypeEntity
      * @exception EffectiveDateNotAfterEffectiveDateOfLastStateEntry the new effective Date is before previous effective date
      * @exception  AuthorizationException user is not an administrator
      */
@@ -102,7 +110,7 @@ public interface Publications {
      that paper.
      * @param CalcAccreditationPointsForPersonRequest a request object passed to get get all papers published for author
      * @return CalcAccreditationPointsForPersonResponse a response object that contains the total accredited score for author
-     * @see    PublicationType
+     * @see    PublicationTypeEntity
      */
     public CalcAccreditationPointsForPersonResponse calcAccreditationPointsForPerson(CalcAccreditationPointsForPersonRequest calcAccreditationPointsForPersonRequest);
 
@@ -111,7 +119,7 @@ public interface Publications {
      the accreditation points for all persons who are part of that group.
      * @param CalcAccreditationPointsForGroupRequest a request object passed to get get all papers published for group
      * @return CalcAccreditationPointsForGroupResponse a response object that contains the total accredited score for group
-     * @see    PublicationType
+     * @see    PublicationTypeEntity
      */
     public CalcAccreditationPointsForGroupResponse calcAccreditationPointsForGroup(CalcAccreditationPointsForGroupRequest calcAccreditationPointsForGroupRequest);
 
@@ -122,7 +130,7 @@ public interface Publications {
      capturing a snapshot of the state of the publication
      * @param ChangePublicationStateRequest a request object passed to change state of publication
      * @return ChangePublicationStateResponse a response object that confirms that new PublicationStateEntity has been added to publication
-     * @see    PublicationState
+     * @see    PublicationStateEntity
      * @see    Publication
      * @exception NotAuthorized not an author of the publication
      * @exception NoSuchPublicationException specified publication could not be found

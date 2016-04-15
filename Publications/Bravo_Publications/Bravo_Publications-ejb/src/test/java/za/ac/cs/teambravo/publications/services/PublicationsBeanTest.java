@@ -60,6 +60,7 @@ public class PublicationsBeanTest {
 
     /**
      * Test of addPublication method, of class PublicationsBean.
+     * @throws java.lang.Exception
      */
     @Test
     public void testAddPublication() throws Exception {
@@ -77,6 +78,7 @@ public class PublicationsBeanTest {
 
     /**
      * Test of getPublication method, of class PublicationsBean.
+     * @throws java.lang.Exception
      */
     @Test
     public void testGetPublication() throws Exception {
@@ -94,6 +96,7 @@ public class PublicationsBeanTest {
 
     /**
      * Test of createPublication method, of class PublicationsBean.
+     * @throws java.lang.Exception
      */
     @Test
     public void testCreatePublication() throws Exception {
@@ -111,6 +114,7 @@ public class PublicationsBeanTest {
 
     /**
      * Test of addPublicationType method, of class PublicationsBean.
+     * @throws java.lang.Exception
      */
     @Test
     public void testAddPublicationType() throws Exception {
@@ -128,6 +132,7 @@ public class PublicationsBeanTest {
 
     /**
      * Test of modifyPublicationType method, of class PublicationsBean.
+     * @throws java.lang.Exception
      */
     @Test
     public void testModifyPublicationType() throws Exception {
@@ -145,6 +150,7 @@ public class PublicationsBeanTest {
 
     /**
      * Test of getPublicationsForPerson method, of class PublicationsBean.
+     * @throws java.lang.Exception
      */
     @Test
     public void testGetPublicationsForPerson() throws Exception {
@@ -162,6 +168,7 @@ public class PublicationsBeanTest {
 
     /**
      * Test of getPublicationsForGroup method, of class PublicationsBean.
+     * @throws java.lang.Exception
      */
     @Test
     public void testGetPublicationsForGroup() throws Exception {
@@ -179,6 +186,7 @@ public class PublicationsBeanTest {
 
     /**
      * Test of calcAccreditationPointsForPerson method, of class PublicationsBean.
+     * @throws java.lang.Exception
      */
     @Test
     public void testCalcAccreditationPointsForPerson() throws Exception {
@@ -196,6 +204,7 @@ public class PublicationsBeanTest {
 
     /**
      * Test of calcAccreditationPointsForGroup method, of class PublicationsBean.
+     * @throws java.lang.Exception
      */
     @Test
     public void testCalcAccreditationPointsForGroup() throws Exception {
@@ -213,6 +222,7 @@ public class PublicationsBeanTest {
 
     /**
      * Test of changePublicationState method, of class PublicationsBean.
+     * @throws java.lang.Exception
      */
     @Test
     public void testChangePublicationState() throws Exception {

@@ -7,12 +7,12 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue(value="InRevision")
-public class InRevision extends LifeCycleState {
+@DiscriminatorValue(value="Submitted")
+public class SubmittedEntity extends LifeCycleStateEntity {
 
-    public InRevision() {
+    public SubmittedEntity() {
         super();
     }
-    
+
 }
 
