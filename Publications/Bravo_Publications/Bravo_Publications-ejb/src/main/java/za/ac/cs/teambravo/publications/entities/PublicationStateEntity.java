@@ -10,10 +10,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries({
+    //@NamedQuery(name = "Lifecyclestate.findAll", query = "SELECT l FROM Lifecyclestate l"),
+    @NamedQuery(name = "PublicationStateEntity.findByDetails", query = "SELECT l FROM PublicationStateEntity l WHERE l.details = :detailsObject")
+})
 @Table
 public class PublicationStateEntity implements Serializable {
     private static final long serialVersionUID = 1L;
