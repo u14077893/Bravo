@@ -45,6 +45,11 @@ import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationsForPer
 import za.ac.cs.teambravo.publications.requestandresponses.GetPublicationsForPersonResponse;
 import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationTypeRequest;
 import za.ac.cs.teambravo.publications.requestandresponses.ModifyPublicationTypeResponse;
+import za.ac.cs.teambravo.publications.requestandresponses.DeactivatePublicationTypeResponse;
+import za.ac.cs.teambravo.publications.requestandresponses.DeactivatePublicationTypeRequest;
+import za.ac.cs.teambravo.publications.requestandresponses.ReactivatePublicationTypeRequest;
+import za.ac.cs.teambravo.publications.requestandresponses.ReactivatePublicationTypeResponse;
+
 
 
 
@@ -237,6 +242,11 @@ public class PublicationsBean implements Publications
         entityManager.getTransaction().commit();
         
         return new ModifyPublicationTypeResponse();
+    }
+    
+    @Override
+    public DeactivatePublicationTypeResponse deactivatePublicationType(DeactivatePublicationTypeRequest deactivatePublicationTypeResponse){
+        
     }
     
     @Override
