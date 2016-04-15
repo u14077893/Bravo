@@ -244,10 +244,10 @@ public class PublicationsBean implements Publications
         return new ModifyPublicationTypeResponse();
     }
     
-    @Override
+   /* @Override
     public DeactivatePublicationTypeResponse deactivatePublicationType(DeactivatePublicationTypeRequest deactivatePublicationTypeResponse){
         
-    }
+    }*/
     
     @Override
     public GetPublicationsForPersonResponse getPublicationsForPerson(GetPublicationsForPersonRequest getPublicationsForPersonRequest) 
