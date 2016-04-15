@@ -14,15 +14,14 @@ import za.ac.cs.teambravo.publications.base.PublicationType;
  */
 public class AddPublicationTypeRequest implements PublicationRequest{
      PublicationType publicationTypeObject;
-     boolean isActive;
+ 
 
-    public boolean isIsActive() {
-        return isActive;
+   
+
+    public AddPublicationTypeRequest(PublicationType publicationTypeObject) {
+        this.publicationTypeObject = publicationTypeObject;
     }
 
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
-    }
 
     public PublicationType getPublicationTypeObject() {
         return publicationTypeObject;

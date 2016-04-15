@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import za.ac.cs.teambravo.publications.base.PublicationTypeState;
 
 /**
  *
@@ -59,6 +60,11 @@ public class PublicationTypeEntity implements Serializable {
 
     public void setTypeStates(List<PublicationTypeStateEntity> typeStates) {
         this.typeStates = typeStates;
+    }
+    
+    public void addStateEntry(PublicationTypeStateEntity state)
+    {
+        typeStates.add(state);
     }
 
     
