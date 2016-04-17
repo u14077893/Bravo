@@ -653,13 +653,226 @@ public class PublicationsBean implements Publications
             else
             {
                 //Get person and their associated publications
+                String reqName = getPublicationsForPersonRequest.getRequester().getFirstName();
+                PublicationConfidenceLevel conLevel = getPublicationsForPersonRequest.getPubConfidence();
+               
                 
+                    //Find person by name and get their id
+                Query personQuery = entityManager.createQuery("Select person.personID from PersonEntity person WHERE person.firstName = :name");
+                personQuery.setParameter("name", reqName);
                 
-                //Filter list of publications based on time period and pub confidence level
+                int personID = (Integer) personQuery.getSingleResult();
+                
+                //Find all publications and make list where person is an author
+                Query pubQuery = entityManager.createQuery("Select publication from PublicationDetailsEntity publication");
+                ArrayList<PublicationDetailsEntity> pubDetails = (ArrayList<PublicationDetailsEntity>) pubQuery.getResultList();
+                
+                ArrayList<PublicationEntity> publications = new ArrayList();
+                
+                for(PublicationDetailsEntity pub : pubDetails)
+                {
+                    for(int i = 0; i < pub.getAuthors().size(); i++)
+                    {
+                        if(pub.getAuthors().get(i).getPersonID() == personID)
+                        {
+                            Query pubStateQuery = entityManager.createQuery("Select publicationState from PublicationStateEntity publicationState WHERE publicationState.details  = :detailObj ");
+                            pubStateQuery.setParameter("detailObj", pub);
+                            
+                            PublicationStateEntity reqState = (PublicationStateEntity) pubStateQuery.getSingleResult();
+                            
+                            if(getPublicationsForPersonRequest.getTimePeriod() != null)
+                            {
+                                Date start = getPublicationsForPersonRequest.getTimePeriod().getStart();
+                                Date end = getPublicationsForPersonRequest.getTimePeriod().getEnd();
+                                
+                                if(reqState.getDate().after(start) && reqState.getDate().before(end))
+                                {
+                                    PublicationEntity thePub;
+                                    Query publicationsQuery = entityManager.createQuery("Select publication from PublicationEntity publication");
+                                     ArrayList<PublicationEntity> allPublications = (ArrayList<PublicationEntity>) publicationsQuery.getResultList();
+                                    boolean found = false; 
+
+                                  switch (conLevel)
+                                  {
+                                      case PUBLISHED:
+                                          if(reqState.getState() instanceof PublishedEntity)
+                                          {
+                                            found = false;
+                                            
+                                           for(PublicationEntity publication : allPublications)
+                                            {
+                                                for(int g = 0; g < publication.getStateEntries().size(); g++)
+                                                {
+                                                    if(publication.getStateEntries().get(g).equals(reqState))
+                                                     {
+                                                         thePub = publication;
+                                                         publications.add(thePub);
+                                                         found = true;
+                                                         break;
+                                                     }
+                                                }
+                                                
+                                                if(found)
+                                                {
+                                                    break;
+                                                }
+                                            } 
+                                          }
+                                          break;
+                                      case ACCEPTED:
+                                          if(reqState.getState() instanceof InRevisionEntity)
+                                          {
+                                            found = false;
+                                            
+                                           for(PublicationEntity publication : allPublications)
+                                            {
+                                                for(int g = 0; g < publication.getStateEntries().size(); g++)
+                                                {
+                                                    if(publication.getStateEntries().get(g).equals(reqState))
+                                                     {
+                                                         thePub = publication;
+                                                         publications.add(thePub);
+                                                         found = true;
+                                                         break;
+                                                     }
+                                                }
+                                                
+                                                if(found)
+                                                {
+                                                    break;
+                                                }
+                                            } 
+                                          }
+                                          
+                                          break;
+                                      case ENVISAGEDTOBEPUBLISHED:
+                                          if((reqState.getState() instanceof SubmittedEntity) || (reqState.getState() instanceof InProgressEntity))
+                                          {
+                                              found = false;
+                                            
+                                           for(PublicationEntity publication : allPublications)
+                                            {
+                                                for(int g = 0; g < publication.getStateEntries().size(); g++)
+                                                {
+                                                    if(publication.getStateEntries().get(g).equals(reqState))
+                                                     {
+                                                         thePub = publication;
+                                                         publications.add(thePub);
+                                                         found = true;
+                                                         break;
+                                                     }
+                                                }
+                                                
+                                                if(found)
+                                                {
+                                                    break;
+                                                }
+                                            } 
+                                          }
+                                          break;  
+                                  }
+                                }
+                            }
+                           else
+                            {
+                                PublicationEntity thePub;
+                                
+                                Query publicationsQuery = entityManager.createQuery("Select publication from PublicationEntity publication");
+                                ArrayList<PublicationEntity> allPublications = (ArrayList<PublicationEntity>) publicationsQuery.getResultList();
+                                boolean pubFound = false;
+                                
+                                switch (conLevel)
+                                {
+                                    case PUBLISHED:
+                          
+                                        if(reqState.getState() instanceof PublishedEntity)
+                                        {
+                                            pubFound = false;
+                                            
+                                           for(PublicationEntity publication : allPublications)
+                                            {
+                                                for(int g = 0; g < publication.getStateEntries().size(); g++)
+                                                {
+                                                    if(publication.getStateEntries().get(g).equals(reqState))
+                                                     {
+                                                         thePub = publication;
+                                                         publications.add(thePub);
+                                                         pubFound = true;
+                                                         break;
+                                                     }
+                                                }
+                                                
+                                                if(pubFound)
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case ACCEPTED:
+                                        if(reqState.getState() instanceof InRevisionEntity)
+                                        {
+                                            pubFound = false;
+                                            
+                                           for(PublicationEntity publication : allPublications)
+                                            {
+                                                for(int g = 0; g < publication.getStateEntries().size(); g++)
+                                                {
+                                                    if(publication.getStateEntries().get(g).equals(reqState))
+                                                     {
+                                                         thePub = publication;
+                                                         publications.add(thePub);
+                                                         pubFound = true;
+                                                         break;
+                                                     }
+                                                }
+                                                
+                                                if(pubFound)
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case ENVISAGEDTOBEPUBLISHED:
+                                        if((reqState.getState() instanceof SubmittedEntity) || (reqState.getState() instanceof InProgressEntity))
+                                        {
+                                            pubFound = false;
+                                            
+                                           for(PublicationEntity publication : allPublications)
+                                            {
+                                                for(int g = 0; g < publication.getStateEntries().size(); g++)
+                                                {
+                                                    if(publication.getStateEntries().get(g).equals(reqState))
+                                                     {
+                                                         thePub = publication;
+                                                         publications.add(thePub);
+                                                         pubFound = true;
+                                                         break;
+                                                     }
+                                                }
+                                                
+                                                if(pubFound)
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                            
+                                        }
+                                        break;
+                                }
+                            }  
+                        }
+                    }
+                }
+                
+                response = new GetPublicationsForPersonResponse();
+                response.setPublications(publications);
             }
         }
         catch(InvalidRequest e)
         {
+            System.err.println(e.getMessage());
         }
        
         return response; 
@@ -681,11 +894,44 @@ public class PublicationsBean implements Publications
             }
             else
             {
+               //Get people who belong to group
+                String groupName = getPublicationsForGroupRequest.getGroupName();
                 
+                Query membersQuery = entityManager.createQuery("Select person from PersonEntity person WHERE person.groupName = :group");
+                membersQuery.setParameter("group", groupName);
+                
+                ArrayList<PersonEntity> groupMembers = (ArrayList<PersonEntity>) membersQuery.getResultList();
+                
+                ArrayList<PublicationEntity> publications = new ArrayList();
+                
+                //Get publications for each person in group
+                for(PersonEntity member : groupMembers)
+                {
+                    PersonMock memberPerson = new PersonMock();
+                    memberPerson.setFirstName(member.getFirstName());
+                    memberPerson.setSurname(member.getSurname());
+                    
+                    GetPublicationsForPersonRequest reqPublications = new GetPublicationsForPersonRequest();
+                    reqPublications.setRequester(memberPerson);
+                    reqPublications.setPubConfidence(getPublicationsForGroupRequest.getPubConfidence());
+                    reqPublications.setTimePeriod(getPublicationsForGroupRequest.getTimePeriod());
+                    
+                    GetPublicationsForPersonResponse result = getPublicationsForPerson(reqPublications);
+                    ArrayList<PublicationEntity> personPubs = result.getPublications();
+                    
+                    for(PublicationEntity pub : personPubs)
+                    {
+                        publications.add(pub);
+                    }
+                }
+                
+                response = new GetPublicationsForGroupResponse();
+                response.setPublications(publications);
             }
         }
         catch(InvalidRequest e)
         {
+            System.err.println(e.getMessage());
         }
        
         return response; 
@@ -717,7 +963,8 @@ public class PublicationsBean implements Publications
                 if(calcAccreditationPointsForPersonRequest.getTimePeriod() != null)
                 {
                     timePeriod = calcAccreditationPointsForPersonRequest.getTimePeriod();
-                    getPublications = new GetPublicationsForPersonRequest(requester, pubConfidence, timePeriod);
+                    getPublications = new GetPublicationsForPersonRequest(requester, pubConfidence);
+                    getPublications.setTimePeriod(timePeriod);
                 }
                 else
                 {
@@ -762,9 +1009,13 @@ public class PublicationsBean implements Publications
                     
                     for(PublicationEntity publication : listOfPublications)
                     {
-                       if(publication.getStateEntries().get(publication.getStateEntries().size()).getType().getTypeName().equals(typeName))
+                        for(int i = 0; i < publication.getStateEntries().size(); i++)
                         {
-                            count++;
+                            if(publication.getStateEntries().get(i).getType().getTypeName().equals(typeName))
+                             {
+                                 count++;
+                                 break;
+                             }
                         }
                     }
                     
@@ -785,7 +1036,7 @@ public class PublicationsBean implements Publications
         }
         catch(InvalidRequest e)
         {
-        
+            System.err.println(e.getMessage());
         }
         
         return response;
@@ -817,7 +1068,8 @@ public class PublicationsBean implements Publications
                 if(calcAccreditationPointsForGroupRequest.getTimePeriod() != null)
                 {
                     timePeriod = calcAccreditationPointsForGroupRequest.getTimePeriod();
-                    getPublications = new GetPublicationsForGroupRequest(groupName, pubConfidence, timePeriod);
+                    getPublications = new GetPublicationsForGroupRequest(groupName, pubConfidence);
+                    getPublications.setTimePeriod(timePeriod);
                 }
                 else
                 {
@@ -862,9 +1114,13 @@ public class PublicationsBean implements Publications
                     
                     for(PublicationEntity publication : listOfPublications)
                     {
-                       if(publication.getStateEntries().get(publication.getStateEntries().size()).getType().getTypeName().equals(typeName))
+                        for(int i = 0; i < publication.getStateEntries().size(); i++)
                         {
-                            count++;
+                            if(publication.getStateEntries().get(i).getType().getTypeName().equals(typeName))
+                             {
+                                 count++;
+                                 break;
+                             }
                         }
                     }
                     
@@ -887,6 +1143,7 @@ public class PublicationsBean implements Publications
         }
         catch(InvalidRequest e)
         {
+            System.err.println(e.getMessage());
         }
         
         return response;

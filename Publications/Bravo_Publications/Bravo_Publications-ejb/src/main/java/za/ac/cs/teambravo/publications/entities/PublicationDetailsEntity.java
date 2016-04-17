@@ -33,13 +33,13 @@ public class PublicationDetailsEntity implements Serializable {
     private Date envisagedPublicationDate;
     
     @OneToMany(targetEntity = PersonEntity.class)
-    private List authors; //These IDS are keys to the persons table
+    private List<PersonEntity> authors; //These IDS are keys to the persons table
 
     public PublicationDetailsEntity() {
         super();
     }
 
-    public PublicationDetailsEntity(Integer detailsID, String title, ArrayList authors, Date envisagedPublicationDate) {
+    public PublicationDetailsEntity(Integer detailsID, String title, List<PersonEntity> authors, Date envisagedPublicationDate) {
         this.detailsID = detailsID;
         this.title = title;
         this.authors = authors;
@@ -70,11 +70,11 @@ public class PublicationDetailsEntity implements Serializable {
         this.envisagedPublicationDate = envisagedPublicationDate;
     }
     
-    public List getAuthors() {
+    public List<PersonEntity> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List authors) {
+    public void setAuthors(List<PersonEntity> authors) {
         this.authors = authors;
     }
     
